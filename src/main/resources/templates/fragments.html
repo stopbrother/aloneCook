@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragments="head">
+<meta charset="UTF-8" name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1,user-scalable=no">
+<title>나 혼자 요리!</title>
+<link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css" />
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/node_modules/summernote/dist/summernote-lite.min.css" />
+<link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" href="/css/index.css" />
+<link rel="stylesheet" href="/css/base.css" />
+<link rel="stylesheet" href="/css/dropdown.css" />
+<link rel="stylesheet" href="/css/footer.css" />
+<link rel="stylesheet" href="/css/page.css" />
+
+
+<script src="/node_modules/swiper/swiper-bundle.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<nav th:fragment="navi (activeMenu)" class="navi">
+	<div class="navi_container">
+		<div class="navi_inner">
+			<div class="navigations">
+				<div class="logo">
+					<a href="/" th:href="@{/}"> <img src="/images/logo_1.png" alt="로고"></a>
+				</div>
+				<div class="navi_menu">
+					<a th:href="@{/}" class="navi_item" th:classappend="${activeMenu == 'home'}? active">
+						홈
+					</a>
+					<a href="#" class="navi_item">
+						소개
+					</a>
+					<a th:href="@{/recipe-list}" class="navi_item" th:classappend="${activeMenu == 'recipe'}? active">
+						레시피
+					</a>
+					<a th:href="@{/bbs-list}" class="navi_item" th:classappend="${activeMenu == 'bbs'}? active">
+						게시판
+					</a>
+				</div>
+			</div>			
+			<div class="navi_login">
+				<div class="navi_right">					
+					<div class="navi_item user_buttons">
+						<a th:href="@{/login}" href="#" class="login button"
+							sec:authorize="!isAuthenticated()">로그인</a> <a th:href="@{/join}"
+							href="#" class="sign-up button"
+							sec:authorize="!isAuthenticated()">회원가입</a>
+					</div>
+					<!-- dropdown css수정 -->
+					<div class="dropdown" sec:authorize="isAuthenticated()">
+						<a class="btn dropdown-toggle user_menu" href="#" role="button"
+							id="dropdownMenuLink" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<div class="userProfile">
+								<img th:if="${!#strings.isEmpty(account?.profileImg)}" th:src="${account.profileImg}" />
+								<img th:if="${#strings.isEmpty(account?.profileImg)}" src="/images/profile.svg" />							
+							</div>
+							<span sec:authentication="name">UserName</span>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li><a class="dropdown_item" href="#" th:href="@{'/profile/' + ${#authentication.name}}">프로필</a></li>
+							<li><a class="dropdown_item" href="#" th:href="@{'/settings/profile'}">설정</a></li>
+							<li class="dropdown-line"></li>
+							<li><a class="dropdown_item" href="#" th:href="@{'/my-recipe'}">나의 레시피</a></li>
+							<li><a class="dropdown_item" href="#" th:href="@{'/recipe/liked'}">찜한 레시피</a></li>
+							<li class="dropdown-line"></li>							
+							<li><form action="#" th:action="@{/logout}" method="post">
+									<button type="submit" class="dropdown_item">로그아웃</button>
+								</form></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="m_navi_menu">
+			<div class="m_navi_menu_container">
+				<div class="m_navi_menu_inner">
+					<a th:href="@{/}" class="m_navi_menu_item" th:classappend="${activeMenu == 'home'}? active"><span>홈</span></a>
+					<a class="m_navi_menu_item"><span>소개</span></a>                                
+                    <a th:href="@{/recipe-list}" class="m_navi_menu_item" th:classappend="${activeMenu == 'recipe'}? active"><span>레시피</span></a>
+                    <a th:href="@{/bbs-list}" class="m_navi_menu_item" th:classappend="${activeMenu == 'bbs'}? active"><span>게시판</span></a>
+                </div>                           
+            </div>
+        </div>
+	</div>
+	<script type="application/javascript">
+	$(function () {
+        var fixed = $("header").offset().top; 
+        $(window).scroll(function () {
+                let scroll = $(window).scrollTop();
+
+                if (scroll > fixed) {
+                    $("header").addClass("fixed");
+                } else {
+                    $("header").removeClass("fixed");
+                }
+            });
+    })	
+</script>
+</nav>
+
+<footer th:fragment="footer">
+	<div class="footer">
+		<div class="footer_info">
+			<div class="footer_info_items">
+				<div class="footer_info_item">
+					<strong>회사명</strong>
+					<span>나혼자요리</span>
+				</div>
+				<div class="footer_info_item">
+					<strong>대표</strong>
+					<span>정지형</span>
+				</div>
+				<div class="footer_info_item">
+					<strong>주소</strong>
+					<span>인천 동구 송림동 122-1 인천재능대학교 IT관 3층</span>
+				</div>
+				<div class="footer_info_item">
+					<strong>이메일</strong>
+					<span>stopbro0323@naver.com</span>
+				</div>
+				<div class="footer_info_item">
+					<strong>전화번호</strong>
+					<span>010-3744-9840</span>
+				</div>
+				<div class="footerRight">
+					©ACOOK. All Rights Reserved.
+				</div>
+			</div>
+			<div class="footer_sns">
+				<a href="#" class="icon_button">
+					<div class="icon"></div>
+				</a>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+<!-- settings 메뉴 -->
+<ul th:fragment="settings-menu (activeMenu)" class="settings_menu_items">
+	<li class="settings_menu_item" th:classappend="${activeMenu == 'profile'}? active">
+		<a href="#" th:href="@{/settings/profile}">프로필</a>
+	</li>
+	<li class="settings_menu_item" th:classappend="${activeMenu == 'password'}? active">
+		<a href="#" th:href="@{/settings/password}">비밀번호 변경</a>
+	</li>
+	<li class="settings_menu_item">
+		<a href="#">회원탈퇴</a>
+	</li>
+</ul>
+
+<!-- profile info(프로필이미지,닉네임 등) -->
+<div th:fragment="profile-info" class="profile_header_container">
+	<div class="profile_header_inner">
+		<div class="user_info">
+			<div class="profile_img_box_wrap">
+				<div class="profile_img_box">
+					<img th:if="${!#strings.isEmpty(byNickname.profileImg)}"
+						th:src="${byNickname.profileImg}" class="profile_img" />
+						<img
+						th:if="${#strings.isEmpty(byNickname.profileImg)}"
+						src="/images/profile.svg" class="profile_img" width="100%"
+						height="100%" />
+				</div>
+			</div>
+
+			<div class="profile_name_wrap">
+				<div class="profile_name">
+					<span class="nickname" th:text="${byNickname.nickname}">UserName</span>
+					
+					<div class="follow">
+						
+							<button th:if="${!isFollow && !isOwner}" type="submit" class="follow_btn">
+								<span>팔로우</span>
+							</button>
+						
+						
+						
+							<button th:if="${isFollow}" type="submit" class="disfollow_btn">
+								<span>팔로우 취소</span>
+							</button>										
+						
+					
+						<a th:if="${isOwner && !isFollow}" th:href="@{/settings/profile}" class="profileEdit"><span>프로필 수정</span></a>
+					</div>
+					
+				</div>
+
+				<div class="user_email">
+					<p th:text="${byNickname.email}">email</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- profile 메뉴 -->
+<div th:fragment="profile-menu (activeMenu)" class="profileMenu_inner">
+	<span class="profileMenu_item" th:classappend="${activeMenu == 'intro'}? active"><a th:href="@{'/profile/' + ${byNickname.nickname}}">소개</a></span>
+	<span class="profileMenu_item" th:classappend="${activeMenu == 'recipe'}? active"><a th:href="@{'/profile/' + ${byNickname.nickname} + '/recipe'}" th:text="|레시피 ${recipeCnt}|">레시피</a></span>
+	<span class="profileMenu_item" th:classappend="${activeMenu == 'follower'}? active"> <a th:href="@{'/profile/' + ${byNickname.nickname} + '/follower'}" th:text="|팔로워 ${followerCnt}|">팔로워 1</a></span>
+	<span class="profileMenu_item" th:classappend="${activeMenu == 'following'}? active"> <a th:href="@{'/profile/' + ${byNickname.nickname} + '/following'}" th:text="|팔로잉 ${followingCnt}|">팔로잉 3</a></span>
+</div>
+
+<!-- message -->
+<script th:fragment="message" th:if="${message}" type="application/javascript">
+	$(document).ready(function() {
+		var msg = "[(${message})]";
+		alert(msg);
+	});	
+</script>
+
+<!-- recipe-write-contentsHeader -->
+<div th:fragment="recipe-write-header (recipeMenu)" class="contents_header">            
+	<div class="page_title">
+		<span>레시피 등록</span>
+    </div>
+	<div class="contents_menu">
+		<div class="contents_menu_inner">
+			<ul class="contents_menu_items">
+				<li class="contents_menu_item" th:classappend="${recipeMenu == 'basic'}? active">
+					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/basic'}">기본정보</a>
+				</li>
+				<li class="contents_menu_item" th:classappend="${recipeMenu == 'ingredient'}? active">
+					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/ingredient'}">재료</a>
+				</li>
+				<li class="contents_menu_item" th:classappend="${recipeMenu == 'step'}? active">
+					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/step'}">조리 과정</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!-- ingredient-write-update -->
+<div th:fragment="ingredient-form (mode, action)">
+	<div class="register">
+            <form class="register_items" method="post" th:action="@{${action}}" th:object="${ingredientForm}">                
+                <div class="register_item">
+                    <div class="register_title">
+                        <p>재료</p>
+                    </div>
+                    <div class="ingredients">
+                    	<textarea class="editor" th:field="*{ingredients}"></textarea>
+                    </div>
+                    
+                </div>                
+
+
+                <div class="register_btn">
+                    <button type="submit" class="submit_btn">
+                        <span>저장</span>
+                    </button>
+                    <button class="cancel_btn">
+                        <span>취소</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+</div>
+<!-- recipe-write-scroll-event -->
+<script type="application/javascript" th:fragment="recipe-write-sc">
+	$(window).scroll(function () {
+		let scroll = $(window).scrollTop();
+		
+		if (scroll >= 123) {
+			$(".navi").addClass("sc_navi");
+            $(".contents_header").addClass("sc_contents_header");
+            $(".contents_menu").addClass("sc_contents_menu");
+            $(".register").addClass("sc_register");
+        } else {
+            $(".navi").removeClass("sc_navi");
+            $(".contents_header").removeClass("sc_contents_header");
+            $(".contents_menu").removeClass("sc_contents_menu");
+            $(".register").removeClass("sc_register");
+        }
+	});
+</script>                
+
+<!-- recipe-view-contentsMenu -->
+<div th:fragment="recipe-menu (recipeMenu)" class="contents_menu">
+	<a href="#" class="contents_menu_item" th:classappend="${recipeMenu == 'recipe'}? active" th:href="@{'/recipe/' + ${recipe.path}}">레시피</a>                        
+	<a href="#" class="contents_menu_item" th:classappend="${recipeMenu == 'community'}? active" th:href="@{'/recipe/' + ${recipe.path} + '/community'}">커뮤니티 <span th:text="${recipe.comments.size()}"></span> </a>
+</div>
+
+<!-- my-recipe menu -->
+<div th:fragment="myRecipe-menu (currentMenu)" class="contentsHeader">
+            <div class="pageTitle">
+                <span>나의 레시피</span>
+            </div>
+            <div class="contentMenu">
+                <div class="contents_menu_inner">
+                    <ul class="contents_menu_items">
+                        <li class="contents_menu_item">
+                            <a th:href="@{/my-recipe}" th:classappend="${currentMenu == 'writing'}? active">작성중</a>
+                        </li>
+                        <li class="contents_menu_item">
+                            <a th:href="@{/my-recipe/published}" th:classappend="${currentMenu == 'published'}? active">공개중</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+</div>
+
+<script type="application/javascript" th:fragment="form-validation">
+//Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+          alert("오류가 있습니다.")
+        }
+		
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+
+<div th:fragment="editor-script">
+    <script src="/node_modules/summernote/dist/summernote-lite.js"></script>
+    <script src="/node_modules/summernote/dist/lang/summernote-ko-KR.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            $('.editor').summernote({
+            	inheritPlaceholder: true,
+            	height: 300,
+            	toolbar: [
+    			    // [groupName, [list of button]]
+    			    ['fontname', ['fontname']],
+    			    ['fontsize', ['fontsize']],
+    			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    			    ['color', ['forecolor','color']],
+    			    ['table', ['table']],
+    			    ['para', ['ul', 'ol', 'paragraph']],
+    			    ['height', ['height']],
+    			    ['insert',['picture','link']],
+    			    ['view', ['fullscreen', 'help']]
+    			  ],
+    			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+    			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']                
+            });
+            
+            $('.BbsEditor').summernote({
+            	inheritPlaceholder: true,
+            	height: 300,
+            	toolbar: [
+            		['fontname', ['fontname']],
+    			    ['fontsize', ['fontsize']],
+    			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    			    ['color', ['forecolor','color']],
+    			    ['table', ['table']],
+    			    ['para', ['ul', 'ol', 'paragraph']],
+    			    ['height', ['height']],
+    			    ['insert',['picture','link','video']],
+    			    ['view', ['fullscreen', 'help']]
+    			  ],
+    			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+    			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']            	
+            });
+            
+            $('.videoEditor').summernote({            	
+            	//placeholer: '비디오 아이콘을 클릭해주세요.',
+            	inheritPlaceholder: true,
+            	height: 100,	
+            	toolbar: [
+            		['insert', ['video']]
+            	]
+            });
+        });
+    </script>
+</div>
+
+
+<div th:fragment="date-time">
+    <script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            moment.locale('ko');
+            $(".date-time").text(function(index, dateTime) {
+                return moment(dateTime).fromNow();
+            });
+            $(".create-day").text(function(index, dateTime) {
+            	return moment(dateTime).format("YYYY.MM.DD");
+            });
+                        
+        })
+    </script>
+</div>
+
+<script type="application/javascript" th:inline="javascript" th:fragment="ajax-csrf-header">
+    $(function() {
+        var csrfToken = /*[[${_csrf.token}]]*/ null;
+        var csrfHeader = /*[[${_csrf.headerName}]]*/ null;
+        $(document).ajaxSend(function (e, xhr, options) {
+            xhr.setRequestHeader(csrfHeader, csrfToken);
+        });
+    });
+</script>
+
+</html>

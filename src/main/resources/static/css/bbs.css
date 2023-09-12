@@ -1,0 +1,260 @@
+* {
+    box-sizing: inherit;
+}
+body {
+    margin: 0;
+    padding: 0;    
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style: none;
+}
+.bbs_btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.main {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+.contents {
+    
+    user-select: none;
+}
+.content_header {
+	border-bottom: 1px solid rgb(230, 230, 230);
+}
+.content_header_title {
+    width: 100%;
+    padding: 24px 0 24px;
+}
+.content_header_title span {
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+}
+
+.bbs_menu {
+    width: 100%;
+}
+.bbs_menu_container {
+    display: flex;
+    position: relative;
+    height: 48px;
+    overflow: auto hidden;
+}
+.bbs_menu_inner {
+    display: inline-flex;
+    
+    font-size: 14px;
+    word-break: keep-all;
+}
+.bbs_menu_item {
+    display: flex;
+    margin: 0 24px 0 0;
+    align-items: center;
+    height: 100%;
+}
+.bbs_navbar_item_active a{
+    font-weight: 700 !important;
+    color: #1ea1f7 !important;
+}
+.bbs_navbar_item a {
+	color: #abb0b5;
+    font-size: 16px;    
+    font-weight: 400;
+    line-height: 1.5;
+}
+.content_bbs_wrap {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.content_bbs {
+    display: flex;
+    width: 100%;    
+    flex-direction: column;
+}
+.bbs_search {
+    padding: 20px 0 38px;
+}
+.bbs_search_items {
+    display: flex;
+    margin-bottom: 10px;
+}
+.bbs_search_filter {
+    width: 12%;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+.search_input {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    padding: 10px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.bbs_search_button {
+    min-width: 96px;
+    margin-left: 16px;
+    height: 48px;
+    background-color: #46cfa7;
+    font-weight: 700;
+    color: #fff;    
+    border: 1px solid #46cfa7;
+    line-height: 1.43;  
+    font-size: 14px;
+}
+
+.bbs_list_container {
+    margin-bottom: 40px;
+}
+.bbs_filter {
+    display: flex;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+.bbs_filter_list {
+    display: flex;
+    align-items: center;
+}
+.bbs_filter_btn {
+    padding: 0 6px;
+    height: 28px;
+    font-weight: 500;
+    color: #abb0b5;
+    border: unset;
+    background-color: unset;
+    line-height: 1.43;  
+    font-size: 14px;
+}
+.bbs_filter_span.active {
+	font-weight: bold;
+	color: #3399cc;
+}
+
+.blank_space {
+    display: inline-flex;
+    align-items: center;
+    margin-left: auto;
+}
+.bbs_write {
+    background-color: #3399cc;
+    border-color: #3399cc;
+    color: #fff;
+    font-size: 12px;
+    padding: 0.25rem 0.5rem;
+    margin-left: 8px;
+    border: 1px solid;
+}
+.bbs_list {
+    margin: 20px 0 20px;
+}
+
+.bbs_item_content {
+    display: flex;
+    padding: 20px 16px;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 15%);
+}
+.bbs_item_info {
+    max-width: 590px;
+    flex: 1 1 590px;
+}
+.bbs_item_info dl {
+    margin: 0;
+    color: rgb(61, 61, 61);
+}
+.bbs_item_info dt {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.bbs_item_info dd {
+    margin: 0;
+    padding: 0;
+}
+
+.bbs_item_info dd span:last-child::before {
+    display: inline-block;
+    border-left: 1px solid #ebeef1;
+    height: 12px;
+    content: "";
+    margin-right: 8px;
+}
+.bbs_item_thumbnail {
+    display: flex;
+    flex: 1 1 146px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    max-width: 146px;
+}
+.bbs_item_thumbnail img {
+    width: 93px;
+    height: 60px; /* min-width: 1024 */
+    display: block;
+    object-fit: cover;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    
+}
+
+@media screen and (min-width: 1080px) {
+    .content_header_title {        
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+    .bbs_menu {
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+    .bbs_menu_container {
+        height: 56px;
+        font-size: 18px;
+    }
+    .bbs_menu_inner {
+        padding: 0;
+        font-size: 18px;
+    }
+    .bbs_menu_item {
+        margin-right: 32px;
+    }
+    .content_bbs_wrap {
+        padding: 0;
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    .content_header_title {        
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .bbs_menu {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .content_bbs_wrap {    
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}

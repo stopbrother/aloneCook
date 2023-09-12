@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/bbs.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu = 'bbs')"></div>
+		</header>
+
+		<!-- 컨텐츠 영역 -->
+		<main class="main">
+			<div class="contents">
+				<div class="content_header">
+					<div class="content_header_title">
+						<span>공지</span>
+					</div>
+				</div>
+				<nav class="bbs_menu">
+					<div class="bbs_menu_container">
+						<ul class="bbs_menu_inner">
+							<li class="bbs_menu_item bbs_navbar_item_active"><a href="#">
+									<span>자유</span>
+							</a></li>
+							<li class="bbs_menu_item"><a href="#"> <span>공지</span>
+							</a></li>
+						</ul>
+					</div>
+				</nav>
+				<div class="content_bbs_wrap">
+					<div class="content_bbs">
+						<div class="sub_header">							
+							<div class="bbs_search">
+								<form class="bbs_search_items">
+									<select class="bbs_search_filter">
+										<option value="title">제목</option>
+										<option value="user">작성자</option>
+									</select> <input type="text" class="search_input">
+									<button class="bbs_btn bbs_search_button">검색</button>
+								</form>
+							</div>
+						</div>
+						<div class="bbs_list_container">
+							<div class="bbs_filter">
+								<ul class="bbs_filter_list">
+									<li class="bbs_filter_item"><a
+										class="bbs_btn bbs_filter_btn"
+										th:href="@{/bbs-list?sort=createdDateTime,desc}"> <span
+											class="bbs_filter_span"
+											th:classappend="${sortProperty == 'createdDateTime'}? active">최신순</span>
+									</a></li>
+									<li class="bbs_filter_item"><a
+										class="bbs_btn bbs_filter_btn"
+										th:href="@{/bbs-list?sort=viewCount,desc}"> <span
+											class="bbs_filter_span"
+											th:classappend="${sortProperty == 'viewCount'}? active">조회순</span>
+									</a></li>
+
+								</ul>
+								<div class="blank_space"></div>
+								<a class="bbs_btn bbs_write" th:href="@{/bbs-write}">글쓰기</a>
+							</div>
+
+							<ul class="bbs_list"
+								th:if="${bbsPageAll.getTotalElements() == 0}">
+								<li>등록된 게시물이 없습니다.</li>
+							</ul>
+							<ul class="bbs_list" th:if="${bbsPageAll.getTotalElements() > 0}">
+								<li class="bbs_item" th:each="bbs: ${bbsPageAll.getContent()}">
+									<a href="#" th:href="@{'/bbs/' + ${bbs.id}}">
+										<div class="bbs_item_content">
+											<div class="bbs_item_info">
+												<dl>
+													<dt>
+														<span th:text="${bbs.title}">제목</span> <em
+															th:text="|[${bbs.comments.size()}]|">[2]</em>
+													</dt>
+													<dd>
+														<span class="date-time" th:text="${bbs.createdDateTime}"></span>
+														<span th:text="${bbs.writer?.nickname}">작성자</span> <span
+															th:text="|조회 ${bbs.viewCount}|"></span>
+													</dd>
+												</dl>
+											</div>
+											<div class="bbs_item_thumbnail">
+												<img src="/img/youtube.png" alt="">
+											</div>
+										</div>
+								</a>
+								</li>
+							</ul>
+							<nav>
+								<ul class="pagination">
+									<li class="page-item"
+										th:classappend="${!bbsPageAll.hasPrevious()}? disabled">
+										<a class="page-link"
+										th:href="@{'/bbs-list?sort=' + ${sortProperty} + ',desc&page=' + ${bbsPageAll.getNumber() -1}}">Before</a>
+									</li>
+
+									<li class="page-item"
+										th:classappend="${i == bbsPageAll.getNumber()}? active"
+										th:each="i: ${#numbers.sequence(0, bbsPageAll.getTotalPages() -1)}">
+										<a class="page-link"
+										th:href="@{'/bbs-list?sort=' + ${sortProperty} + ',desc&page=' + ${i}}"
+										th:text="${i + 1}">1</a>
+									</li>
+
+									<li class="page-item"
+										th:classappend="${!bbsPageAll.hasNext()}? disabled"><a
+										class="page-link"
+										th:href="@{'/bbs-list?sort=' + ${sortProperty} + ',desc&page=' + ${bbsPageAll.getNumber() +1}}">Next</a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+	<script th:replace="fragments.html :: date-time"></script>
+</body>
+</html>

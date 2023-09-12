@@ -1,0 +1,118 @@
+* {
+    box-sizing: inherit;
+}
+body {
+    margin: 0;
+    padding: 0;    
+}
+ul, li {
+    margin: 0;
+    padding: 0;
+}
+ul, li {
+    list-style: none;
+}
+.bbs_btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.main {
+    min-height: 800px;
+}
+.content {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    max-width: 1160px;
+}
+.bbs_write {
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 15%);
+    padding: 16px;
+    max-width: 920px;
+    height: 95%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+.bbs_write_header {
+    margin-bottom: 24px;
+}
+.form_item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+}
+.bbs_write_type_list {
+    display: flex;
+    flex-direction: row;
+}
+.bbs_write_type_item {
+    margin-right: 12px;
+}
+.type_btn_active {
+    min-width: 90px;
+    height: 34px;
+    background-color: #1ea1f7;
+    border-color: #1ea1f7;
+    color: #fff;
+    font-weight: 700;
+}
+.type_btn {
+    min-width: 90px;
+    height: 34px;
+    background: none;
+    border-color: #dee2e6;
+    font-weight: 700;
+}
+.form_label {
+    line-height: 1.43;  
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #3e4042;
+    font-weight: 500;
+}
+.input_item {    
+    display: flex;
+    margin-bottom: 1px;
+    padding: 13px 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.input_item>input {
+    padding: 0;
+    width: 100%;
+    font-size: 15px;
+    border: 0;
+    background: none;
+}
+.form_btn {
+    justify-content: flex-end;
+    padding: 8px 32px 40px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.cancel_btn {
+    margin-right: 16px;    
+    min-width: 180px;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    height: 48px;
+    font-weight: 700;
+}
+.submit_btn {
+    min-width: 180px;
+    background-color: #1ea1f7;
+    border: 1px solid #1ea1f7;
+    color: #fff;
+    height: 48px;
+    font-weight: 700;
+}

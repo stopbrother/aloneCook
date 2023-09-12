@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/recipe.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi"></div>
+		</header>
+
+		<!-- 컨텐츠 영역 -->
+		<main class="main">
+			<div class="recipe_content">
+				<div class="content_filter">
+					<div class="content_filter_container">
+						<div class="content_filter_inner">
+							<div class="filter_options">
+								<div class="filter">
+									<span class="filter_btn">
+										<button class="filter_button"></button>
+									</span> <span class="filter_btn">
+										<button class="filter_button"></button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="recipe_content_container">
+					<div class="recipe_content_list" th:if="${recipePage.getTotalElements() == 0}">
+						<div class="counter">
+							<span></span>개의 레시피가 있습니다.
+						</div>
+						<div class="recipe_search_noresult">일치하는 레시피가 없습니다.</div>
+					</div>
+					
+					
+					<div class="recipe_content_list" th:if="${recipePage.getTotalElements() > 0}">
+						<div class="counter">
+							<span th:text="${recipePage.getTotalElements()}"></span>개의 레시피가 있습니다.
+						</div>
+						<div class="recipe_items">
+							<div class="recipe_item_wrap" th:each="recipe: ${recipePage.getContent()}">
+								<div class="recipe_item">
+									<a class="recipe_card" th:href="@{'/recipe/' + ${recipe.path}}">
+										<div class="recipe_card_img_box">
+											<div class="recipe_card_img">
+												<img >
+											</div>
+										</div>
+										<div class="recipe_card_info_box">
+											<dl>
+												<dt th:text="${recipe.title}"></dt>
+												<dd class="writer">
+													<span>김덕배</span>
+												</dd>
+												<dd class="card_sub_info">
+													<span>좋아요</span>
+													<span>조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+						
+						<nav>
+  							<ul class="pagination">
+    							<li class="page-item" th:classappend="${!recipePage.hasPrevious()}? disabled">
+      								<a class="page-link" th:href="@{'/search/recipe?keyword=' + ${keyword} + '&sort=' + ${sortProperty} + ',desc&page=' + ${recipePage.getNumber() -1}}">Before</a>
+    							</li>
+    							
+    							<li class="page-item" th:classappend="${i == recipePage.getNumber()}? active"
+    							 	th:each="i: ${#numbers.sequence(0, recipePage.getTotalPages() -1)}">
+    							<a class="page-link" th:href="@{'/search/recipe?keyword=' + ${keyword} + '&sort=' + ${sortProperty} + ',desc&page=' + ${i}}" th:text="${i + 1}">1</a>
+    							</li>
+    							    							
+    							<li class="page-item" th:classappend="${!recipePage.hasNext()}? disabled">
+      								<a class="page-link" th:href="@{'/search/recipe?keyword=' + ${keyword} + '&sort=' + ${sortProperty} + ',desc&page=' + ${recipePage.getNumber() +1}}">Next</a>
+    							</li>
+  							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+</body>
+</html>

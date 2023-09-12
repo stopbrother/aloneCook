@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/liked.css" />
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+		<!-- 컨텐츠 영역 -->
+		<div class="contentsWrap">
+			<div class="contents">
+				<div class="contents_header">
+					<div class="pageTitle">
+						<span>찜한 레시피</span>
+					</div>
+				</div>
+
+				<div class="recipe_content_container contentWrap">
+					<div class="recipe_content_list">
+						<div class="counter"></div>
+						<div class="recipe_items">
+							<div class="recipe_item_wrap"
+								th:if="${!#lists.isEmpty(recipeLiked)}"
+								th:each="like : ${recipeLiked}">
+								<div class="recipe_item">
+									<a class="recipe_card"
+										th:href="@{'/recipe/' + ${like.recipe.path}}">
+										<div class="recipe_card_img_box">
+											<div class="recipe_card_img">
+												<img th:src="${like.recipe.foodImg}"
+													th:alt="${like.recipe.title}">
+											</div>
+										</div>
+										<div class="recipe_card_info_box">
+											<dl>
+												<dt th:text="${like.recipe.title}">김치볶음밥</dt>
+												<dd class="writer">
+													<span th:text="${like.recipe.writer?.nickname}">김덕배</span>
+												</dd>
+												<dd class="card_sub_info">
+													<span>좋아요</span> <span>조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- 푸터 영역 -->
+
+				<footer th:replace="fragments.html :: footer"></footer>
+
+			</div>
+		</div>
+		
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>	
+	</div>
+</body>
+</html>

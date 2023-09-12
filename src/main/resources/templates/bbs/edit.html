@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/bbs_write.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi"></div>
+		</header>
+
+		<!-- 컨텐츠 영역 -->
+		<main class="main">
+			<div class="content">
+				<form class="bbs_write" th:action="@{'/bbs/' + ${bbs.id} + '/edit'}"
+					th:object="${bbsForm}" method="post">
+					<div class="bbs_write_header">
+						<span>글수정</span>
+					</div>
+					<div class="form_item">
+						<ul class="bbs_write_type_list">
+							<li class="bbs_write_type_item">
+								<button class="bbs_btn type_btn_active">자유</button>
+							</li>
+							<li class="bbs_write_type_item">
+								<button class="bbs_btn type_btn">공지</button>
+							</li>
+						</ul>
+					</div>
+					<div class="form_item">
+						<label class="form_label">제목</label>
+						<div class="input_item">
+							<input type="text" th:field="*{title}">
+						</div>
+						<div class="form-group">
+							<textarea type="textarea" class="BbsEditor"
+								placeholder="내용을 입력해 주세요." th:field="*{content}"></textarea>
+						</div>
+					</div>
+					<div class="form_btn">
+						<button type="button" class="bbs_btn cancel_btn">취소</button>
+						<button type="submit" class="bbs_btn submit_btn">저장</button>
+					</div>
+				</form>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+
+	<script th:replace="fragments.html :: editor-script"></script>
+</body>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/view.css" />
+<body>
+	<div>
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+		<main>
+			<div class="recipeIntro">
+				<div class="recipeIntro_container">
+					<div class="recipeIntro_inner">
+						<div class="recipeIntro_head">
+							<div class="recipeIntro_head_inner">
+								<p class="category">한식</p>
+								<h1 class="recipe_title" th:text="${recipe.title}">음식 이름</h1>
+								<div class="writer">
+									<a href="#"
+										th:href="@{'/profile/' + ${recipe.writer?.nickname}}"
+										th:text="${recipe.writer?.nickname}"></a>
+								</div>
+							</div>
+						</div>
+						<div class="main_img">
+							<figure class="main_img_cover">
+								<div class="slider_wrap">
+									<div class="swiper_wrap">
+										<div class="swiper">
+											<div class="swiper_slide">
+												<div class="food_img">
+													<img th:src="${recipe.foodImg}">
+												</div>
+											</div>
+											<div class="swiper_slide"></div>
+											<div class="swiper_slide"></div>
+										</div>
+										<div class="swiper_pagination">
+											<div class="bullet bullet-active"></div>
+											<div class="bullet"></div>
+											<div class="bullet"></div>
+										</div>
+									</div>
+									<div class="swiper_btn_prev swiper_btn_disable">
+										<div class="arrow_left"></div>
+									</div>
+									<div class="swiper_btn_next">
+										<div class="arrow_right"></div>
+									</div>
+								</div>
+							</figure>
+						</div>
+						<aside class="recipeIntro_sub">
+							<div class="recipe_descrip">
+								<span th:text="${recipe.foodIntro}">description</span>
+							</div>
+							<div class="recipe_subInfo">
+								<div class="recipe_subInfo_items">
+									<dl class="recipe_subInfo_item">
+										<dt>난이도</dt>
+										<dd
+											th:if="${recipe.level == T(com.aloneCook.recipe.Level).EASY}">쉬움</dd>
+										<dd
+											th:if="${recipe.level == T(com.aloneCook.recipe.Level).NORMAL}">보통</dd>
+										<dd
+											th:if="${recipe.level == T(com.aloneCook.recipe.Level).HARD}">어려움</dd>
+									</dl>
+									<dl class="recipe_subInfo_item">
+										<dt>조회수</dt>
+										<dd th:text="${recipe.viewCount}"></dd>
+									</dl>
+								</div>
+							</div>
+							<div class="recipe_btns">
+								<div class="recipe_btns_inner">
+									<div class="recipe_btn" id="like_btn">
+
+										<button class="likeButton" id="like" type="button"
+											th:if="${!recipe.isLiker(#authentication.principal)}">
+											<div class="likeButton_inner">
+												<div class="icon_like">
+													<i class="fa fa-heart-o" aria-hidden="true"></i>
+												</div>
+												<span th:text="${recipe.likeCount}"></span>
+											</div>
+										</button>
+
+
+
+										<button class="likeButton" id="dislike" type="button"
+											th:if="${recipe.isLiker(#authentication.principal)}">
+											<div class="likeButton_inner">
+												<div class="icon_cancel">
+													<i class="fa fa-heart" aria-hidden="true"></i>
+												</div>
+												<span th:text="${recipe.likeCount}"></span>
+											</div>
+										</button>
+
+
+									</div>
+									<div class="recipe_btn">
+										<button class="share_button recipe_button">
+											<div class="share_btn_detail recipe_btn_detail">
+												<div class="icon_kakao"></div>
+											</div>
+										</button>
+									</div>
+									<div class="recipe_btn">
+										<button class="share_button recipe_button">
+											<div class="share_btn_detail recipe_btn_detail">
+												<div class="icon_facebook"></div>
+											</div>
+										</button>
+									</div>
+									<div class="recipe_btn">
+										<button class="share_button recipe_button">
+											<div class="share_btn_detail recipe_btn_detail">
+												<div class="icon_twiter"></div>
+											</div>
+										</button>
+									</div>
+									<div class="recipe_btn">
+										<button class="share_button recipe_button">
+											<div class="share_btn_detail recipe_btn_detail">
+												<div class="icon_link"></div>
+											</div>
+										</button>
+									</div>
+								</div>
+							</div>
+						</aside>
+					</div>
+				</div>
+			</div>
+
+			<nav class="contents_nav">
+				<div class="contents_nav_container">
+					<div class="contents_nav_inner">
+						<div
+							th:replace="fragments.html :: recipe-menu(recipeMenu='recipe')"></div>
+					</div>
+				</div>
+			</nav>
+
+			<div class="contents">
+				<div class="contents_container">
+					<div class="contents_inner">
+						<div class="contents_main">
+							<div class="contents_main_inner">
+								<div class="recipe_subMenu">
+									<ul class="subMenu_items">
+										<li class="subMenu_item"><a href="#ingredient">재료</a></li>
+										<li class="subMenu_item"><a href="#step">조리순서</a></li>
+										<li class="subMenu_item"><a href="#video">영상</a></li>
+									</ul>
+								</div>
+								<div class="recipe_wrap">
+									<div class="recipe">
+										<div class="recipe_content" id="ingredient">
+											<div class="recipe_subTitle">재료</div>
+											<div class="ingredients" th:utext="${recipe.ingredients}">
+												재료</div>
+										</div>
+										<div th:each="step: ${recipe.steps}">
+											<div class="recipe_content" id="step">
+												<div class="recipe_subTitle">조리순서</div>
+												<div class="cooking">
+													<div class="cooking_step">
+														<div class="cooking_desc" th:utext="${recipe.steps}">
+															조리법</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="recipe_content" id="video">
+												<div class="recipe_subTitle">영상</div>
+												<div class="cooking_video">
+													<div class="video" th:utext="${recipe.videoUrl}">동영상</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="content_footer">
+				<div class="recentlyView_recipe">
+					<div class="recentlyView_recipe_container">
+						<div class="recentlyView_title">관심 레시피</div>
+						<div class="recipe_list_slider">
+							<div class="swiper-container">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide" th:each="liked : ${likedRecipeList}">
+										<a class="recipeList_item"
+											th:href="@{'/recipe/' + ${liked.recipe.path}}">
+											<div class="recipeList_item_img">
+												<img th:src="${liked.recipe.foodImg}">
+											</div>
+											<div class="recipeList_item_info">
+												<dl>
+													<dd class="recipeList_item_writer">
+														<span th:text="${liked.recipe.writer?.nickname}">김덕배</span>
+													</dd>
+													<dt>
+														<strong th:text="${liked.recipe.title}">오뎅탕</strong>
+													</dt>
+												</dl>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+	</div>
+
+	<script th:replace="fragments.html :: ajax-csrf-header"></script>
+	<script type="application/javascript">
+		        
+    $(function () {
+    	var recipePath = "[(${recipe.path})]";
+    	
+		$(document).on("click", "#like", function(){
+			$.ajax({
+                method: "POST",
+                url: "/recipe/" + recipePath + "/like"                
+    		}).done(function () {
+    			console.log("좋아요");
+    			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
+    		}).fail(function (textStatus) {
+    			console.log(textStatus);
+    		});
+		});    	    	
+
+    	$(document).on("click", "#dislike", function(){
+    		$.ajax({
+    			method: "DELETE",
+    			url: "/recipe/" + recipePath + "/dislike"
+    		}).done(function () {
+    			console.log("좋아요 취소");
+    			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
+    		})
+    	});
+    	
+    	
+    	
+    });
+           
+    
+	</script>
+	<script>
+		$(function() {
+			var navfixed = $(".contents_nav").offset().top;
+			$(window).scroll(function() {
+				let scroll = $(window).scrollTop();
+				if (scroll >= navfixed) {
+					$(".contents_nav").addClass("sc_contents_nav");
+					$(".subMenu_items").addClass("sc_subMenu_items");
+				} else {
+					$(".contents_nav").removeClass("sc_contents_nav");
+					$(".subMenu_items").removeClass("sc_subMenu_items");
+				}
+			});
+
+			$('.subMenu_item > a').click(function(event) {
+				event.preventDefault();
+				$("html, body").animate({
+					scrollTop : $(this.hash).offset().top - 130
+				});
+
+			});
+		});
+	</script>
+
+	<script type="application/javascript">
+		
+   		const swiper = new Swiper('.swiper-container', {
+	      // Optional parameters
+	      
+	      loop: false,
+	      spaceBetween: 30,
+	      slidesPerView: 3,
+	      slidesPerGroup: 3,
+	    
+	      // If we need pagination
+	      pagination: {
+	        el: '.swiper-pagination',
+	      },
+	    
+	      // Navigation arrows
+	      navigation: {
+	        nextEl: '.swiper-button-next',
+	        prevEl: '.swiper-button-prev',
+	      },
+	    
+	      // And if we need scrollbar
+	      scrollbar: {
+	        el: '.swiper-scrollbar',
+	      },
+	      
+	      breakpoints: {
+	    	768: {
+	    		slidesPerView: 4,
+	    		slidesPerGroup: 4,
+	    	},
+	    	1080: {
+	            slidesPerView: 5,
+	            slidesPerGroup: 4,
+	        }
+	      },
+	      
+	      observer: true,
+	      observeParents: true,
+	    });
+   
+	</script>
+
+</body>
+</html>

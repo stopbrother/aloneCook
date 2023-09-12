@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		
+			<div th:replace="fragments.html :: navi(activeMenu = 'home')"></div>
+		
+
+		<!-- 컨텐츠 영역 -->
+		<div class="contentsWrap">
+			<div class="contents">
+				<div class="banner_wrap">
+					<div class="banner_container">
+						<div class="banner_inner">
+							<div class="banner">
+								<a href="#" class="banner_link"> <img class="banner-pc"
+									src="images/banner.png">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 최신메뉴 -->
+				<div class="content_recipe">
+					<div class="content_recipe_container">
+						<div class="content_list_title">
+							<div class="content_list_title_inner">
+								<a href="#" class="title_link"> <span>최신 레시피</span>
+								</a>
+							</div>
+							<a th:href="@{/recipe-list}" class="view_total">전체보기</a>
+						</div>
+						<div class="items_list swiper-container">
+							<div class="items swiper-wrapper">
+								<div class="item swiper-slide"
+									th:each="recipe: ${newRecipeList}">
+									<a href="#" class="item_link"
+										th:href="@{'/recipe/' + ${recipe.path}}">
+										<div class="item_img">
+											<img th:src="${recipe.foodImg}" th:alt="${recipe.title}"
+												class="im">
+										</div>
+										<div class="item_info">
+											<dl>
+												<dt th:text="${recipe.title}">제목</dt>
+												<dd class="writer">
+													<span th:text="${recipe.writer?.nickname}">작성자</span>
+												</dd>
+												<dd class="item_info_bottom">
+													<span th:text="|좋아요 ${recipe.likeCount}|">좋아요</span> <span
+														th:text="|조회수 ${recipe.viewCount}|">조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 인기레시피 -->
+				<div class="content_recipe">
+					<div class="content_recipe_container">
+						<div class="content_list_title">
+							<div class="content_list_title_inner">
+								<div class="content_title">
+									<span>인기 레시피</span>
+								</div>
+							</div>
+						</div>
+						<div class="items_list swiper-container">
+							<div class="items swiper-wrapper">
+								<div class="item swiper-slide"
+									th:each="recipe : ${favoriteList}">
+									<a href="#" class="item_link"
+										th:href="@{'/recipe/' + ${recipe.path}}">
+										<div class="item_img">
+											<img th:src="${recipe.foodImg}" th:alt="${recipe.title}"
+												class="im">
+										</div>
+										<div class="item_info">
+											<dl>
+												<dt th:text="${recipe.title}">제목</dt>
+												<dd class="writer">
+													<span th:text="${recipe.writer?.nickname}">작성자</span>
+												</dd>
+												<dd class="item_info_bottom">
+													<span th:text="|좋아요 ${recipe.likeCount}|">좋아요</span> <span
+														th:text="|조회수 ${recipe.viewCount}|">조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 관심레시피 -->
+				<div class="content_recipe" sec:authorize="isAuthenticated()">
+					<div class="content_recipe_container">
+						<div class="content_list_title">
+							<div class="content_list_title_inner">
+								<a href="#" class="title_link"> <span>관심 레시피</span>
+								</a>
+							</div>
+							<a th:href="@{/recipe/liked}" class="view_total">전체보기</a>
+						</div>
+						<div class="items_list swiper-container">
+							<div class="items swiper-wrapper">
+								<div class="item swiper-slide"
+									th:each="like : ${likeRecipeList}">
+									<a href="#" class="item_link"
+										th:href="@{'/recipe/' + ${like.recipe.path}}">
+										<div class="item_img">
+											<img th:src="${like.recipe.foodImg}"
+												th:alt="${like.recipe.title}" class="im">
+										</div>
+										<div class="item_info">
+											<dl>
+												<dt th:text="${like.recipe.title}">제목</dt>
+												<dd class="writer">
+													<span th:text="${like.recipe.writer?.nickname}">작성자</span>
+												</dd>
+												<dd class="item_info_bottom">
+													<span th:text="|좋아요 ${like.recipe.likeCount}|">좋아요</span> <span
+														th:text="|조회수 ${like.recipe.viewCount}|">조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 게시판 -->
+				<!--
+        <div class="content_bbs">
+            <div class="content_bbs_container">
+            <h3>게시판</h3>
+            <div class="freetalk_list">
+                <div>
+                    <a href="#" class="freetalk">
+                        <div class="freetalk_box_top">
+                            <span class="writer">김덕배</span>
+                            <span class="update">3분 전</span>
+                        </div>
+                        <div class="freetalk_box_content">
+                            <span>최고입니다</span>                         
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+	-->
+
+
+
+			</div>
+		</div>
+		
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+	</div>
+
+	<script type="application/javascript">
+		
+   		const swiper = new Swiper('.swiper-container', {
+	      // Optional parameters
+	      
+	      loop: false,
+	      spaceBetween: 30,
+	      slidesPerView: 3,
+	      slidesPerGroup: 3,
+	    
+	      // If we need pagination
+	      pagination: {
+	        el: '.swiper-pagination',
+	      },
+	    
+	      // Navigation arrows
+	      navigation: {
+	        nextEl: '.swiper-button-next',
+	        prevEl: '.swiper-button-prev',
+	      },
+	    
+	      // And if we need scrollbar
+	      scrollbar: {
+	        el: '.swiper-scrollbar',
+	      },
+	      
+	      breakpoints: {
+	    	768: {
+	    		slidesPerView: 4,
+	    		slidesPerGroup: 4,
+	    	},
+	    	1080: {
+	            slidesPerView: 5,
+	            slidesPerGroup: 4,
+	        }
+	      },
+	      
+	      observer: true,
+	      observeParents: true,
+	    });
+   
+	</script>
+</body>
+</html>

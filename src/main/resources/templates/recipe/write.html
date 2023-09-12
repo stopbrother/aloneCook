@@ -1,0 +1,275 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/recipe_write.css" />
+
+<body>
+   <div id="wrap">
+    <!--gnb 영역 -->
+        <header>
+            <div th:replace="fragments.html :: navi(activeMenu = 'recipe')"></div>
+        </header>
+
+    <!-- 컨텐츠 영역 -->    
+    <div class="main">
+        <div class="contents_header">
+            <div class="page_title">
+                <span>레시피 등록</span>
+            </div>
+        </div>
+
+        <div class="register">
+            <form class="register_items needs-validation" id="recipeForm" th:action="@{/recipe-write}" th:object="${recipeForm}" method="post" enctype="multipart/form-data" novalidate>
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">레시피 대표 이미지</dt>
+                        <dd class="register_item_infoDesc">
+                            레시피 대표 이미지에 사용 됩니다.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <div class="register_form_container" id="img-preview">
+                        <div class="imgUpload">
+                            <div>
+                                <span>이미지 업로드</span>
+                                <p>최소 1개, 최대 5개까지 업로드 가능</p>
+                            </div>
+                            <input type="file" id="main-img-file" accept="image/*" multiple required>
+                        </div>
+                      	<input type="hidden" id="foodImgUpload" th:field="*{foodImg}" multiple> 
+                      	
+                        <li class="imgStep">
+                        	<div class="imgStep_num">
+                        		<span></span>
+                        	</div>
+                        	<div class="imgStep_box">
+                        		<div class="imgStep_img">
+                        			
+                        		</div>
+                        		<!-- 
+                        		<div class="imgStep_change">
+                        			<button class="change_btn">변경</button>
+                        			<input type="file" />
+                        		</div>
+                        		-->
+                        	</div>
+                        	<div class="imgStep_btn">
+                    			<button class="stepBtn">
+                    				<div class="stepBtn_arrow">↑</div>
+                    			</button>
+                    			 <button type="button" class="stepBtn imgCancel">
+                    			 	<div class="stepBtn_cancel">X</div>
+                    			 </button>
+                    			 <button class="stepBtn">
+                    			 	<div class="stepBtn_arrow">↓</div>
+                    			 </button>
+                    		</div>
+                        </li>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="register_item">
+                	<dl class="register_item_info">
+                        <dt class="register_title">레시피 주소</dt>
+                        <dd class="register_item_infoDesc">
+                            레시피 주소(URL)에 사용됩니다.<br>예) aloneCook.com/recipe/<b>레시피주소</b>
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                    	<div class="inputAndGuide">
+                    		<input type="text" class="form-control" id="path" th:field="*{path}" aria-describedby="pathHelp" required min="2" max="20" placeholder="레시피 URL" />
+                    		<small id="pathHelp" class="form-text text-muted">
+                				공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로 입력하세요.
+                			</small>
+                			<small class="invalid-feedback">레시피 주소를 입력하세요.</small>
+                			<small class="form-text text-danger" th:if="${#fields.hasErrors('path')}" th:errors="*{path}">Path Error</small>
+                    	</div>                    	
+                    </div>                    
+                </div>
+
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">레시피 제목</dt>
+                        <dd class="register_item_infoDesc">
+                            레시피 제목에 사용됩니다.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <div class="inputAndGuide">
+                            <input type="text" id="title" class="form-control" th:field="*{title}" required max="50" placeholder="레시피 제목">
+                            <small id="titleHelp" class="form-text text-muted">
+                				30자 이내로 입력하세요.
+                			</small>
+                			<small class="invalid-feedback">레시피 제목을 입력하세요.</small>
+                			<small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>                            
+                        </div>                        
+                    </div>
+                </div>
+
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">레시피 소개</dt>
+                        <dd class="register_item_infoDesc">
+                            어떤 음식인지 간단하게 소개해 주세요.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <div class="inputAndGuide">
+                            <input type="text" id="foodIntro" class="form-control" th:field="*{foodIntro}" placeholder="레시피 소개" required>
+                            <small id="introHelp" class="form-text text-muted">
+                				30자 이내로 입력하세요.
+                			</small>
+                			<small class="invalid-feedback">레시피 소개를 입력하세요.</small>
+                			<small class="form-text text-danger" th:if="${#fields.hasErrors('foodIntro')}" th:errors="*{foodIntro}"></small>                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">난이도</dt>
+                        <dd class="register_item_infoDesc">
+                            음식 완성 난이도를 선택해 주세요.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <select id="level" class="form-control" th:field="*{level}">
+                        	<option th:value="EASY">쉬움</option>
+                        	<option th:value="NORMAL">보통</option>
+                        	<option th:value="HARD">어려움</option>                                                       
+                        </select>
+                    </div>
+                </div>
+
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">레시피 재료</dt>
+                        <dd class="register_item_infoDesc">
+                            레시피에 사용되는 재료를 소개해 주세요.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                    	<div class="inputAndGuide">
+                    		<textarea id="ingredients" class="editor" th:field="*{ingredients}" placeholder="재료를 입력해 주세요." required></textarea>                    		
+                			<small class="invalid-feedback">재료를 입력하세요.</small>
+                			<small class="form-text text-danger" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></small>
+                    	</div>
+                    </div>
+                    
+                </div>
+                
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">조리 과정</dt>
+                        <dd class="register_item_infoDesc">
+                            조리 과정을 순서대로 소개해 주세요. 
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <div class="register_form_container">
+                        	<textarea id="steps" class="editor" th:field="*{steps}" placeholder="조리 과정을 입력해 주세요." required></textarea>                            	
+                			<small class="invalid-feedback">조리 과정을 입력하세요.</small>
+                			<small class="form-text text-danger" th:if="${#fields.hasErrors('steps')}" th:errors="*{steps}"></small>                                                    
+                        </div>
+                    </div>
+                </div>                
+
+                <div class="register_item">
+                    <dl class="register_item_info">
+                        <dt class="register_title">동영상</dt>
+                        <dd class="register_item_infoDesc">
+                            동영상으로 소개할 수 있습니다.
+                        </dd>
+                    </dl>
+                    <div class="register_form">
+                        <div class="register_form_container">
+                            <textarea class="videoEditor" placeholder="↑비디오 아이콘을 클릭해 주세요." th:field="*{videoUrl}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="register_btn">
+                    <button type="submit" class="submit_btn">
+                        <span>저장</span>
+                    </button>
+                    <button class="cancel_btn">
+                        <span>취소</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- 푸터 영역 -->
+
+    <footer th:replace = "fragments.html :: footer"></footer>
+
+    </div>
+    
+    <script th:replace="fragments.html :: form-validation"></script>
+    <script th:replace="fragments.html :: editor-script"></script>
+    <script th:replace="fragments.html :: message"></script>
+    
+    <script type="application/javascript">
+    $(function() {    	
+		let $mainImgFile = $("#main-img-file");
+		let $imgUpload = $(".imgUpload");
+		let $imgPreview = $("#img-preview");
+		
+		$(".imgStep").hide();
+		
+		$imgUpload.click(function() {
+			$mainImgFile.click();
+		});
+		
+		$mainImgFile.change(function(e) {
+			var uploadFiles = [];
+			
+			uploadFiles = [];
+									
+			var fileArr = Array.prototype.slice.call(e.target.files);
+			
+			if (e.target.files.length > 5) {
+				alert("최대 5장까지 업로드 할 수 있습니다.");
+			}
+			
+			fileArr.forEach(function(f) {
+				if(e.target.files.length < 6) {
+					uploadFiles.push(f);
+					const reader = new FileReader();
+					
+					reader.onload = e => {
+						$(".imgStep").show();
+						
+						let img = document.createElement("img");
+						img.src = e.target.result;
+						
+						$(".imgStep_img").html(img);																							
+						$("#foodImgUpload").val(e.target.result);
+					};
+					reader.readAsDataURL(f);
+					
+				}
+			});
+			
+			$(".imgCancel").click(function () {
+				$(".imgStep").hide();
+				$("#foodImgUpload").val('');
+			});
+			
+		});
+		
+	
+		
+		
+		
+	})
+    </script>
+    
+</body>
+</html>

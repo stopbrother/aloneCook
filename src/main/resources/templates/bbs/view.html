@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/bbs_view.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+		<!-- 컨텐츠 영역 -->
+		<main class="main">
+			<div class="content">
+				<div class="bbs_view">
+					<div class="bbs_view_inner">
+						<div class="bbs_view_header">
+							<div class="header_title">
+								<h1 th:text="${bbs.title}">제목</h1>
+							</div>
+							<div class="header_sub_title">
+								<div class="write_info">
+									<h6 th:text="${bbs.writer?.nickname}">작성자</h6>
+									<span class="date-time" th:text="${bbs.createdDateTime}">작성일</span>
+								</div>
+								<div class="bbs_info">
+									<div>
+										댓글 <span th:text="${community.size()}">0</span>
+									</div>
+									<div>
+										조회 <span>0</span>
+									</div>
+								</div>
+							</div>
+							<div class="writer_btn"
+								th:if="${bbs.isManager(#authentication.principal)}">
+								<a class="edit" th:href="@{'/bbs/' + ${bbs.id} + '/edit'}">수정</a>
+								<a class="delete" th:href="@{'/bbs/' + ${bbs.id} + '/remove'}">삭제</a>
+							</div>
+						</div>
+						<div class="bbs_view_content">
+							<div class="bbs_view_content_body" th:utext="${bbs.content}">내용</div>
+							<div class="bbs_view_content_footer">
+								<button class="bbs_btn like_btn">좋아요</button>
+								<button class="bbs_btn share_btn">공유하기</button>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<h4 class="comment_cnt">
+							댓글 <span>2</span>
+						</h4>
+						<div class="comment_write_container">
+							<div class="comment_write_inner">
+								<input type="text" class="comment_write" name="comment"
+									id="comment" placeholder="댓글작성">
+							</div>
+							<button type="submit" id="commentSave" class="write_button">등록</button>
+						</div>
+						<div th:if="${community.size() == 0}">등록된 댓글이 없습니다.</div>
+						<div class="comments" th:each="community: ${community}">
+							<div class="comment_item">
+								<div class="comment_item_inner">
+									<div class="user_profile">
+										<div class="writer_info">
+
+
+											<img class="writer_img"
+												th:if="${!#strings.isEmpty(community.account?.profileImg)}"
+												th:src="${community.account?.profileImg}" /> <img
+												class="writer_img"
+												th:if="${#strings.isEmpty(community.account?.profileImg)}"
+												src="/images/profile.svg" />
+
+
+											<div class="img_right">
+												<a href="#" class="writer_nickname"> <span
+													th:text="${community.account?.nickname}"></span>
+												</a> <span class="date-time"
+													th:text="${community.createDateTime}">날짜</span>
+											</div>
+										</div>
+									</div>
+									<div class="comment_content">
+										<div class="comment_content_inner">
+											<div class="comment_text_wrap">
+												<div class="comment_text" th:text="${community.comment}">댓글내용.</div>
+											</div>
+										</div>
+									</div>
+									<div class="comment_bottom"
+										th:if="${#authentication.principal.Username} == ${community.account?.nickname}">
+										<div class="comment_manage">
+											<!-- <button type="button" class="comment_update">수정</button> -->
+											<button type="button" class="comment_delete" id="communityId"
+												th:data-num="${community.id}">삭제</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+
+	<script th:replace="fragments.html :: date-time"></script>
+	<script th:replace="fragments.html :: ajax-csrf-header"></script>
+	<script type="application/javascript" th:inline="javascript">
+		
+    	$(function() {
+        	$("#commentSave").click(function() {
+        		const comment = $("#comment").val();
+        		var bbsId = "[(${bbs.id})]";
+        		
+        		$.ajax({
+        			
+        			contentType: "application/json; charset=utf-8",
+                    method: "POST",
+                    url: "/bbs/" + bbsId + "/comment/add",
+                    data: JSON.stringify({'comment': comment})
+        		}).done(function () {
+        			console.log("등록 완료");
+        			location.reload();
+        		//	$(".contents").load("/recipe/" + recipePath + "/community .contents");
+        		}).fail(function (textStatus) {
+        			console.log(textStatus);
+        		});
+        		
+        	});
+        	
+        	$(".comment_delete").click(function() {
+        		const eventCheck = confirm("해당 댓글을 삭제하시겠습니까?");
+        		var bbsId = "[(${bbs.id})]";
+        		var id = $("#communityId").data('num');
+        		
+        		if (eventCheck == true) {
+        			$.ajax({
+        				contentType: "application/json; charset=utf-8",
+        				method: "DELETE",
+        				url: "/profile/" + bbsId + "/comment/" + id    				
+        			}).done(function () {
+        				console.log("댓글 삭제완료");
+        				location.reload();
+        			});
+        		}
+        	});
+    	})
+    
+	</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/recipe.css" />
+
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		
+			<div th:replace="fragments.html :: navi(activeMenu = 'recipe')"></div>
+		
+
+		<!-- 컨텐츠 영역 -->
+		<main class="contentsWrap">
+			<div class="contents recipe_content">
+				<div class="content_filter_wrap">
+					<div class="content_filter_container">
+						<div class="content_filter_inner">
+							<div class="content_filter">
+								<div class="dropdown">
+									<button th:if="${sortProperty == 'createdDateTime'}"
+										class="filter dropdown-toggle" type="button"
+										id="dropdownMenuButton" data-bs-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">최신순</button>
+									<button th:if="${sortProperty == 'likeCount'}"
+										class="filter dropdown-toggle" type="button"
+										id="dropdownMenuButton" data-bs-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">인기순</button>
+									<button th:if="${sortProperty == 'viewCount'}"
+										class="filter dropdown-toggle" type="button"
+										id="dropdownMenuButton" data-bs-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">조회순</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown_item"
+											th:classappend="${#strings.equals(sortProperty, 'createdDateTime')}? active"
+											th:href="@{/recipe-list?sort=createdDateTime,desc}"> 최신순
+										</a> <a class="dropdown_item"
+											th:classappend="${#strings.equals(sortProperty, 'likeCount')}? active"
+											th:href="@{/recipe-list?sort=likeCount,desc}"> 인기순 </a> <a
+											class="dropdown-item"
+											th:classappend="${#strings.equals(sortProperty, 'viewCount')}? active"
+											th:href="@{/recipe-list?sort=viewCount,desc}"> 조회순 </a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="recipe_content_container">
+					<div class="recipe_content_list"
+						th:if="${recipePageAll.getTotalElements() == 0}">
+						<div class="count_write">
+							<div class="counter">
+								<span th:text="${recipePageAll.getTotalElements()}"></span>개의
+								레시피가 있습니다.
+							</div>
+							<div class="write">
+								<a th:href="@{/recipe-write}">레시피 등록</a>
+							</div>
+						</div>
+						등록된 레시피가 없습니다.
+					</div>
+					<div class="recipe_content_list"
+						th:if="${recipePageAll.getTotalElements() > 0}">
+						<div class="count_write">
+							<div class="counter">
+								<span th:text="${recipePageAll.getTotalElements()}"></span>개의
+								레시피가 있습니다.
+							</div>
+							<div class="write">
+								<a th:href="@{/recipe-write}">레시피 등록</a>
+							</div>
+						</div>
+						<div class="recipe_items">
+							<div class="recipe_item_wrap"
+								th:each="recipe: ${recipePageAll.getContent()}">
+								<div class="recipe_item">
+									<a class="recipe_card" th:href="@{'/recipe/' + ${recipe.path}}">
+										<div class="recipe_card_img_box">
+											<div class="recipe_card_img">
+												<img th:src="${recipe.foodImg}" th:alt="${recipe.title}">
+											</div>
+										</div>
+										<div class="recipe_card_info_box">
+											<dl>
+												<dt th:text="${recipe.title}">제목</dt>
+												<dd class="writer">
+													<span th:text="${recipe.writer?.nickname}">작성자</span>
+												</dd>
+												<dd class="card_sub_info">
+													<span th:text="|좋아요 ${recipe.likeCount}|">좋아요</span> <span
+														th:text="|조회수 ${recipe.viewCount}|">조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+						</div>
+
+						<nav>
+							<ul class="pagination">
+								<li class="page-item"
+									th:classappend="${!recipePageAll.hasPrevious()}? disabled">
+									<a class="page-link"
+									th:href="@{'/recipe-list?sort=' + ${sortProperty} + ',desc&page=' + ${recipePageAll.getNumber() -1}}">Before</a>
+								</li>
+
+								<li class="page-item"
+									th:classappend="${i == recipePageAll.getNumber()}? active"
+									th:each="i: ${#numbers.sequence(0, recipePageAll.getTotalPages() -1)}">
+									<a class="page-link"
+									th:href="@{'/recipe-list?sort=' + ${sortProperty} + ',desc&page=' + ${i}}"
+									th:text="${i + 1}">1</a>
+								</li>
+
+								<li class="page-item"
+									th:classappend="${!recipePageAll.hasNext()}? disabled"><a
+									class="page-link"
+									th:href="@{'/recipe-list?sort=' + ${sortProperty} + ',desc&page=' + ${recipePageAll.getNumber() +1}}">Next</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<!-- 푸터 영역 -->
+
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+
+	<script th:replace="fragments.html :: date-time"></script>
+</body>
+</html>

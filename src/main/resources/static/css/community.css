@@ -1,0 +1,122 @@
+::placeholder {
+    opacity: 0.3;
+}
+.community_contents {
+	width: 100%;
+    background-color: #fff;    
+    padding-bottom: 0;
+}
+.recipe-community { 
+    max-width: 650px;
+    background: none;
+}
+.comment_write_container {
+	width: auto;
+	padding: 16px;
+}
+.comment_write_inner {
+	display: flex;
+	width: 100%;
+}
+.comment_write {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    font-size: 14px;
+    resize: none;
+}
+.write_button {
+    cursor: pointer;
+    width: 104px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border: 1px solid rgb(240, 240, 240);
+    border-radius: 1px;
+    margin: 0;
+    outline: 0;
+    box-sizing: border-box;
+    padding: 0 24px;
+    color: rgb(61, 61, 61);
+    background: #fff;
+}
+.comments {
+	padding: 0 16px;
+}
+.comment_item {
+    padding: 0; /**/
+}
+.comments:not(:first-of-type) > div {
+    border-top: 1px solid rgb(240, 240, 240);
+}
+.comment_item_inner {
+    padding-bottom: 21px; /**/
+    padding: 28px 0 16px;
+}
+.user_profile {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.writer_info {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    gap: 10px;
+    flex: 1 0 auto;
+}
+.writer_img {
+    margin-top: 0;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: rgb(208 208 208) 0px 0px 1px 0px inset, rgb(208 208 208) 0px 0px 1px 0px;
+    margin-right: 0;
+}
+.img_right {
+    display: flex;
+    flex-direction: row;    
+    gap: 10px;
+    width: calc(100% - 46px);
+	font-size: 14px;
+}
+.writer_nickname {
+    color: rgb(61, 61, 61);
+    font-weight: bold;
+}
+.comment_content {
+    width: 100%;
+}
+.comment_content_inner {
+    position: relative;
+    margin-top: 16px;
+}
+.comment_text {
+    font: 400 16px / 28px NotoSansKR;
+    max-height: 360px; /**/
+    overflow: hidden;
+    color: rgb(109, 109, 109);
+    white-space: pre-wrap;
+}
+.comment_bottom {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 10px;
+}
+.comment_update, .comment_delete {
+    border: 0;
+    background: none;
+    font-size: 12px;
+    cursor: pointer;
+}
+.comment_update {
+    color: #7b858e;
+    padding: 0;
+}
+.comment_delete {
+    color: #f95b54;
+}

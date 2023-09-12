@@ -1,0 +1,121 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1055;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+}
+.modal-open {
+	padding-right: 0 !important; 
+}
+
+.modal-dialog {
+  flex-direction: column;
+  position: relative;
+  width: 400px;
+  margin: 20px;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  max-height: calc(100% - 40px);
+}
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translate(0, -50px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade .modal-dialog {
+    transition: none;
+  }
+}
+.modal.show .modal-dialog {
+  transform: none;
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1050;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+.modal-backdrop.fade {
+  opacity: 0;
+}
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+.modal-header {
+  
+  margin: 32px 32px 16px 32px;
+  text-align: center;
+  
+}
+
+.modal-title {
+  display: block;
+  color: #262626;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  margin: -4px 0 -6px;
+}
+
+.modal-body {
+  display: flex;
+  margin-top: 16px;
+  flex-direction: column;
+}
+
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+    min-height: calc(100% - 3.5rem);
+  }
+}
+
+.modal-btn {
+  background-color: transparent;
+  border-top: 1px solid #dbdbdb;
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  cursor: pointer;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 48px;
+  padding: 4px 8px;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+}
+.upload {
+  color: #0095f6;
+  font-weight: 700;
+}
+.delete {
+  color: #ed4956;
+  font-weight: 700;
+}
