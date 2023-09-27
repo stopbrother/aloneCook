@@ -26,28 +26,20 @@
 						<div class="main_img">
 							<figure class="main_img_cover">
 								<div class="slider_wrap">
-									<div class="swiper_wrap">
-										<div class="swiper">
+									<div class="swiper-container">
+										<div class="swiper-wrapper">
 											<div class="swiper_slide">
 												<div class="food_img">
 													<img th:src="${recipe.foodImg}">
 												</div>
-											</div>
-											<div class="swiper_slide"></div>
-											<div class="swiper_slide"></div>
+											</div>											
 										</div>
 										<div class="swiper_pagination">
-											<div class="bullet bullet-active"></div>
-											<div class="bullet"></div>
-											<div class="bullet"></div>
+											<div class="bullet"></div>											
 										</div>
 									</div>
-									<div class="swiper_btn_prev swiper_btn_disable">
-										<div class="arrow_left"></div>
-									</div>
-									<div class="swiper_btn_next">
-										<div class="arrow_right"></div>
-									</div>
+									<div class="swiper_btn_prev"></div>
+									<div class="swiper_btn_next"></div>
 								</div>
 							</figure>
 						</div>
@@ -194,7 +186,7 @@
 					<div class="recentlyView_recipe_container">
 						<div class="recentlyView_title">관심 레시피</div>
 						<div class="recipe_list_slider">
-							<div class="swiper-container">
+							<div class="swiper-container recently">
 								<div class="swiper-wrapper">
 									<div class="swiper-slide" th:each="liked : ${likedRecipeList}">
 										<a class="recipeList_item"
@@ -263,6 +255,8 @@
 	<script>
 		$(function() {
 			var navfixed = $(".contents_nav").offset().top;
+			var footer = $(".content_footer").offset().top - 450;
+			
 			$(window).scroll(function() {
 				let scroll = $(window).scrollTop();
 				if (scroll >= navfixed) {
@@ -271,7 +265,9 @@
 				} else {
 					$(".contents_nav").removeClass("sc_contents_nav");
 					$(".subMenu_items").removeClass("sc_subMenu_items");
-				}
+				} if (scroll >= footer) {					
+					$(".subMenu_items").removeClass("sc_subMenu_items");
+				}				
 			});
 
 			$('.subMenu_item > a').click(function(event) {
@@ -289,10 +285,8 @@
    		const swiper = new Swiper('.swiper-container', {
 	      // Optional parameters
 	      
-	      loop: false,
-	      spaceBetween: 30,
-	      slidesPerView: 3,
-	      slidesPerGroup: 3,
+	      loop: false,	      
+	      slidesPerView: 1,	      
 	    
 	      // If we need pagination
 	      pagination: {
@@ -308,23 +302,50 @@
 	      // And if we need scrollbar
 	      scrollbar: {
 	        el: '.swiper-scrollbar',
-	      },
-	      
-	      breakpoints: {
-	    	768: {
-	    		slidesPerView: 4,
-	    		slidesPerGroup: 4,
-	    	},
-	    	1080: {
-	            slidesPerView: 5,
-	            slidesPerGroup: 4,
-	        }
-	      },
+	      },	      	      
 	      
 	      observer: true,
 	      observeParents: true,
 	    });
    
+   		const recently = new Swiper('.recently', {
+  	      // Optional parameters
+  	      
+  	      loop: false,
+  	      spaceBetween: 30,
+  	      slidesPerView: 3,
+  	      slidesPerGroup: 3,
+  	    
+  	      // If we need pagination
+  	      pagination: {
+  	        el: '.swiper-pagination',
+  	      },
+  	    
+  	      // Navigation arrows
+  	      navigation: {
+  	        nextEl: '.swiper-button-next',
+  	        prevEl: '.swiper-button-prev',
+  	      },
+  	    
+  	      // And if we need scrollbar
+  	      scrollbar: {
+  	        el: '.swiper-scrollbar',
+  	      },
+  	      
+  	      breakpoints: {
+  	    	768: {
+  	    		slidesPerView: 4,
+  	    		slidesPerGroup: 4,
+  	    	},
+  	    	1080: {
+  	            slidesPerView: 5,
+  	            slidesPerGroup: 4,
+  	        }
+  	      },
+  	      
+  	      observer: true,
+  	      observeParents: true,
+  	    });
 	</script>
 
 </body>
