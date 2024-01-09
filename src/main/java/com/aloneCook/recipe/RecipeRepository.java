@@ -31,12 +31,13 @@ public interface RecipeRepository extends JpaRepository<Recipe, Long>, RecipeRep
 	@EntityGraph(attributePaths = {"steps", "manager"})
 	Recipe findRecipeWithCookingStepByPath(String path);
 	
-	List<Recipe> findFirst10ByOrderByCreatedDateTimeDesc(); //최근레시피
+	List<Recipe> findFirst10ByDraftedOrderByPublishedDateTimeDesc(boolean drafted); //최근레시피
 	
-	List<Recipe> findFirst10ByOrderByLikeCountDesc(); //인기레시피
+	List<Recipe> findFirst10ByDraftedOrderByLikeCountDesc(boolean drafted); //인기레시피
 
-	List<Recipe> findByManagerContainingOrderByCreatedDateTimeDesc(Account account); //내가 만든 레시피
+	List<Recipe> findByManagerContainingAndDraftedOrderByPublishedDateTimeDesc(Account account, boolean drafted); //내가 만든 레시피(공개중)
 	
+	List<Recipe> findByWriterAndDraftedOrderByCreatedDateTimeDesc(Account writer, boolean drafted); //내가 만든 레시피(임시저장)
 	
 	long countByManagerContaining(Account account);
 /*

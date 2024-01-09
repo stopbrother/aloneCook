@@ -30,8 +30,8 @@ public class MainController {
 		if (account != null) {
 			model.addAttribute(account);
 		}
-		model.addAttribute("newRecipeList", recipeRepository.findFirst10ByOrderByCreatedDateTimeDesc());
-		model.addAttribute("favoriteList", recipeRepository.findFirst10ByOrderByLikeCountDesc());
+		model.addAttribute("newRecipeList", recipeRepository.findFirst10ByDraftedOrderByPublishedDateTimeDesc(false));
+		model.addAttribute("favoriteList", recipeRepository.findFirst10ByDraftedOrderByLikeCountDesc(false));
 		model.addAttribute("likeRecipeList", likeRepository.findByAccountAndLiked(account, true));
 		return "index";
 	}

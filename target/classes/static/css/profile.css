@@ -1,0 +1,421 @@
+.profile_contents {
+    border-bottom: 1px solid rgb(230, 230, 230);    
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #3d3d3d;
+    background: #fff;
+}
+.profile_header {
+    border-bottom: 1px solid rgb(230, 230, 230);
+}
+.profile_header_container {
+    overflow: hidden;
+    padding: 24px 0;
+}
+.profile_header_inner {
+    display: flex;
+    position: relative;
+    width: 100%;
+    min-height: 64px;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgb(109, 109, 109);
+}
+.user_info {
+    display: flex;
+    position: relative;
+}
+.profile_img_box_wrap {
+    width: 120px;
+    height: 120px; /* 여기까지 min-width:1080px */
+    position: relative;
+    top: 0;
+    left: 0;
+    min-width: 60px;
+    min-height: 60px;
+}
+.profile_img_box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-size: 40px;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: rgb(208, 208, 208) 0 0 1px 0 inset,
+                rgb(208, 208, 208) 0 0  1px 0;
+}
+.profile_name_wrap {
+    margin-top: 0;
+    margin-left: 24px;
+    max-width: 720px; /* 여기까지 min-width:1080px */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile_name {
+	display: flex;
+	align-items: center;
+}
+.nickname {
+    font-size: 30px;
+    line-height: 45px; /* 여기까지 min-width:1080px */
+    color: rgb(61, 61, 61);
+    font-weight: bold;
+}
+.follow {
+    display: flex;
+    margin-left: 17px;
+}
+.follow_btn, .disfollow_btn, .profileEdit {
+    padding: 7px 16px;
+    width: 100%;
+    outline: 0;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 8px;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    background-color: rgb(0, 149, 246);
+    color: #fff;
+}
+.disfollow_btn, .profileEdit {
+	background-color: rgb(239, 239, 239) !important;
+	color: #000 !important;
+}
+.follow_btn span, .disfollow_btn span, .profileEdit span {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+}
+.user_email {
+    font-size: 18px;
+    line-height: 27px; /* 여기까지 min-width:1080px */
+    display: flex;
+    flex-direction: column;
+}
+.user_email p {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px; /* 여기까지 min-width:1080px */
+    display: inline-flex;
+    color: rgb(109, 109, 109);
+}
+
+
+.profileMenu_container {
+    font-size: 18px;
+    line-height: 27px;
+    height: 56px; /* 여기까지 min-width:1080px */
+    display: flex;
+   /*overflow: auto hidden; */
+    position: relative;
+}
+/*
+.profileMenu_container::after {
+    content: "";
+    height: 3px;
+    display: block;
+    position: absolute;
+    background: rgb(61, 61, 61);
+    bottom: -1px;
+    width: 40px;
+    left: 24px;
+}
+*/
+.profileMenu_inner {
+    
+    display: inline-flex;
+}
+.profileMenu_item {
+    margin-right: 32px; /* 여기까지 min-width:1080px */
+    margin: 0 24px 0 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.profileMenu_item.active {
+	border-bottom: 2px solid #000;
+}
+.profileMenu_item.active a {
+    font-weight: bold;
+    color: rgb(61, 61, 61);
+}
+.profileMenu_item a {
+    display: flex;
+    position: relative;
+    color: rgb(158, 158, 158);
+    font-weight: bold;
+}
+.profileMenu_item a:hover {
+    font-weight: bold;
+    color: rgb(61, 61, 61);
+}
+
+.profile_content {
+    padding: 24px 0;
+}
+.profile_content_inner {
+
+}
+
+.profile_intro {
+    color: rgb(158, 158, 158);
+    font-size: 18px;
+    line-height: 27px;
+    padding: 14px 0 24px;
+    min-height: 147px;
+}
+
+.created_counter {
+    font-size: 16px;
+    line-height: 27px;
+    letter-spacing: -0.02em;
+    padding: 14px 0 24px; /* 1080 */
+    color: rgb(61, 61, 61);
+}
+.created_counter span {
+    font-style: normal;
+}
+
+.created_list {
+    padding: 0;
+    margin: 0 -12px; /* 1080 */
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.recipe_item_wrap {
+    width: 25%; /* min-width 865 */
+    padding: 0 10px; /* min-width 640 */
+    margin: 0;
+    box-sizing: border-box;
+}
+.recipe_item {
+    margin-bottom: 56px; /* min-width 640 */
+    position: relative;
+}
+.recipe_card {
+    flex-wrap: wrap;
+}
+.recipe_card_img_box {
+    position: relative;
+    flex-basis: 132px;
+}
+.recipe_card_img {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.recipe_card_img::before {
+    content: "";
+    padding-bottom: 86%;
+    display: block;
+}
+.recipe_card_img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.2s ease 0s;
+}
+.recipe_card_img img::before {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+.recipe_card_info_box {
+    padding: 0; /* min-width 640 */
+    flex: 1 1 0%;
+}
+.recipe_card_info_box dl {
+    
+    padding-top: 16px;
+    margin-bottom: 14px; /* min-width 640 */
+    margin: 0;
+    color: rgb(61, 61, 61);
+    overflow: hidden;
+}
+.recipe_card_info_box dl dt {
+    min-height: auto;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+    line-height: 22px !important; /* mine-width 640 */
+    max-height: initial;
+    width: 93%;
+    font-weight: bold;
+    overflow: hidden;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+    color: rgb(61, 61, 61);
+}
+.recipe_card_info_box dl dd {
+    margin: 0;
+    padding: 0;
+}
+.recipe_card_info_box dl dd.writer {
+    color: rgb(158, 158, 158);
+    font-size: 13px;
+    line-height: 21px;
+}
+.recipe_card_info_box dl dd.card_sub_info {
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+    color: rgb(61, 61, 61);
+    padding-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.followList_wrap {
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    flex-direction: column;
+}
+.followList {
+    padding: 0;
+    border: 1px solid rgb(242, 242, 242);
+    border-radius: 8px; /* */
+    margin: 16px 0;
+    display: flex;
+    width: 70%;   
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.followList_item {
+    padding-left: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.followList_item_img {
+    display: inline-flex;
+    align-self: center;
+}
+.followList_item_img img {
+	display: inline-flex;
+	position: relative;
+	width: 56px;
+	height: 56px;
+	min-width: 56px;
+	min-height: 56px;
+	border-radius: 50%;
+}
+.followList_item_content {
+    margin-left: 24px;
+    min-height: 88px;
+    border-bottom: 1px solid rgb(242, 242, 242); /**/
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+.followList_item_desc {
+    overflow: hidden;
+    display: inline-flex;
+    flex-direction: column;
+}
+.followName {
+    font-size: 16px;
+    line-height: 27px;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    font-weight: bold;
+    color: #000;
+}
+.followList_btn {
+    min-width: 184px;
+    padding: 0 40px;
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+    justify-content: center;
+}
+.followList_btn button {
+    line-height: 27px;
+    outline: 0;
+    display: inline-flex;
+    width: 104px;
+    min-width: 104px;
+    height: 36px;
+    font-size: 16px;
+    padding: 0 16px 0 12px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 8px;
+    margin: 0;
+    border: 0;
+    color: #fff;
+    background-color: rgb(0, 149, 246);
+    box-sizing: border-box;
+}
+.followList_btn span {
+    font-weight: 600;
+    line-height: 18px;
+}
+.itsme {
+	display: none;
+}
+
+
+@media screen and (min-width: 768px) {
+    
+}
+
+@media screen and (min-width: 1080px) {
+    .profile_header_container {
+    	width: 100%;
+    	max-width: 1080px;
+    	margin: 0 auto;
+    	 
+    }
+    .profile_header_inner {
+    	max-width: 1080px;
+    	margin: 0 auto;
+    }
+    .profile_content_inner {
+    	width: 100%;
+    	max-width: 1080px;
+    	margin: 0 auto;
+	}
+}
+
+@media screen and (min-width: 1280px) {
+    .profile_header_container {    	
+    	max-width: 1200px;    	
+    }
+    .profile_header_inner {
+    	max-width: 1200px;    
+    }    
+    .profile_content_inner {    	
+    	max-width: 1200px;    	
+	}
+}

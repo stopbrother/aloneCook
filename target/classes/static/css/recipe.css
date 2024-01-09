@@ -1,0 +1,217 @@
+.main {
+    display: block;
+    width: 100%;
+    flex-grow: 1;
+    background: #fff;
+}
+.recipe_content {
+	
+    letter-spacing: -0.015em;
+    font-weight: 400;    
+}
+.content_filter_wrap {
+	position: relative;
+    box-sizing: border-box;    
+}
+.content_filter_container {    
+    display: flex;
+    position: relative;
+    height: 100%;
+    align-items: center;
+    padding: 0 6px 0 0;
+}
+.content_filter_inner {
+	position: relative;	
+    width: 100%;    
+    margin-top: 24px;
+    z-index: 99;
+}
+.content_filter {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;	
+}
+.filter {
+    border: 1px solid rgb(230, 230, 230); /* min-width:768 */       
+    height: 34px;
+    line-height: 34px;
+    box-sizing: border-box;
+    margin-right: 8px;
+    border-radius: 3px;
+    background: #fff;
+    color: rgb(72, 72, 72);
+    padding: 0;
+    overflow: hidden;
+}
+
+
+.recipe_content_container {
+    min-height: 150px;    
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.recipe_content_list {
+    color: rgb(51, 51, 51);
+}
+.count_write {
+    display: flex;
+    justify-content: space-between;
+}
+.counter {
+    padding: 16px 20px 32px 0; /* min-width:768 */
+    font-size: 14px;
+    line-height: 24px;
+    color: rgb(61, 61, 61);
+    letter-spacing: -0.08px;
+}
+.counter span {
+    color: #0095f6;
+}
+.write {
+    padding: 16px 0 32px;
+}
+.write a {
+	color: rgb(61, 61, 61);
+    padding: 8px 12px;
+    background: transparent;
+    border: 1px solid rgb(230, 230, 230);
+    border-radius: 4px;
+}
+.recipe_items {
+    width: auto;
+    margin: 0 -10px;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.recipe_item_wrap {
+    width: 25%; /* min-width 865 */
+    padding: 0 10px; /* min-width 640 */
+    margin: 0;
+    box-sizing: border-box;
+}
+.recipe_item {
+    margin-bottom: 56px; /* min-width 640 */
+    position: relative;
+}
+.recipe_card {
+    flex-wrap: wrap;
+}
+.recipe_card_img_box {
+    position: relative;
+    flex-basis: 132px;
+}
+.recipe_card_img {
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.recipe_card_img::before {
+    content: "";
+    padding-bottom: 86%;
+    display: block;
+}
+.recipe_card_img img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.2s ease 0s;
+}
+.recipe_card_img img::before {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-sizing: border-box;
+}
+.recipe_card_info_box {
+    padding: 0; /* min-width 640 */
+    flex: 1 1 0%;
+}
+.recipe_card_info_box dl {
+    
+    padding-top: 16px;
+    margin-bottom: 14px; /* min-width 640 */
+    margin: 0;
+    color: rgb(61, 61, 61);
+    overflow: hidden;
+}
+.recipe_card_info_box dl dt {
+    min-height: auto;
+    margin-bottom: 8px;
+    font-size: 16px !important;
+    line-height: 22px !important; /* mine-width 640 */
+    max-height: initial;
+    width: 93%;
+    font-weight: bold;
+    overflow: hidden;
+    letter-spacing: -0.015em;
+    word-break: keep-all;
+    color: rgb(61, 61, 61);
+}
+.recipe_card_info_box dl dd {
+    margin: 0;
+    padding: 0;
+}
+.recipe_card_info_box dl dd.writer {
+    color: rgb(158, 158, 158);
+    font-size: 13px;
+    line-height: 21px;
+}
+.recipe_card_info_box dl dd.card_sub_info {
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: -0.015em;
+    color: rgb(61, 61, 61);
+    padding-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.recipe_search_noresult {
+    font-size: 2rem;
+    margin: 160px auto; /* min-width: 1080px */
+    opacity: 0.5;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.3);
+    font-weight: bolder;
+}
+
+
+
+@media screen and (min-width: 768px) {
+    
+}
+
+@media screen and (min-width: 1080px) {
+	.content_filter_container {
+		width: 1080px;
+		margin: 0 auto;
+	}
+    .recipe_content_container {
+    	max-width: 1080px;
+    }    
+}
+
+@media screen and (min-width: 1280px) {
+	.content_filter_container {
+		width: 1200px;
+	}
+    .recipe_content_container {
+    	max-width: 1200px;
+    }
+}

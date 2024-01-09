@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aloneCook.like.Likes;
@@ -32,6 +34,8 @@ import com.aloneCook.community.CommentForm;
 import com.aloneCook.community.Community;
 import com.aloneCook.community.CommunityRepository;
 import com.aloneCook.community.CommunityService;
+import com.aloneCook.image.Image;
+import com.aloneCook.image.ImageService;
 import com.aloneCook.like.LikeRepository;
 import com.aloneCook.like.LikeService;
 import com.aloneCook.recipe.form.RecipeForm;
@@ -53,6 +57,7 @@ public class RecipeController {
 	private final LikeRepository likeRepository;
 	private final CommunityService communityService;
 	private final CommunityRepository communityRepository;
+	private final ImageService imageService;
 	
 	
 	@GetMapping("/recipe-list")
@@ -78,15 +83,45 @@ public class RecipeController {
 	}
 	@PostMapping("/recipe-write")
 	public String newRecipeSubmit(@CurrentUser Account account, @Valid RecipeForm recipeForm,
-								Errors errors, Model model, RedirectAttributes attributes) {		
-		if (errors.hasErrors()) {			
-			model.addAttribute(account);			
-			return "recipe/write";
+								@RequestParam(value = "draft", required = false) boolean drafted,
+								@RequestParam("images") List<MultipartFile> images,
+								Model model, RedirectAttributes attributes) {		
+		if (drafted) {			
+			recipeService.draftRecipe(modelMapper.map(recipeForm, Recipe.class), account, images);			
+			attributes.addFlashAttribute("message", "레시피가 저장 되었습니다.");
+			return "redirect:/my-recipe/draft";
+		} else {
+			Recipe newRecipe = recipeService.createNewRecipe(modelMapper.map(recipeForm, Recipe.class), account, images);		
+			attributes.addFlashAttribute("message", "레시피가 공개되었습니다.");
+			return "redirect:/recipe/" + URLEncoder.encode(newRecipe.getPath(), StandardCharsets.UTF_8);
 		}
-		Recipe newRecipe = recipeService.createNewRecipe(modelMapper.map(recipeForm, Recipe.class), account);
-		attributes.addFlashAttribute("message", "기본정보가 저장되었습니다.");
-		return "redirect:/recipe/" + URLEncoder.encode(newRecipe.getPath(), StandardCharsets.UTF_8);
+		
 	}
+	
+	@PostMapping("/update-foodimg")
+	@ResponseBody
+	public ResponseEntity updateFoodImg(@RequestParam("oldFileName") String oldFileName,
+										@RequestParam("newImageFile") MultipartFile newImageFile) {
+		Image updateImage = imageService.updateImage(oldFileName, newImageFile);
+		
+		if(updateImage != null) {
+			return ResponseEntity.ok("이미지 변경 성공");
+		}else {
+			return ResponseEntity.badRequest().body("이미지 변경 실패");
+		}
+	}
+	
+	/*
+	@PostMapping("/recipe-draft")
+	public String draftRecipe(@CurrentUser Account account, @Valid RecipeForm recipeForm,
+							Model model, RedirectAttributes attributes) {
+		Recipe recipe = recipeService.draftRecipe(modelMapper.map(recipeForm, Recipe.class), account);
+		attributes.addFlashAttribute("message", "임시저장 되었습니다.");
+		return "redirect:/recipe/" + URLEncoder.encode(recipe.getPath(), StandardCharsets.UTF_8);
+	}
+	*/	
+	
+
 	@InitBinder("recipeForm")
 	public void recipeFormInitBinder(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(recipeFormValid);

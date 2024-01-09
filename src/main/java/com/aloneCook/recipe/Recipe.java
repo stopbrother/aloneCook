@@ -28,6 +28,7 @@ import javax.persistence.OrderBy;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aloneCook.community.Community;
+import com.aloneCook.image.Image;
 import com.aloneCook.like.Likes;
 import com.aloneCook.user.UserAccount;
 import com.aloneCook.user.Account;
@@ -74,11 +75,14 @@ public class Recipe {
 	private String steps;
 	
 	private String videoUrl;
-	
-	@Column(nullable = false)
+		
 	private LocalDateTime createdDateTime;
 	
+	private LocalDateTime publishedDateTime;
+	
 	private boolean published;
+	
+	private boolean drafted;
 	
 	private Long viewCount;
 	
@@ -91,6 +95,9 @@ public class Recipe {
 	@OrderBy("id")
 	@OneToMany(mappedBy = "recipe")	
 	private List<Community> comments = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "recipe")
+	private List<Image> images = new ArrayList<>();
 	
 	
 	public void viewCnt(Account account) {
@@ -165,6 +172,11 @@ public class Recipe {
 		this.comments.add(community);
 		community.setRecipe(this);
 	}
+
+
+
+
+
 
 	
 

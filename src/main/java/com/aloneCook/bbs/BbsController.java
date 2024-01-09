@@ -70,20 +70,24 @@ public class BbsController {
 		return "bbs/view";
 	}
 	
-	@GetMapping("/bbs-list")
-	public String bbsList(@CurrentUser Account account, Model model,
+	@GetMapping("/bbs-list/{category}")
+	public String bbsList(@CurrentUser Account account, @PathVariable Category category, Model model,
 						@PageableDefault(size = 10, sort = "createdDateTime", direction = Sort.Direction.DESC)
 						Pageable pageable) {
 		if(account != null) {
 			model.addAttribute(account);
 		}
 		Page<Bbs> bbsPageAll = bbsRepository.findAll(pageable);
+		Page<Bbs> bbsCategory = bbsRepository.findByCategory(category, pageable);
+		
+		model.addAttribute("category", category.name());
 		model.addAttribute("bbsPageAll", bbsPageAll);
+		model.addAttribute("bbsCategory", bbsCategory);
 		model.addAttribute("sortProperty", pageable.getSort().toString()
 						.contains("createdDateTime")? "createdDateTime" : "viewCount");
 		
 		return "bbs/list";
-	}		
+	}	
 	
 	@GetMapping("/bbs/{id}/edit")
 	public String bbsEditView(@CurrentUser Account account, @PathVariable("id") Long id, Model model) {

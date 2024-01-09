@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/profile.css" />
+
+<body>
+   <div id="wrap">
+    <!--gnb 영역 -->
+        <header>
+            <div th:replace="fragments.html :: navi"></div>
+        </header>
+		
+
+		<!-- 컨텐츠 영역 -->
+		<div class="profile_contents">
+			<div class="profile_header">
+				<div th:replace="fragments.html :: profile-info"></div>
+				<div class="profileMenu">
+					<div class="profileMenu_container">
+						<div th:replace="fragments.html :: profile-menu(activeMenu='following')"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="profile_content">
+				<div class="profile_content_inner">
+					<div class="followList_wrap">
+                    <div class="followList" th:if="${!#lists.isEmpty(followingList)}" th:each="following : ${followingList}">
+                        <div class="followList_item">
+                            <div class="followList_item_img">
+                                <img th:if="${!#strings.isEmpty(following.toUser?.profileImg)}" th:src="${following.toUser.profileImg}">
+                                <img th:if="${#strings.isEmpty(following.toUser?.profileImg)}" src="/images/profile.svg" />
+                            </div>
+                            <div class="followList_item_content">
+                                <div class="followList_item_desc">
+                                
+                                    <a class="followName" th:href="@{'/profile/' + ${following.toUser.nickname}}" th:text="${following.toUser.nickname}">김덕배</a>
+                                </div>
+                                <div class="followList_btn">
+                                	<form th:if="${!myList.equals(followingList)} and ${following.toUser.nickname} != ${#authentication.principal.Username}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/follow'}" method="post">
+										<button type="submit" class="follow_btn">
+											<span>팔로우</span>
+										</button>										
+									</form>
+									
+                                    <form th:if="${myList.equals(followingList)}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/unfollow'}" method="post">
+										<button type="submit" class="disfollow_btn">
+											<span>팔로우 취소</span>
+										</button>										
+									</form>																	
+									
+                                </div>
+                                <div th:if="${!myList.equals(followingList)} and ${following.toUser.nickname} == ${#authentication.principal.Username}"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 푸터 영역 -->
+
+		<footer th:replace = "fragments.html :: footer"></footer>
+
+	</div>
+</body>
+</html>

@@ -114,7 +114,7 @@ public class UserController {
 			model.addAttribute("followingCnt", followRepository.countByFromUser(byNickname));
 			model.addAttribute("followerCnt", followRepository.countByToUser(byNickname));
 			model.addAttribute("recipeCnt", recipeRepository.countByManagerContaining(byNickname));
-			model.addAttribute("recipeList", recipeRepository.findByManagerContainingOrderByCreatedDateTimeDesc(byNickname));
+			model.addAttribute("recipeList", recipeRepository.findByManagerContainingAndDraftedOrderByPublishedDateTimeDesc(byNickname, false));
 		}		
 		return "user/recipe";
 	}
@@ -169,10 +169,20 @@ public class UserController {
 		if (account != null) {
 			model.addAttribute(account);
 			model.addAttribute("recipeManager",
-					recipeRepository.findByManagerContainingOrderByCreatedDateTimeDesc(account));
+					recipeRepository.findByManagerContainingAndDraftedOrderByPublishedDateTimeDesc(account, false));
 			return "recipe/my/recipe";
 		}
 		model.addAttribute("message", "잘못된 경로입니다.");
+		return "index";
+	}
+	@GetMapping("/my-recipe/draft")
+	public String viewDraftRecipe(@CurrentUser Account account, Model model) {
+		if (account != null) {
+			model.addAttribute(account);
+			model.addAttribute("draftList", recipeRepository.findByWriterAndDraftedOrderByCreatedDateTimeDesc(account, true));															 
+			return "recipe/my/draft";
+		}
+		model.addAttribute("message", "잘못된 경로 입니다.");
 		return "index";
 	}
 	

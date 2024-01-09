@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/profile.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+
+		<!-- 컨텐츠 영역 -->
+		<div class="contentsWrap">
+			<div class="profile_contents contents">
+				<div class="profile_header">
+					<div th:replace="fragments.html :: profile-info"></div>
+
+					<div class="profileMenu contentMenu">
+						<div class="profileMenu_container">
+							<div
+								th:replace="fragments.html :: profile-menu(activeMenu='intro')"></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="profile_content contentWrap">
+					<div class="profile_content_inner">
+						<div th:if="${!#strings.isEmpty(account.intro)}"
+							th:text="${account.intro}" class="profile_intro"></div>
+						<div th:if="${#strings.isEmpty(account.intro)}"
+							class="profile_intro">소개가 없습니다.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+	<script th:replace="fragments.html :: ajax-csrf-header"></script>
+
+	<script type="application/javascript">
+		
+		$(function() {
+			var userName = "[(${byNickname.nickname})]";
+			
+			$(document).on("click", ".follow_btn", function() {
+				$.ajax({
+					method: "POST",
+					url: "/profile/" + userName + "/follow"
+				}).done(function () {
+					console.log("팔로우 성공");
+					location.reload();
+				}).fail(function () {
+					console.log("팔로우 실패");
+				});
+			});
+			
+			$(document).on("click", ".disfollow_btn", function() {
+				$.ajax({
+					method: "DELETE",
+					url: "/profile/" + userName + "/unfollow"
+				}).done(function () {
+					console.log("팔로우 끊기");
+					location.reload();
+				})
+			})
+			
+		})
+	
+	</script>
+
+</body>
+</html>

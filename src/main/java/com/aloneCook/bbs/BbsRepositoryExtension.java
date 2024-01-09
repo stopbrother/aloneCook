@@ -10,4 +10,6 @@ public interface BbsRepositoryExtension {
 	Page<Bbs> findAll(Pageable pageable);
 	
 	Page<Bbs> findByKeyword(String keyword, Pageable pageable);
+	
+	Page<Bbs> findByCategory(Category category, Pageable pageable);
 }

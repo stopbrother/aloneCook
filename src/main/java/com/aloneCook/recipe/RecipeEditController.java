@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aloneCook.recipe.form.BasicForm;
@@ -25,13 +27,43 @@ import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/recipe/{path}/edit")
+@RequestMapping("/recipe/{path}")
 public class RecipeEditController {
 
 	private final RecipeService recipeService;
 	private final ModelMapper modelMapper;
+	
+	@GetMapping("/edit")
+	public String editRecipeView(@CurrentUser Account account, @PathVariable String path, Model model) {
+		Recipe recipe = recipeService.getRecipeToEdit(account, path);
+		model.addAttribute(account);
+		model.addAttribute(recipe);
+		model.addAttribute(modelMapper.map(recipe, RecipeForm.class));
+		return "recipe/edit";
+	}
+	
+	@PostMapping("/edit")
+	public String editRecipeSubmit(@CurrentUser Account account, @PathVariable String path,
+							@Valid RecipeForm recipeForm,
+							@RequestParam(value = "draft", required = false) boolean drafted,
+							@RequestParam("images") List<MultipartFile> images,
+							RedirectAttributes attributes, Model model) {
+		Recipe recipe = recipeService.getRecipeToEdit(account, path);
+		recipeForm.setLevel(recipe.getLevel());		
 		
+		if (drafted) {
+			recipeService.editDraftRecipe(recipe, recipeForm, images);
+			attributes.addFlashAttribute("message", "레시피가 저장 되었습니다.");
+			return "redirect:/my-recipe/draft";
+		}
+		recipeService.editRecipe(recipe, recipeForm, images);
+		attributes.addFlashAttribute("message", "레시피가 수정 및 공개되었습니다.");
+		return "redirect:/recipe/" + recipe.getEncodedPath();
+	}
 
+	
+	
+/*	
 	@GetMapping("/basic")
 	public String basicEditView(@CurrentUser Account account, @PathVariable String path, Model model) {
 		Recipe recipe = recipeService.getRecipeToEdit(account, path);
@@ -104,5 +136,5 @@ public class RecipeEditController {
 		attributes.addFlashAttribute("message", "조리 방법을 저장했습니다.");
 		return "redirect:/recipe/" + recipe.getEncodedPath() + "/edit/step";
 	}
-	
+	*/
 }

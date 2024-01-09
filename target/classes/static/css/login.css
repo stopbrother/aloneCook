@@ -1,0 +1,197 @@
+#wrap {
+	height: 100%;
+    background: #e9e9e9;
+    box-sizing: border-box;
+}
+
+.head {
+	background: #3399cc;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    height: 6.281rem;
+    text-align: center;
+}
+.head img {
+    height: 6.27rem;
+}
+
+.login {
+    position: relative;
+	width: 100%;
+}
+.login_container {
+	width: 400px;
+    padding-top: 72px;
+    margin: 0 auto 12px;
+    text-align: center;
+}
+.login_title {
+    font-weight: 500;
+    font-size: 26px;
+    margin-bottom: 24px;
+}
+.form_content {
+	text-align: left;
+    margin-bottom: 16px;
+}
+.input_title {
+    line-height: 1.43;
+    letter-spacing: -.3px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #000;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.login_btn {
+    background: #3399cc;
+    color: #fff;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    border: 1px solid;
+    padding: 0 16px;
+    width: 100%;
+    height: 48px;
+    line-height: 1.47;
+    font-size: 15px;
+    letter-spacing: -.3px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-error {
+	font-size: 14px;
+	font-weight: bold;
+	color: rgb(255, 87, 87);
+	margin: 12px;
+}
+
+.join_btn, .password_find {
+    text-align: center;
+    width: 100%;
+    font-size: 0.7rem;
+    font-size: 0.7em;
+}
+.join_btn a, .password_find a {
+    color: #3399cc;
+    font-weight: bold;
+    width: 1%;
+}
+
+
+
+footer {
+    background: #3399cc;
+    width: 100%;
+    text-align: center;
+    height: 5rem;
+    margin-top: 17.2%;
+}
+footer p {
+    padding-top: 9%;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9rem;
+}
+.foot2 {
+    float: left;
+    background: #fff;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}    
+/* 태블릿 사이즈 */
+@media all and (min-width:768px) {
+    /*
+.login_container {
+    background: #fff;
+    margin: 11.5% 10% 0 10%;
+    height: 40rem;
+}
+.login_container h1 {
+    padding-top: 12%;
+    font-size: 3rem;
+    font-size: 3em;
+}
+.login {
+    padding-top: 5%;
+}
+.id input, .pw input {
+    height: 3rem;
+    font-size: 1.3rem;
+    font-size: 1.3em;
+}
+button {
+    height: 4rem;
+    font-size: 1.7rem;
+    font-size: 1.7em;
+}
+.join_btn {
+     font-size: 1.3rem;
+     font-size: 1.3em;
+ }
+footer {
+    margin-top: 11.5%;
+}
+footer p {
+    padding-top: 3%;
+    font-size: 1.2rem;
+    font-size: 1.2rem;
+}
+*/
+}
+/* PC 사이즈 */
+
+@media all and (min-width:1024px) {
+    /*
+#wrap {
+    max-width: 1200px;
+    position: relative;
+    margin: 0 auto;
+    }
+.login_container {
+    margin: 14% 10% 0 10%;
+    height: 55rem;
+}
+.id input, .pw input {
+    height: 4rem;
+    font-size: 1.5rem;
+    font-size: 1.5em;
+}
+button {
+    height: 4.5rem;
+}
+.join_btn {
+     font-size: 1.7rem;
+     font-size: 1.7em;
+ }
+footer {
+    margin-top: 13.5%;
+}
+footer p {
+    padding-top: 2.5%;
+    font-size: 1.5rem;
+    font-size: 1.5rem;
+}
+*/
+}

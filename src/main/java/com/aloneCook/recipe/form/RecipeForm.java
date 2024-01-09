@@ -27,8 +27,6 @@ public class RecipeForm {
 	@Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9_-]{2,20}$") //공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로
 	private String path;
 	
-	private String foodImg;
-
 	@NotBlank
 	@Length(max = 30)
 	private String title;

@@ -1,0 +1,264 @@
+.alert {
+  position: relative;
+  padding: 1rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  width: 1080px;
+  margin: 0 auto;
+}
+.alert-success {
+  color: #0f5132;
+  background-color: #d1e7dd;
+  border-color: #badbcc;
+}
+
+
+.settings_header {
+    border-bottom: 1px solid #dbdbdb;
+}
+/*
+.page_title {
+    width: 1080px;
+    margin: 0 auto; /* 여기까지 min-with:1000px*/
+ /*   padding: 32px 16px 18px;
+} */
+/*
+.page_title span {
+    font-size: 36px;
+    line-height: 54px; /* 여기까지 min-with:1000px*/
+  /*  font-weight: 300;
+}*/
+
+.settings_menu {
+	
+}
+.settings_menu_inner {
+    font-size: 18px;
+    line-height: 27px;
+    height: 56px; /* 여기까지 min-with:1000px*/
+    display: flex;
+    overflow: auto hidden;
+    position: relative;
+}
+.settings_menu_items {
+    padding: 0;
+    font-size: 18px; /* 여기까지 min-with:1000px*/
+    display: inline-flex;
+    
+}
+.settings_menu_item {
+    display: inline-flex;
+    position: relative;    
+    min-height: 54px;
+    justify-content: center;
+    align-items: center;    
+    margin-right: 24px;
+    padding: 0 6px;
+    color: rgb(61, 61, 61);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2;
+    cursor: pointer;
+}
+.settings_menu_item.active::after {
+	content: "";
+	display: flex;
+	position: absolute;
+	bottom: -3px;
+	height: 3px;
+	width: calc(100% + 2px);
+	background: rgb(61, 61, 61);
+}
+.settings_menu_item.active a{
+    font-weight: bold;
+    color: rgb(61, 61, 61);
+}
+.settings_menu_item a {
+    display: flex;
+    position: relative;
+    color: rgb(158, 158, 158);
+    font-weight: bold;
+}
+.settings_menu_item a:hover {
+    font-weight: bold;
+    color: rgb(61, 61, 61);
+}
+
+.content_wrap {
+    display: flex;
+    padding: 24px 0;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.content {
+    width: 100%;
+    box-sizing: border-box;
+}
+.settings_item {
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: 16px;
+    padding-bottom: 20px;
+}
+.settings_item_title {
+    font-size: 16px;
+    line-height: 27px;
+    display: flex;
+    margin-bottom: 12px;
+}
+.settings_item_title p {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-weight: bold;
+}
+.profile_edit {
+    flex-direction: row;
+    justify-content: flex-start;
+    display: flex;
+}
+.profile_img_box {
+    display: flex;
+    height: 64px;
+    width: 64px;
+    margin-right: 22px;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: rgb(208, 208, 208) 0 0 1px 0 inset,
+                rgb(208, 208, 208) 0 0 1px 0;
+}
+.profile_img_btn {
+    border: 0;
+    cursor: pointer;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+}
+.profile_img_btn img {
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    background-position-x: 50%;
+    background-position-y: 37%;
+    background-size: cover;
+}
+
+.profile_name {
+    display: flex;
+    flex: 0 1 auto;
+    margin-right: 20px;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+.nickname {
+    font-size: 25px;
+    line-height: 35px;
+    margin-bottom: 2px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 400;
+    margin: 0;
+}
+
+.profile_img_cg_btn {
+    text-align: left;
+    border: 0;
+    display: inline;
+    padding: 0;
+    position: relative;
+    appearance: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: inherit;
+    text-overflow: ellipsis;
+    user-select: none;
+    width: auto;
+}
+.settings_item_input {
+    width: auto;
+
+}
+.settings_item_input input {
+
+}
+.settings_item_textarea {
+    height: 208px; /* 여기까지 min-with:1000px*/
+    
+}
+.settings_item_textarea textarea {
+    width: 100%;
+    height: 100%;    
+    resize: none;
+    overflow: auto;
+}
+
+.settings_submit {
+    margin-top: 20px;
+}
+.submit_btn {
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 27px;
+    min-width: 110px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    white-space: nowrap;
+    border-radius: 4px;
+    margin: 0;
+    border: 0;
+    font-weight: normal;
+    box-sizing: border-box;
+    padding-right: 16px;
+    color: #fff;
+    background-color: #0095f6;
+}
+
+.password {
+    margin-top: 20px;
+}
+.password_title {
+    color: rgb(61, 61, 61);
+    margin-bottom: 10px;
+}
+
+.form-feedback {
+	display:none;
+}
+.form-warning {
+    margin: 8px 0 0;
+    color: rgb(255, 87, 87);
+    font-size: 13px;
+    line-height: 20px;
+}
+
+
+@media screen and (min-width: 768px) {
+    
+}
+
+@media screen and (min-width: 1080px) {
+    .content_wrap {
+    	min-height: 460px;    	    	    	
+    }
+    .content {
+    	width: 540px;
+    	
+    }
+}
+
+@media screen and (min-width: 1280px) {
+    
+}

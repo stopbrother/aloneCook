@@ -28,7 +28,7 @@ public class RecipeRepositoryExtensionImpl extends QuerydslRepositorySupport imp
 	@Override
 	public Page<Recipe> findAll(Pageable pageable) {
 		QRecipe recipe = QRecipe.recipe;
-		JPQLQuery<Recipe> result = from(recipe);
+		JPQLQuery<Recipe> result = from(recipe).where(recipe.drafted.isFalse());
 		JPQLQuery<Recipe> pageableQuery = getQuerydsl().applyPagination(pageable, result);
 		QueryResults<Recipe> fetchResults = pageableQuery.fetchResults();
 		return new PageImpl<>(fetchResults.getResults(), pageable, fetchResults.getTotal());

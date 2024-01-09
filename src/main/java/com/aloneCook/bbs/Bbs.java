@@ -8,6 +8,8 @@ import java.util.Set;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -34,6 +36,9 @@ public class Bbs {
 
 	@Id @GeneratedValue
 	private Long id;
+	
+	@Enumerated(EnumType.STRING)
+	private Category category;
 	
 	@ManyToMany
 	private Set<Account> managers = new HashSet<>();

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/profile.css" />
+
+<body>
+   <div id="wrap">
+    <!--gnb 영역 -->
+        <header>
+            <div th:replace="fragments.html :: navi"></div>
+        </header>
+		
+
+		<!-- 컨텐츠 영역 -->
+		<div class="profile_contents">
+			<div class="profile_header">
+				<div th:replace="fragments.html :: profile-info"></div>
+				<div class="profileMenu">
+					<div class="profileMenu_container">
+						<div th:replace="fragments.html :: profile-menu(activeMenu='follower')"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="profile_content">
+				<div class="profile_content_inner">
+					<div class="followList_wrap">					
+                    <div class="followList" th:if="${!#lists.isEmpty(followerList)}" th:each="follower : ${followerList}">
+                        <div class="followList_item">
+                            <div class="followList_item_img">
+                                <img th:if="${!#strings.isEmpty(follower.fromUser?.profileImg)}" th:src="${follower.fromUser.profileImg}">
+                                <img th:if="${#strings.isEmpty(follower.fromUser?.profileImg)}" src="/images/profile.svg" />
+                            </div>
+                            <div class="followList_item_content">
+                                <div class="followList_item_desc">
+                                    <a class="followName"th:href="@{'/profile/' + ${follower.fromUser.nickname}}" th:text="${follower.fromUser.nickname}">김덕배</a>                                   
+                                    
+                                </div>
+                                                               
+                                <div class="followList_btn">
+                                	<div class="itsme" th:if="${follower.fromUser.nickname} == ${#authentication.principal.Username}"></div>
+                                
+                                	
+                                		<button type="button" class="follow_btn" id="listFollow" th:if="${!myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${#authentication.principal.Username}">
+                                        	<span id="username" th:data-name="${follower.fromUser.nickname}">팔로우</span>
+                                    	</button>
+                                		
+                                	
+                                	
+                                		<button type="submit" class="disfollow_btn" id="listUnFollow" th:if="${myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${account.nickname}">
+                                			<span>팔로우 취소</span>
+                                		</button>
+                                	
+                                	                               	                                	                                	                              
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 푸터 영역 -->
+
+		<footer th:replace = "fragments.html :: footer"></footer>
+
+	</div>
+	
+ 	<script th:replace="fragments.html :: ajax-csrf-header"></script>
+	<script type="application/javascript">
+		$(function() {
+			var userid = $("#username").data('name');
+			
+			
+			$(document).on("click", "#listFollow", function() {
+				$.ajax({
+					method: "POST",
+					url: "/profile/" + userid + "/follow"
+				}).done(function () {
+					console.log("팔로우 성공");
+					
+				}).fail(function () {
+					console.log("팔로우 실패");
+				});
+			});
+			
+			$(document).on("click", ".disfollow_btn", function() {
+				const eventCheck = confirm("팔로우를 끊으시겠습니까?");
+				
+				if(eventCheck == true) {
+					$.ajax({
+						method: "DELETE",
+						url: "/profile/" + userName + "/unfollow"
+					}).done(function () {
+						console.log("팔로우 끊기");
+						location.reload();
+					})
+				}
+			})
+			
+		})
+
+	</script>
+
+</body>
+</html>

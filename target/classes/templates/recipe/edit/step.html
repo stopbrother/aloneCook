@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/recipe_write.css" />
+<body>
+    <div>
+    	<header>
+            <div th:replace="fragments.html :: navi(activeMenu)"></div>
+        </header>
+
+    <!-- 컨텐츠 영역 -->    
+    <div class="main">
+    	<div th:replace="fragments.html :: recipe-write-header(recipeMenu='step')"></div>
+
+        <div class="register">
+            <form class="register_items" method="post" th:action="@{'/recipe/' + ${recipe.getPath()} + '/edit/step'}" th:object="${stepForm}">                                                
+                <div class="register_item">
+                    <div class="register_title">
+                        <p>레시피 순서</p>
+                    </div>
+                    <div class="register_form">
+                        <div class="register_form_container">
+                        	<textarea class="editor" th:field="*{steps}"></textarea>                                                        
+                        </div>
+                    </div>                    
+                </div>
+                <div class="register_item">
+                    <div class="register_title">
+                        <p>동영상</p>
+                    </div>
+                    <div class="register_form">
+                        <div class="register_form_container">
+                            <textarea class="videoEditor" placeholder="동영상 링크" th:field="*{videoUrl}"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="register_btn">
+                    <button type="submit" class="submit_btn">
+                        <span>저장</span>
+                    </button>
+                    <button class="cancel_btn">
+                        <span>취소</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 푸터 영역 -->
+
+    <footer>
+        <div class="footer">
+            <div class="footer_left">
+                <div class="footer_left_top">
+                    <span class="footer_logo">
+                        <a href="#"><img></a>
+                    </span>
+                </div>
+                <div class="footer_left_info">
+                    <div class="footer_info">
+                        <span>나 혼자 요리｜</span>
+                        <span>대표자 : 정지형｜</span>
+                        <span>T : 010-3744-9840</span>
+                        <br>
+                        <span>E : stopbro0323@naver.com｜</span>
+                        <span>주소 : 인천 동구 송림동 122-1 인천재능대학교 IT관 3층</span>
+                        <br>
+                        <span>서비스 이용문의 : 010-4266-7582 (평일 10:00 ~ 18:00)</span>                                             
+                    </div>
+                    &copy;ACOOK. All Rights Reserved.   
+                </div>
+            </div>
+            <div class="footer_right">
+                <a href="#"><i class="instagram"></i></a>
+                <a href="#"><i class="facebook"></i></a>
+                <a href="#"><i class="youtube"></i></a>
+            </div>
+        </div>      
+    </footer>
+
+    </div>
+    <script th:replace="fragments.html :: editor-script"></script>
+    <script th:replace="fragments.html :: message"></script>
+</body>
+</html>

@@ -9,6 +9,8 @@ import lombok.Data;
 @Data
 public class BbsForm {
 
+	private Category category = Category.FREE;
+	
 	@NotBlank
 	@Length(max = 50)
 	private String title;

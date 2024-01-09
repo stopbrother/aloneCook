@@ -1,0 +1,57 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/join.css" />
+
+<body>
+	<div id="wrap">
+		<section class="head">
+			<a th:href="@{/}"> <img src="images/login/logo_logo.png">
+			</a>
+		</section>
+		<div class="join">
+			<div class="join_container">
+				<h2 class="join_title">회원가입</h2>
+				<div class="join_inner">
+					<form class="join_form needs-validation" action="#"
+						th:action="@{/join}" th:object="${joinForm}" method="post"
+						novalidate>
+						<div class="form_content">
+							<div class="input_title">닉네임</div>							
+							<input type="text" class="form-control" placeholder="닉네임" th:field="*{nickname}"
+							required minlength="3" maxlength="20">							
+							<small id="nicknameHelp" class="form-text">닉네임은 2자 이상, 20자 이내로 입력해주세요.</small>
+							<small class="invalid-feedback">닉네임을 입력하세요.</small>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error</small>
+						</div>
+						<div class="form_content">
+							<div class="input_title">이메일</div>							
+							<input type="email" class="form-control" placeholder="이메일" th:field="*{email}"
+							aria-describedby="emailHelp" required>														
+							<small class="invalid-feedback">이메일을 입력하세요.</small>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error</small>
+						</div>
+						<div class="form_content">
+							<div class="input_title">비밀번호</div>							
+							<input type="password" class="form-control" placeholder="비밀번호" th:field="*{password}"
+							aria-describedby="passwordHelp" required minlength="8" maxlength="50">							
+							<small id="passwordHelp" class="form-text">비밀번호는 8자 이상, 50자 이내로 입력하세요.</small>
+							<small class="invalid-feedback">비밀번호를 입력하세요.</small>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</small>
+						</div>
+
+						<button type="submit" class="join_btn"
+							aria-describedby="submitHelp">회원가입</button>
+						<small id="submitHelp"> <a href="#">약관</a>에 동의하시면 회원가입 버튼을
+							클릭하세요.
+						</small>
+						<hr width="100%" color="#3399cc">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script th:replace="fragments.html :: form-validation"></script>
+</body>
+</html>
