@@ -104,6 +104,7 @@ public class RecipeService {
 		for (Image image : imageFiles) {
 			image.setRecipe(recipe);
 		}
+		recipe.setDrafted(false);
 	}
 	
 	

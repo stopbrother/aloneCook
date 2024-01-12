@@ -278,8 +278,8 @@
                     		</div>
                         </li>                        
                         </ul>
-                        <ul>
-                        	<li id="previewItem" class="imgStep"></li>
+                        <ul id="previewItems">
+                        	
                         </ul>
                         </div>
                         </div>
@@ -442,7 +442,7 @@ $(document).ready(function() {
 	function updatePreview(files) {
 		//var files = $('#main-img-file')[0].files;
 		files = files || [];		
-		$('#previewItem').empty();
+		$('#previewItems').empty();
 		
 		for (var i = 0; i < files.length; i++) {
 			var file = files[i];
@@ -450,12 +450,14 @@ $(document).ready(function() {
 			
 			reader.onload = function(e) {				
 				var img = e.target.result;
-				var imgElement = '<div class="imgStep_box">' +
-									'<div class="imgStep_img">' +
-										'<img src="' + img + '">' +
+				var imgElement = '<li class="imgStep">' + 
+								 	'<div class="imgStep_box">' +
+										'<div class="imgStep_img">' +
+											'<img src="' + img + '">' +
+										'</div>' +
 									'</div>' +
-								'</div>';
-				$('#previewItem').append(imgElement);
+								 '</li>';
+				$('#previewItems').append(imgElement);
 				
 				var changeImage = $('#imgPreview .imgStep_box').find('img[data-file-name="' + file.name + '"]');
 				if (changeImage.length > 0) {

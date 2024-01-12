@@ -55,10 +55,11 @@ public class RecipeEditController {
 			recipeService.editDraftRecipe(recipe, recipeForm, images);
 			attributes.addFlashAttribute("message", "레시피가 저장 되었습니다.");
 			return "redirect:/my-recipe/draft";
-		}
-		recipeService.editRecipe(recipe, recipeForm, images);
-		attributes.addFlashAttribute("message", "레시피가 수정 및 공개되었습니다.");
-		return "redirect:/recipe/" + recipe.getEncodedPath();
+		} else {
+			recipeService.editRecipe(recipe, recipeForm, images);
+			attributes.addFlashAttribute("message", "레시피가 수정 및 공개되었습니다.");
+			return "redirect:/recipe/" + recipe.getEncodedPath();
+		}		
 	}
 
 	
