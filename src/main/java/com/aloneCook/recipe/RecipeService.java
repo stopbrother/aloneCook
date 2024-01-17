@@ -56,10 +56,8 @@ public class RecipeService {
 		recipe.addManager(account);
 		recipe.setPublishedDateTime(LocalDateTime.now());
 		
-		List<Image> images = imageService.saveImages(imageFiles);
-		for (Image image : images) {
-			image.setRecipe(recipe);
-		}
+		List<Image> images = imageService.saveImages(imageFiles, recipe);
+		
 		recipe.setImages(images);
 		
 		return recipeRepository.save(recipe);
@@ -70,41 +68,34 @@ public class RecipeService {
 		recipe.setCreatedDateTime(LocalDateTime.now());
 		recipe.setDrafted(true);
 		
-		List<Image> images = imageService.saveImages(imageFiles);
-		for (Image image : images ) {
-			image.setRecipe(recipe);
-		}
+		List<Image> images = imageService.saveImages(imageFiles, recipe);
+
 		recipe.setImages(images);
 		return recipeRepository.save(recipe);
 	}
 	
-	public void editDraftRecipe(Recipe recipe, RecipeForm recipeForm, List<MultipartFile> images) {
-		//RecipeForm의 내용을 기존 레시피 엔티티에 매핑
-		modelMapper.map(recipeForm, recipe);
+	public void editDraftRecipe(Recipe recipe, RecipeForm recipeForm, List<MultipartFile> images) {		
+		modelMapper.map(recipeForm, recipe); //RecipeForm의 내용을 기존 레시피 엔티티에 매핑
+		recipe.setDrafted(true);
+		
+		//if (images != null && !images.isEmpty()) {
 		
 		//이미지 업로드 및 기타 로직 수행
-		List<Image> imageFiles = imageService.saveImages(images);
-		
+		List<Image> imageFiles = imageService.saveImages(images, recipe);
+			
 		//기존 레시피의 이미지들을 제거하고 새로운 이미지들로 설정
 		recipe.getImages().clear();
-		recipe.getImages().addAll(imageFiles);
-		
-		for (Image image : imageFiles) {
-			image.setRecipe(recipe);
-		}
-		
-		recipe.setDrafted(true);
+		recipe.getImages().addAll(imageFiles);			
+				
 	}
 	public void editRecipe(Recipe recipe, RecipeForm recipeForm, List<MultipartFile> images) {
 		modelMapper.map(recipeForm, recipe);
-		
-		List<Image> imageFiles = imageService.saveImages(images);
-		recipe.getImages().clear();
-		recipe.getImages().addAll(imageFiles);
-		for (Image image : imageFiles) {
-			image.setRecipe(recipe);
-		}
 		recipe.setDrafted(false);
+							
+		List<Image> imageFiles = imageService.saveImages(images, recipe);
+		recipe.getImages().clear();
+		recipe.getImages().addAll(imageFiles);		
+				
 	}
 	
 	

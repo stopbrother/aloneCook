@@ -10,6 +10,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import com.aloneCook.recipe.Recipe;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +31,7 @@ public class ImageService {
 
 	private final ImageRepository imageRepository;
 
-	public List<Image> saveImages(List<MultipartFile> imageFiles) {
+	public List<Image> saveImages(List<MultipartFile> imageFiles, Recipe recipe) {
 		String uploadDirPath = "src/main/resources/static/uploads"; //파일을 저장할 디렉토리 경로 (상대 경로)
 		
 		// 디렉토리 생성 
@@ -42,23 +43,25 @@ public class ImageService {
 		List<Image> images = new ArrayList<>();
 		
 		for (MultipartFile imageFile : imageFiles) {
-			//현재 시간을 활용한 고유한 파일명 생성
-			String encodedFileName = System.currentTimeMillis() + "-" +
-					StringUtils.cleanPath(Objects.requireNonNull(imageFile.getOriginalFilename()));
-			String decodedFileName = URLDecoder.decode(encodedFileName, StandardCharsets.UTF_8);
-			try {
-				Path filePath = Path.of(uploadDirPath, decodedFileName); //경로 설정
-				Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-				
-				Image image = new Image();
-				image.setFileName(decodedFileName);
-				
-				imageRepository.save(image);
-				images.add(image);
-			} catch (IOException e) {
-				throw new RuntimeException("이미지 저장 실패", e);
-			}
-			
+			if (!imageFile.isEmpty()) {
+				//현재 시간을 활용한 고유한 파일명 생성
+				String encodedFileName = UUID.randomUUID().toString() + "-" +
+						StringUtils.cleanPath(Objects.requireNonNull(imageFile.getOriginalFilename()));
+				String decodedFileName = URLDecoder.decode(encodedFileName, StandardCharsets.UTF_8);
+				try {
+					Path filePath = Path.of(uploadDirPath, decodedFileName); //경로 설정
+					Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+					
+					Image image = new Image();
+					image.setFileName(decodedFileName);
+					image.setRecipe(recipe); // 이미지에 레시피 설정
+					
+					imageRepository.save(image);
+					images.add(image);				
+				} catch (IOException e) {
+					throw new RuntimeException("이미지 저장 실패", e);
+				}
+			}						
 		}
 		return images;
 	}
