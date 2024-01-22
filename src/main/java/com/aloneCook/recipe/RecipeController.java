@@ -98,18 +98,6 @@ public class RecipeController {
 		
 	}
 	
-	@PostMapping("/update-foodimg")
-	@ResponseBody
-	public ResponseEntity updateFoodImg(@RequestParam("oldFileName") String oldFileName,
-										@RequestParam("newImageFile") MultipartFile newImageFile) {
-		Image updateImage = imageService.updateImage(oldFileName, newImageFile);
-		
-		if(updateImage != null) {
-			return ResponseEntity.ok("이미지 변경 성공");
-		}else {
-			return ResponseEntity.badRequest().body("이미지 변경 실패");
-		}
-	}
 	
 	/*
 	@PostMapping("/recipe-draft")

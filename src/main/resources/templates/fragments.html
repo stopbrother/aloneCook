@@ -269,7 +269,7 @@
                     			<button class="stepBtn">
                     				<div class="stepBtn_arrow">↑</div>
                     			</button>
-                    			 <button type="button" class="stepBtn imgCancel">
+                    			 <button type="button" class="stepBtn imgCancel" th:attr="data-file-name=${image.fileName}">
                     			 	<div class="stepBtn_cancel">X</div>
                     			 </button>
                     			 <button class="stepBtn">
@@ -498,6 +498,24 @@ $(document).ready(function() {
 			});
 			//updatePreview([]);
 			//$('#main-img-file').off('change');
+		});
+	});
+	
+	$('.imgCancel').click(function () {
+		var fileName = $(this).data('file-name');
+		
+		$.ajax({
+			type: 'POST',
+			url: '/delete-foodimg',
+			data: { fileName: fileName },
+			success: function(response) {
+				alert('이미지 삭제 성공:' + response);
+				
+				$('.imgCancel[data-file-name="' + fileName + '"]').closest('.imgStep').remove();
+			},
+			error: function(erroer) {
+				alert('이미지 삭제 실패: ' + error.responseText);
+			}
 		});
 	});
 

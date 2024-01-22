@@ -114,6 +114,14 @@ public class ImageService {
 			throw new RuntimeException("이미지를 읽을 수 없습니다.", e);
 		}
 	}
+
+	public void deleteImageByFileName(String fileName) {
+		Image image = imageRepository.findByFileName(fileName);
+		if (image != null) {
+			deleteImage(image);
+		}
+	}
+
 	
 	
 }
