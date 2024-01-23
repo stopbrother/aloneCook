@@ -207,6 +207,36 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="recentlyView_recipe">
+					<div class="recentlyView_recipe_container">
+						<div class="recentlyView_title">최근 본 레시피</div>
+						<div class="recipe_list_slider">
+							<div class="recently">
+								<div class="swiper-wrapper">
+									<div class="swiper-slide" th:each="history : ${userHistoryList}">
+										<a class="recipeList_item"
+											th:href="@{'/recipe/' + ${history.recipe.path}}">
+											<div class="recipeList_item_img">
+												<img th:src="${history.recipe.foodImg}">
+											</div>
+											<div class="recipeList_item_info">
+												<dl>
+													<dd class="recipeList_item_writer">
+														<span th:text="${history.recipe.writer?.nickname}">김덕배</span>
+													</dd>
+													<dt>
+														<strong th:text="${history.recipe.title}">오뎅탕</strong>
+													</dt>
+												</dl>
+											</div>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</main>
 

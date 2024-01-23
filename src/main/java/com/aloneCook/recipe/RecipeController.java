@@ -41,6 +41,8 @@ import com.aloneCook.like.LikeService;
 import com.aloneCook.recipe.form.RecipeForm;
 import com.aloneCook.recipe.validate.RecipeFormValid;
 import com.aloneCook.user.CurrentUser;
+import com.aloneCook.user.history.UserHistoryRepository;
+import com.aloneCook.user.history.UserHistoryService;
 import com.aloneCook.user.Account;
 
 import lombok.RequiredArgsConstructor;
@@ -53,11 +55,14 @@ public class RecipeController {
 	private final ModelMapper modelMapper;
 	private final RecipeFormValid recipeFormValid;
 	private final RecipeRepository recipeRepository;
-	private final LikeService likeService;
+	private final UserHistoryService userHistoryService;
+	private final UserHistoryRepository userHistoryRepository;
 	private final LikeRepository likeRepository;
-	private final CommunityService communityService;
-	private final CommunityRepository communityRepository;
-	private final ImageService imageService;
+	//private final LikeService likeService;
+	//private final CommunityService communityService;
+	//private final CommunityRepository communityRepository;
+	//private final ImageService imageService;
+	
 	
 	
 	@GetMapping("/recipe-list")
@@ -120,9 +125,12 @@ public class RecipeController {
 	public String viewRecipe(@CurrentUser Account account, @PathVariable String path, Model model) {		
 		Recipe recipe = recipeService.getRecipe(path);
 		recipeService.getRecipeCnt(path, account);
+		userHistoryService.saveUserHistory(account, recipe);
+		
 		model.addAttribute(recipe);
 		model.addAttribute(account);
 		model.addAttribute("likedRecipeList", likeRepository.findByAccountAndLiked(account, true));
+		model.addAttribute("userHistoryList", userHistoryRepository.findByAccountOrderByTimeStampDesc(account));
 		return "recipe/view";
 	}
 	

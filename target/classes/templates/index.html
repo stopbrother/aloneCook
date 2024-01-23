@@ -144,6 +144,48 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<!-- 최근 본 레시피 -->
+				<div class="content_recipe" sec:authorize="isAuthenticated()">
+					<div class="content_recipe_container">
+						<div class="content_list_title">
+							<div class="content_list_title_inner">
+								<a href="#" class="title_link"> <span>최근 본 레시피</span>
+								</a>
+							</div>
+							
+						</div>
+						<div class="items_list swiper-container">
+							<div class="items swiper-wrapper">
+								<div class="item swiper-slide"
+									th:each="history : ${userHistoryList}">
+									<a href="#" class="item_link"
+										th:href="@{'/recipe/' + ${history.recipe.path}}">
+										<div class="item_img">
+											<img th:src="${history.recipe.foodImg}"
+												th:alt="${history.recipe.title}" class="im">
+										</div>
+										<div class="item_info">
+											<dl>
+												<dt th:text="${history.recipe.title}">제목</dt>
+												<dd class="writer">
+													<span th:text="${history.recipe.writer?.nickname}">작성자</span>
+												</dd>
+												<dd class="item_info_bottom">
+													<span th:text="|좋아요 ${history.recipe.likeCount}|">좋아요</span> <span
+														th:text="|조회수 ${history.recipe.viewCount}|">조회수</span>
+												</dd>
+											</dl>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+						</div>
+					</div>
+				</div>
 
 				<!-- 게시판 -->
 				<!--

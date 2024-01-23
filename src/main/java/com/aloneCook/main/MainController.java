@@ -14,6 +14,8 @@ import com.aloneCook.like.LikeRepository;
 import com.aloneCook.recipe.Recipe;
 import com.aloneCook.recipe.RecipeRepository;
 import com.aloneCook.user.CurrentUser;
+import com.aloneCook.user.history.UserHistory;
+import com.aloneCook.user.history.UserHistoryRepository;
 import com.aloneCook.user.Account;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,7 @@ public class MainController {
 	
 	private final RecipeRepository recipeRepository;
 	private final LikeRepository likeRepository;
+	private final UserHistoryRepository userHistoryRepository;
 
 	@GetMapping("/")
 	public String home(@CurrentUser Account account, Model model) {
@@ -33,6 +36,7 @@ public class MainController {
 		model.addAttribute("newRecipeList", recipeRepository.findFirst10ByDraftedOrderByPublishedDateTimeDesc(false));
 		model.addAttribute("favoriteList", recipeRepository.findFirst10ByDraftedOrderByLikeCountDesc(false));
 		model.addAttribute("likeRecipeList", likeRepository.findByAccountAndLiked(account, true));
+		model.addAttribute("userHistoryList", userHistoryRepository.findByAccountOrderByTimeStampDesc(account));
 		return "index";
 	}
 	
