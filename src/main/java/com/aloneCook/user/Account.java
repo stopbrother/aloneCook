@@ -50,6 +50,11 @@ public class Account {
 	@Lob @Basic(fetch = FetchType.EAGER)
 	private String profileImg;
 	
+	@OneToMany(mappedBy = "fromUser")
+	private List<Follow> followers;
+	
+	@OneToMany(mappedBy = "toUser")
+	private List<Follow> following;
 
 /*
 	@OneToMany(mappedBy = "fromUser")

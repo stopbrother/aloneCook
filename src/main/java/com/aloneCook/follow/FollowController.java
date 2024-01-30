@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aloneCook.user.Account;
@@ -23,20 +24,20 @@ public class FollowController {
 	private final UserRepository userRepository;
 	private final FollowService followService;
 	
-	@PostMapping("/profile/{nickname}/follow")
+	@PostMapping("/{nickname}/follow")
 	@ResponseBody
 	public ResponseEntity addFollow(@PathVariable String nickname, @CurrentUser Account account) {
 		Account byNickname = userService.getAccount(nickname);
 		followService.addFollow(byNickname, account);
 		
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("팔로우 성공");
 	}
-	@DeleteMapping("/profile/{nickname}/unfollow")
+	@DeleteMapping("/{nickname}/unfollow")
 	@ResponseBody
 	public ResponseEntity unfollow(@PathVariable String nickname, @CurrentUser Account account) {
 		Account byNickname = userRepository.findAccountWithFollowingsBynickname(nickname);
 		followService.unFollow(byNickname, account);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok("팔로우취소 성공");
 	}
 	
 	/*

@@ -177,7 +177,7 @@
 					
 					<div class="follow">
 						
-							<button th:if="${!isFollow && !isOwner}" type="submit" class="follow_btn">
+							<button th:if="${!isFollow && !isOwner}" th:data-name="${byNickname.nickname}" class="follow_btn">
 								<span>팔로우</span>
 							</button>
 						
@@ -201,6 +201,53 @@
 	</div>
 </div>
 
+<!-- follow script -->
+<script type="application/javascript" th:fragment="follow">
+	$(document).ready(function() {
+		var nickname;
+		
+		$(".follow_btn").click(function() {
+			nickname = $(this).data("name");
+			follow("/" + nickname + "/follow");
+		});
+		$(".unfollow_btn").click(function() {
+			nickname = $(this).data("name");
+			unfollow("/" + nickname + "/unfollow");
+		});
+		
+		function follow(url) {
+			$.ajax({
+				type: "POST",
+				url: url,
+				data: {nickname: nickname},
+				success: function(response) {
+					alert(response);
+					
+					location.reload();
+				},
+				error: function() {
+					alert('팔로우 실패');
+				}
+			});
+		}
+		function unfollow(url) {
+			$.ajax({
+				type: "DELETE",
+				url: url,
+				data: {nickname: nickname},
+				success: function(response) {
+					alert(response);
+				},
+				error: function() {
+					alert('팔로우취소 실패');
+				}
+			});
+		}
+		
+		function updateFollowButton()
+	});
+</script>
+
 <!-- profile 메뉴 -->
 <div th:fragment="profile-menu (activeMenu)" class="profileMenu_inner">
 	<span class="profileMenu_item" th:classappend="${activeMenu == 'intro'}? active"><a th:href="@{'/profile/' + ${byNickname.nickname}}">소개</a></span>
@@ -216,6 +263,7 @@
 		alert(msg);
 	});	
 </script>
+
 
 <!-- recipe-form -->
 <div th:fragment="recipe-form (mode, action)">

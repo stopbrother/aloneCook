@@ -8,7 +8,7 @@
    <div id="wrap">
     <!--gnb 영역 -->
         <header>
-            <div th:replace="fragments.html :: navi"></div>
+            <div th:replace="fragments.html :: navi(activeMenu)"></div>
         </header>
 		
 
@@ -68,10 +68,11 @@
 
 		<footer th:replace = "fragments.html :: footer"></footer>
 
-	</div>
-	
+	</div>	
  	<script th:replace="fragments.html :: ajax-csrf-header"></script>
-	<script type="application/javascript">
+ 	<script th:replace= "fragments.html :: follow"></script>
+<!--  
+<script type="application/javascript">
 		$(function() {
 			var userid = $("#username").data('name');
 			
@@ -105,6 +106,6 @@
 		})
 
 	</script>
-
+-->
 </body>
 </html>

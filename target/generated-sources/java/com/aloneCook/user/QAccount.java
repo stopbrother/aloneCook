@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -20,6 +21,10 @@ public class QAccount extends EntityPathBase<Account> {
     public static final QAccount account = new QAccount("account");
 
     public final StringPath email = createString("email");
+
+    public final ListPath<com.aloneCook.follow.Follow, com.aloneCook.follow.QFollow> followers = this.<com.aloneCook.follow.Follow, com.aloneCook.follow.QFollow>createList("followers", com.aloneCook.follow.Follow.class, com.aloneCook.follow.QFollow.class, PathInits.DIRECT2);
+
+    public final ListPath<com.aloneCook.follow.Follow, com.aloneCook.follow.QFollow> following = this.<com.aloneCook.follow.Follow, com.aloneCook.follow.QFollow>createList("following", com.aloneCook.follow.Follow.class, com.aloneCook.follow.QFollow.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
