@@ -42,13 +42,10 @@
                                 	<div class="itsme" th:if="${follower.fromUser.nickname} == ${#authentication.principal.Username}"></div>
                                 
                                 	
-                                		<button type="button" class="follow_btn" id="listFollow" th:if="${!myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${#authentication.principal.Username}">
-                                        	<span id="username" th:data-name="${follower.fromUser.nickname}">팔로우</span>
-                                    	</button>
-                                		
-                                	
-                                	
-                                		<button type="submit" class="disfollow_btn" id="listUnFollow" th:if="${myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${account.nickname}">
+                                		<button class="follow_btn" id="listFollow" th:data-name="${follower.fromUser.nickname}" th:if="${!myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${#authentication.principal.Username}">
+                                        	<span id="username">팔로우</span>
+                                    	</button>                                		
+                                		<button class="disfollow_btn" id="listUnFollow" th:data-name="${follower.fromUser.nickname}" th:if="${myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${account.nickname}">
                                 			<span>팔로우 취소</span>
                                 		</button>
                                 	

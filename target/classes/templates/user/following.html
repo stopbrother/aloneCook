@@ -39,13 +39,13 @@
                                 </div>
                                 <div class="followList_btn">
                                 	<form th:if="${!myList.equals(followingList)} and ${following.toUser.nickname} != ${#authentication.principal.Username}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/follow'}" method="post">
-										<button type="submit" class="follow_btn">
+										<button class="follow_btn">
 											<span>팔로우</span>
 										</button>										
 									</form>
 									
                                     <form th:if="${myList.equals(followingList)}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/unfollow'}" method="post">
-										<button type="submit" class="disfollow_btn">
+										<button class="disfollow_btn">
 											<span>팔로우 취소</span>
 										</button>										
 									</form>																	

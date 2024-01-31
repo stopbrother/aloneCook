@@ -175,19 +175,14 @@
 				<div class="profile_name">
 					<span class="nickname" th:text="${byNickname.nickname}">UserName</span>
 					
-					<div class="follow">
+					<div class="follow">						 
+						<button th:if="${!isOwner && !isFollow}" th:data-name="${byNickname.nickname}" class="follow_btn">
+							<span>팔로우</span>
+						</button>
+						<button th:if="${isFollow}" th:data-name="${byNickname.nickname}" class="disfollow_btn">
+							<span>팔로우 취소</span>
+						</button>										
 						
-							<button th:if="${!isFollow && !isOwner}" th:data-name="${byNickname.nickname}" class="follow_btn">
-								<span>팔로우</span>
-							</button>
-						
-						
-						
-							<button th:if="${isFollow}" type="submit" class="disfollow_btn">
-								<span>팔로우 취소</span>
-							</button>										
-						
-					
 						<a th:if="${isOwner && !isFollow}" th:href="@{/settings/profile}" class="profileEdit"><span>프로필 수정</span></a>
 					</div>
 					
@@ -203,49 +198,27 @@
 
 <!-- follow script -->
 <script type="application/javascript" th:fragment="follow">
-	$(document).ready(function() {
-		var nickname;
+$(document).ready(function () {
+	$(".follow_btn, .disfollow_btn").click(function() {
+		var nickname = $(this).data("name");
+		var isFollow = $(this).hasClass("disfollow_btn");
 		
-		$(".follow_btn").click(function() {
-			nickname = $(this).data("name");
-			follow("/" + nickname + "/follow");
+		$.ajax({
+			type: isFollow ? "DELETE" : "POST",
+			url: "/" + nickname + (isFollow ? "/unfollow" : "/follow"),
+			data: {nickname: nickname},
+			success: function(response) {
+				alert(response);
+				
+				location.reload();
+			},
+			error: function() {
+				alert('팔로우 실패');
+			}
 		});
-		$(".unfollow_btn").click(function() {
-			nickname = $(this).data("name");
-			unfollow("/" + nickname + "/unfollow");
-		});
-		
-		function follow(url) {
-			$.ajax({
-				type: "POST",
-				url: url,
-				data: {nickname: nickname},
-				success: function(response) {
-					alert(response);
-					
-					location.reload();
-				},
-				error: function() {
-					alert('팔로우 실패');
-				}
-			});
-		}
-		function unfollow(url) {
-			$.ajax({
-				type: "DELETE",
-				url: url,
-				data: {nickname: nickname},
-				success: function(response) {
-					alert(response);
-				},
-				error: function() {
-					alert('팔로우취소 실패');
-				}
-			});
-		}
-		
-		function updateFollowButton()
 	});
+	
+});
 </script>
 
 <!-- profile 메뉴 -->
