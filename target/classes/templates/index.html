@@ -39,7 +39,7 @@
 									<a href="#" class="item_link"
 										th:href="@{'/recipe/' + ${recipe.path}}">
 										<div class="item_img">
-											<img th:src="${recipe.images[0].fileName}" th:alt="${recipe.title}"
+											<img th:src="'/uploads/' + ${recipe.images[0].fileName}" th:alt="${recipe.title}"
 												class="im">
 										</div>
 										<div class="item_info">
@@ -80,7 +80,7 @@
 									<a href="#" class="item_link"
 										th:href="@{'/recipe/' + ${recipe.path}}">
 										<div class="item_img">
-											<img th:src="${recipe.images[0].fileName}" th:alt="${recipe.title}"
+											<img th:src="'/uploads/' + ${recipe.images[0].fileName}" th:alt="${recipe.title}"
 												class="im">
 										</div>
 										<div class="item_info">
@@ -121,7 +121,7 @@
 									<a href="#" class="item_link"
 										th:href="@{'/recipe/' + ${like.recipe.path}}">
 										<div class="item_img">
-											<img th:src="${like.recipe.images[0].fileName}"
+											<img th:src="'/uploads/' + ${like.recipe.images[0].fileName}"
 												th:alt="${like.recipe.title}" class="im">
 										</div>
 										<div class="item_info">
@@ -163,7 +163,7 @@
 									<a href="#" class="item_link"
 										th:href="@{'/recipe/' + ${history.recipe.path}}">
 										<div class="item_img">
-											<img th:src="${history.recipe.images[0].fileName}"
+											<img th:src="'/uploads/' + ${history.recipe.images[0].fileName}"
 												th:alt="${history.recipe.title}" class="im">
 										</div>
 										<div class="item_info">

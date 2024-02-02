@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -29,13 +30,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ImageService {
 
+	@Value("${file.upload-dir}")
+	private String uploadDirPath;
+	
 	private final ImageRepository imageRepository;
 
 	public List<Image> saveImages(List<MultipartFile> imageFiles, Recipe recipe) {
-		String uploadDirPath = "src/main/resources/static/uploads"; //파일을 저장할 디렉토리 경로 (상대 경로)
+		String uploadPath = uploadDirPath; //파일을 저장할 디렉토리 경로
 		
 		// 디렉토리 생성 
-		File uploadDir = new File(uploadDirPath);
+		File uploadDir = new File(uploadPath);
 		if (!uploadDir.exists()) { //존재하지 않으면 새로 생성
 			uploadDir.mkdirs();
 		}
