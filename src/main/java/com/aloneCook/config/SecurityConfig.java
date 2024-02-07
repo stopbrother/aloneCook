@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().mvcMatchers("/node_modules/**")
-				.antMatchers("/favicon.ico", "/resources/**", "/error")
+				.antMatchers("/favicon.ico", "/resources/**", "/uploads/**", "/error")
 				.requestMatchers(PathRequest.toStaticResources().atCommonLocations());
 		// ↑ static resources는 스프링 시큐리티 필터 적용 X
 	}
