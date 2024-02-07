@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.aloneCook.recipe.Recipe;
@@ -24,7 +25,7 @@ public class UserHistory {
 	@ManyToOne
 	private Account account;
 	
-	@ManyToOne
+	@ManyToOne	
 	private Recipe recipe;
 	
 	private LocalDateTime timeStamp;

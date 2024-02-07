@@ -47,7 +47,7 @@
 													<a class="MyRecipe_btn manage"
 														th:href="@{'/recipe/' + ${recipe.path} + '/edit'}">관리</a>
 													<a class="MyRecipe_btn remove"
-														th:href="@{'/recipe/' + ${recipe.path} + '/remove'}">삭제</a>
+														th:href="@{'/recipe/' + ${recipe.path} + '/remove'}" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
 												</div>
 											</div>
 										</div>
@@ -68,5 +68,6 @@
 	</div>
 
 	<script th:replace="fragments.html :: date-time"></script>
+	<script th:replace="fragments.html :: message"></script>
 </body>
 </html>

@@ -29,12 +29,12 @@ import com.aloneCook.recipe.form.StepForm;
 import com.aloneCook.community.Community;
 import com.aloneCook.community.CommunityRepository;
 import com.aloneCook.image.Image;
+import com.aloneCook.image.ImageRepository;
 import com.aloneCook.image.ImageService;
 import com.aloneCook.like.LikeRepository;
 import com.aloneCook.user.Account;
 import com.aloneCook.user.UserAccount;
-
-
+import com.aloneCook.user.history.UserHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;
@@ -50,6 +50,8 @@ public class RecipeService {
 	private final ApplicationEventPublisher eventPublisher;
 	private final CommunityRepository communityRepository;
 	private final ImageService imageService;
+	private final UserHistoryRepository userHistoryRepository;
+	
 	
 	public Recipe createNewRecipe(Recipe recipe, Account account, List<MultipartFile> imageFiles) {
 		recipe.setWriter(account);
@@ -190,8 +192,10 @@ public class RecipeService {
 
 
 	
-	public void remove(Recipe recipe) {
+	public void remove(Recipe recipe) {		
 		recipeRepository.delete(recipe);
+		
+		//userHistoryRepository.deleteByRecipe(recipe);
 	}
 
 

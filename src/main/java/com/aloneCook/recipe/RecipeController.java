@@ -35,6 +35,7 @@ import com.aloneCook.community.Community;
 import com.aloneCook.community.CommunityRepository;
 import com.aloneCook.community.CommunityService;
 import com.aloneCook.image.Image;
+import com.aloneCook.image.ImageRepository;
 import com.aloneCook.image.ImageService;
 import com.aloneCook.like.LikeRepository;
 import com.aloneCook.like.LikeService;
@@ -62,7 +63,7 @@ public class RecipeController {
 	//private final CommunityService communityService;
 	//private final CommunityRepository communityRepository;
 	//private final ImageService imageService;
-	
+	private final ImageRepository imageRepository;
 	
 	
 	@GetMapping("/recipe-list")
@@ -135,9 +136,13 @@ public class RecipeController {
 	}
 	
 	@GetMapping("/recipe/{path}/remove")
-	public String removeRecipe(@CurrentUser Account account, @PathVariable String path, Model model) {
-		Recipe recipe = recipeService.getRecipeToStatus(account, path);
+	public String removeRecipe(@CurrentUser Account account, @PathVariable String path, Model model,
+								RedirectAttributes attributes) {
+		Recipe recipe = recipeService.getRecipeToStatus(account, path);		
+		
 		recipeService.remove(recipe);
+		
+		attributes.addFlashAttribute("message", "삭제 되었습니다.");
 		return "redirect:/my-recipe";
 	}
 	

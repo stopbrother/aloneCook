@@ -5,10 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aloneCook.recipe.Recipe;
 import com.aloneCook.user.Account;
 
 @Transactional(readOnly = true)
 public interface UserHistoryRepository extends JpaRepository<UserHistory, Long> {
 
 	List<UserHistory> findByAccountOrderByTimeStampDesc(Account account);
+
+	void deleteByRecipe(Recipe recipe);
+	
 }
