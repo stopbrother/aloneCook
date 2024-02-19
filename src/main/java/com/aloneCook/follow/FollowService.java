@@ -1,5 +1,9 @@
 package com.aloneCook.follow;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,7 +26,7 @@ public class FollowService {
 			Follow follow = new Follow();
 			follow.setToUser(nickname);
 			follow.setFromUser(account);
-			//account.addFollowing(follow);
+			follow.setFollowedTime(LocalDateTime.now());
 			followRepository.save(follow);
 		}
 	}
@@ -36,6 +40,19 @@ public class FollowService {
 		Account target = userRepository.findByNickname(nickname);
 		return followRepository.existsByToUserAndFromUser(target, account);
 	}
+
+	public List<String> getFollowed(Account account) {
+		List<Follow> followed = followRepository.findByFromUserOrderByFollowedTimeDesc(account);
+		List<String> followedList = new ArrayList<>();
+		
+		for (Follow follow : followed) {
+			followedList.add(follow.getToUser().getNickname());
+		}
+		return followedList;
+	}
+
+
+
 
 
 

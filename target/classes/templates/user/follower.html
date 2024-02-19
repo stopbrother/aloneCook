@@ -34,24 +34,18 @@
                             </div>
                             <div class="followList_item_content">
                                 <div class="followList_item_desc">
-                                    <a class="followName"th:href="@{'/profile/' + ${follower.fromUser.nickname}}" th:text="${follower.fromUser.nickname}">김덕배</a>                                   
-                                    
+                                    <a class="followName" th:href="@{'/profile/' + ${follower.fromUser.nickname}}" th:text="${follower.fromUser.nickname}">김덕배</a>                                   
                                 </div>
                                                                
                                 <div class="followList_btn">
                                 	<div class="itsme" th:if="${follower.fromUser.nickname} == ${#authentication.principal.Username}"></div>
-                                
-                                	
                                 		<button class="follow_btn" id="listFollow" th:data-name="${follower.fromUser.nickname}" th:if="${!myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${#authentication.principal.Username}">
                                         	<span id="username">팔로우</span>
                                     	</button>                                		
-                                		<button class="disfollow_btn" id="listUnFollow" th:data-name="${follower.fromUser.nickname}" th:if="${myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${account.nickname}">
+                                		<button class="disfollow_btn" id="listUnFollow" th:data-name="${follower.fromUser.nickname}" th:if="${myList.contains(follower.fromUser.nickname)} and ${follower.fromUser.nickname} != ${#authentication.principal.Username}">
                                 			<span>팔로우 취소</span>
                                 		</button>
-                                	
-                                	                               	                                	                                	                              
                                 </div>
-                                
                             </div>
                         </div>
                     </div>

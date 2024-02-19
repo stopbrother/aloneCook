@@ -124,8 +124,7 @@ public class UserController {
 		if (account != null) {			
 			Account byNickname = userService.getAccount(nickname);
 			boolean follow = followRepository.existsByToUserAndFromUser(byNickname, account);
-			List<Follow> userList = followRepository.findAllByToUser(byNickname);
-			List<Follow> myList	= followRepository.findAllByFromUser(account);
+			List<String> myList = followService.getFollowed(account);
 			
 			
 			
@@ -137,7 +136,7 @@ public class UserController {
 			model.addAttribute("followerCnt", followRepository.countByToUser(byNickname));
 			model.addAttribute("followerList", followRepository.findAllByToUser(byNickname));
 			model.addAttribute("recipeCnt", recipeRepository.countByManagerContaining(byNickname));
-			model.addAttribute("myList", followRepository.findAllByFromUser(account));
+			model.addAttribute("myList", myList);
 			
 		}		
 		return "user/follower";

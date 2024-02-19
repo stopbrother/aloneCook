@@ -22,6 +22,14 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 
 	long countByFromUser(Account byNickname);
 
+	List<Account> findFromUserByToUser(String nickname);
+
+	List<Follow> findByToUserNickname(String nickname);
+
+	List<Follow> findByToUser(Account account);
+	
+	List<Follow> findByFromUserOrderByFollowedTimeDesc(Account account);
+
 	
 	
 	

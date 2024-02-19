@@ -22,6 +22,8 @@ public class QFollow extends EntityPathBase<Follow> {
 
     public static final QFollow follow = new QFollow("follow");
 
+    public final DateTimePath<java.time.LocalDateTime> followedTime = createDateTime("followedTime", java.time.LocalDateTime.class);
+
     public final com.aloneCook.user.QAccount fromUser;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
