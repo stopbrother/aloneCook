@@ -38,20 +38,14 @@
                                     <a class="followName" th:href="@{'/profile/' + ${following.toUser.nickname}}" th:text="${following.toUser.nickname}">김덕배</a>
                                 </div>
                                 <div class="followList_btn">
-                                	<form th:if="${!myList.equals(followingList)} and ${following.toUser.nickname} != ${#authentication.principal.Username}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/follow'}" method="post">
-										<button class="follow_btn">
-											<span>팔로우</span>
-										</button>										
-									</form>
-									
-                                    <form th:if="${myList.equals(followingList)}" th:action="@{'/profile/' + ${following.toUser.nickname} + '/unfollow'}" method="post">
-										<button class="disfollow_btn">
-											<span>팔로우 취소</span>
-										</button>										
-									</form>																	
-									
-                                </div>
-                                <div th:if="${!myList.equals(followingList)} and ${following.toUser.nickname} == ${#authentication.principal.Username}"></div>
+                                	<div class="itsme" th:if="${following.toUser.nickname} == ${#authentication.principal.Username}"></div>
+                                		<button class="follow_btn" id="listFollow" th:data-name="${following.toUser.nickname}" th:if="${!myList.contains(following.toUser.nickname)} and ${following.toUser.nickname} != ${#authentication.principal.Username}">
+                                        	<span id="username">팔로우</span>
+                                    	</button>                                		
+                                		<button class="disfollow_btn" id="listUnFollow" th:data-name="${following.toUser.nickname}" th:if="${myList.contains(following.toUser.nickname)} and ${following.toUser.nickname} != ${#authentication.principal.Username}">
+                                			<span>팔로우 취소</span>
+                                		</button>
+                                </div>                                
                             </div>
                         </div>
 
@@ -66,7 +60,7 @@
 		<footer th:replace = "fragments.html :: footer"></footer>
 
 	</div>
-	
+	<script th:replace="fragments.html :: ajax-csrf-header"></script>
 	<script th:replace= "fragments.html :: follow"></script>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class FollowService {
 	}
 
 	public List<String> getFollowed(Account account) {
-		List<Follow> followed = followRepository.findByFromUserOrderByFollowedTimeDesc(account);
+		List<Follow> followed = followRepository.findByFromUser(account);
 		List<String> followedList = new ArrayList<>();
 		
 		for (Follow follow : followed) {

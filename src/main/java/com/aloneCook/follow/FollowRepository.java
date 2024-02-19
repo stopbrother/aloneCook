@@ -13,26 +13,18 @@ public interface FollowRepository extends JpaRepository<Follow, Long> {
 	boolean existsByToUserAndFromUser(Account byNickname, Account account);
 	
 	Follow findByFromUserAndToUser(Account byNickname, Account account);		
-	
-	List<Follow> findAllByToUser(Account account);
-
-	List<Follow> findAllByFromUser(Account account);
 
 	long countByToUser(Account byNickname);
 
 	long countByFromUser(Account byNickname);
 
-	List<Account> findFromUserByToUser(String nickname);
-
-	List<Follow> findByToUserNickname(String nickname);
-
 	List<Follow> findByToUser(Account account);
 	
-	List<Follow> findByFromUserOrderByFollowedTimeDesc(Account account);
+	List<Follow> findByFromUser(Account account);
 
+	List<Follow> findAllByToUserOrderByFollowedTimeDesc(Account account);
 	
-	
-	
-	
+	List<Follow> findAllByFromUserOrderByFollowedTimeDesc(Account account);
+
 
 }

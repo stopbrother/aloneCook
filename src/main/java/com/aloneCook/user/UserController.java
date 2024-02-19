@@ -134,7 +134,7 @@ public class UserController {
 			model.addAttribute("isFollow", follow);
 			model.addAttribute("followingCnt", followRepository.countByFromUser(byNickname));
 			model.addAttribute("followerCnt", followRepository.countByToUser(byNickname));
-			model.addAttribute("followerList", followRepository.findAllByToUser(byNickname));
+			model.addAttribute("followerList", followRepository.findAllByToUserOrderByFollowedTimeDesc(byNickname));
 			model.addAttribute("recipeCnt", recipeRepository.countByManagerContaining(byNickname));
 			model.addAttribute("myList", myList);
 			
@@ -147,7 +147,7 @@ public class UserController {
 		if (account != null) {			
 			Account byNickname = userService.getAccount(nickname);
 			boolean follow = followRepository.existsByToUserAndFromUser(byNickname, account);
-			//List<Follow> myList = followRepository.findAllByFromUser(account); 
+			List<String> myList = followService.getFollowed(account);
 			
 			model.addAttribute(account);
 			model.addAttribute("byNickname", byNickname);		
@@ -155,9 +155,9 @@ public class UserController {
 			model.addAttribute("isFollow", follow);
 			model.addAttribute("followingCnt", followRepository.countByFromUser(byNickname));
 			model.addAttribute("followerCnt", followRepository.countByToUser(byNickname));
-			model.addAttribute("followingList", followRepository.findAllByFromUser(byNickname));
+			model.addAttribute("followingList", followRepository.findAllByFromUserOrderByFollowedTimeDesc(byNickname));
 			model.addAttribute("recipeCnt", recipeRepository.countByManagerContaining(byNickname));
-			model.addAttribute("myList", followRepository.findAllByFromUser(account));
+			model.addAttribute("myList", myList);
 		}	
 		return "user/following";
 	}
