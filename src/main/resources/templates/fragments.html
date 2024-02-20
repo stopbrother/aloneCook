@@ -84,7 +84,7 @@
 					<a th:href="@{/}" class="m_navi_menu_item" th:classappend="${activeMenu == 'home'}? active"><span>홈</span></a>
 					<a class="m_navi_menu_item"><span>소개</span></a>                                
                     <a th:href="@{/recipe-list}" class="m_navi_menu_item" th:classappend="${activeMenu == 'recipe'}? active"><span>레시피</span></a>
-                    <a th:href="@{/bbs-list}" class="m_navi_menu_item" th:classappend="${activeMenu == 'bbs'}? active"><span>게시판</span></a>
+                    <a th:href="@{/bbs-list/{category}(category='NOTICE')}" class="m_navi_menu_item" th:classappend="${activeMenu == 'bbs'}? active"><span>게시판</span></a>
                 </div>                           
             </div>
         </div>

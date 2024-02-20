@@ -77,11 +77,11 @@ public class BbsController {
 		if(account != null) {
 			model.addAttribute(account);
 		}
-		Page<Bbs> bbsPageAll = bbsRepository.findAll(pageable);
-		Page<Bbs> bbsCategory = bbsRepository.findByCategory(category, pageable);
+		//Page<Bbs> bbsPageAll = bbsRepository.findAll(pageable);
+		Page<Bbs> bbsCategory = bbsRepository.findAllCategory(category, pageable);
 		
 		model.addAttribute("category", category.name());
-		model.addAttribute("bbsPageAll", bbsPageAll);
+		//model.addAttribute("bbsPageAll", bbsPageAll);
 		model.addAttribute("bbsCategory", bbsCategory);
 		model.addAttribute("sortProperty", pageable.getSort().toString()
 						.contains("createdDateTime")? "createdDateTime" : "viewCount");

@@ -35,7 +35,7 @@ public class BbsRepositoryExtensionImpl extends QuerydslRepositorySupport implem
 	}
 	
 	@Override
-	public Page<Bbs> findByCategory(Category category, Pageable pageable) {
+	public Page<Bbs> findAllCategory(Category category, Pageable pageable) {
 		QBbs bbs = QBbs.bbs;		
 		JPQLQuery<Bbs> query = from(bbs).where(bbs.category.eq(category));
 		JPQLQuery<Bbs> pageableQuery = getQuerydsl().applyPagination(pageable, query);
