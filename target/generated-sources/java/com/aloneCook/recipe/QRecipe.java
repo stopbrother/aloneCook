@@ -22,6 +22,8 @@ public class QRecipe extends EntityPathBase<Recipe> {
 
     public static final QRecipe recipe = new QRecipe("recipe");
 
+    public final NumberPath<Long> commentCount = createNumber("commentCount", Long.class);
+
     public final ListPath<com.aloneCook.community.Community, com.aloneCook.community.QCommunity> comments = this.<com.aloneCook.community.Community, com.aloneCook.community.QCommunity>createList("comments", com.aloneCook.community.Community.class, com.aloneCook.community.QCommunity.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.time.LocalDateTime> createdDateTime = createDateTime("createdDateTime", java.time.LocalDateTime.class);

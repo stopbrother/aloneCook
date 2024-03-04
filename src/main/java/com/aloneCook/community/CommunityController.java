@@ -77,8 +77,8 @@ public class CommunityController {
 	@ResponseBody
 	public ResponseEntity removeComment(@CurrentUser Account account, @PathVariable String path,
 										@PathVariable("id") Community community) {
-		
-		communityService.removeComment(community);
+		Recipe recipe = recipeService.getRecipe(path);
+		communityService.removeComment(community, recipe);
 		return ResponseEntity.ok().build();
 	}
 	

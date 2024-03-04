@@ -88,7 +88,9 @@ public class Recipe {
 	
 	private Long viewCount;
 	
-	private Long likeCount;
+	private Long likeCount = 0L; //초기값을 0으로 설정
+	
+	private Long commentCount = 0L;
 	
 	@OneToMany(mappedBy = "recipe")
 	//@OrderBy("likedTime")
@@ -172,10 +174,17 @@ public class Recipe {
 
 	public void addComment(Community community) {
 		this.comments.add(community);
+		this.commentCount++;
 		community.setRecipe(this);
 	}
 
+	public void removeComment(Community community) {
+		this.comments.remove(community);
+		this.commentCount--;
+		community.setRecipe(null);
+	}
 
+	
 
 
 

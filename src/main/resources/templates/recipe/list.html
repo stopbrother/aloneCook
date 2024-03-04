@@ -20,7 +20,7 @@
 						<div class="content_filter_inner">
 							<div class="content_filter">
 								<div class="dropdown">
-									<button th:if="${sortProperty == 'createdDateTime'}"
+									<button th:if="${sortProperty == 'publishedDateTime'}"
 										class="filter dropdown-toggle" type="button"
 										id="dropdownMenuButton" data-bs-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">최신순</button>
@@ -32,16 +32,24 @@
 										class="filter dropdown-toggle" type="button"
 										id="dropdownMenuButton" data-bs-toggle="dropdown"
 										aria-haspopup="true" aria-expanded="false">조회순</button>
+									<button th:if="${sortProperty == 'commentCount'}"
+										class="filter dropdown-toggle" type="button"
+										id="dropdownMenuButton" data-bs-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">댓글순</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<a class="dropdown_item"
-											th:classappend="${#strings.equals(sortProperty, 'createdDateTime')}? active"
-											th:href="@{/recipe-list?sort=createdDateTime,desc}"> 최신순
-										</a> <a class="dropdown_item"
+											th:classappend="${#strings.equals(sortProperty, 'publishedDateTime')}? active"
+											th:href="@{/recipe-list?sort=publishedDateTime,desc}"> 최신순
+										</a>
+										<a class="dropdown_item"
 											th:classappend="${#strings.equals(sortProperty, 'likeCount')}? active"
-											th:href="@{/recipe-list?sort=likeCount,desc}"> 인기순 </a> <a
-											class="dropdown-item"
+											th:href="@{/recipe-list?sort=likeCount,desc}"> 인기순 </a>
+										<a class="dropdown-item"
 											th:classappend="${#strings.equals(sortProperty, 'viewCount')}? active"
 											th:href="@{/recipe-list?sort=viewCount,desc}"> 조회순 </a>
+										<a class="dropdown-item"
+											th:classappend="${#strings.equals(sortProperty, 'commentCount')}? active"
+											th:href="@{/recipe-list?sort=commentCount,desc}"> 댓글순 </a>
 									</div>
 								</div>
 							</div>

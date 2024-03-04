@@ -21,17 +21,18 @@ public class CommunityService {
 
 
 
-	public Community createComment(Community community, Recipe recipe, Account account) {
-		
+	public Community createComment(Community community, Recipe recipe, Account account) {		
 		community.setRecipe(recipe);
 		community.setAccount(account);
-		community.setCreateDateTime(LocalDateTime.now());		
+		community.setCreateDateTime(LocalDateTime.now());
+		recipe.addComment(community);
 		
 		return communityRepository.save(community);
 	}
 
-	public void removeComment(Community community) {
+	public void removeComment(Community community, Recipe recipe) {
 		communityRepository.delete(community);
+		recipe.removeComment(community);
 	}
 
 	/*

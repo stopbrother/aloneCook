@@ -68,16 +68,17 @@ public class RecipeController {
 	
 	@GetMapping("/recipe-list")
 	public String listRecipe(@CurrentUser Account account, Model model,
-							@PageableDefault(size = 8, sort = "createdDateTime", direction = Sort.Direction.DESC)							
+							@PageableDefault(size = 8, sort = "publishedDateTime", direction = Sort.Direction.DESC)							
 							Pageable pageable) {
 		if(account != null) {
 			model.addAttribute(account);			
 		}			
 		Page<Recipe> recipePageAll = recipeRepository.findAll(pageable);
 		model.addAttribute("recipePageAll", recipePageAll);
-		model.addAttribute("sortProperty", pageable.getSort().toString().contains("createdDateTime")? "createdDateTime"
+		model.addAttribute("sortProperty", pageable.getSort().toString().contains("publishedDateTime")? "publishedDateTime"
 								: pageable.getSort().toString().contains("likeCount")? "likeCount"
-								: "viewCount");
+								: pageable.getSort().toString().contains("viewCount")? "viewCount"
+								: "commentCount");
 		return "recipe/list";
 	}
 	
