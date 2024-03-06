@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aloneCook.like.LikeRepository;
 import com.aloneCook.recipe.Recipe;
 import com.aloneCook.recipe.RecipeService;
 import com.aloneCook.user.Account;
 import com.aloneCook.user.CurrentUser;
+import com.aloneCook.user.history.UserHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,6 +38,8 @@ public class CommunityController {
 	private final CommunityService communityService;
 	private final CommunityRepository communityRepository;
 	private final ModelMapper modelMapper;
+	private final LikeRepository likeRepository;
+	private final UserHistoryRepository userHistoryRepository;
 	
 	@GetMapping("")
 	public String viewCommunity(@CurrentUser Account account, @PathVariable String path, Model model) {
@@ -47,6 +51,8 @@ public class CommunityController {
 		List<Community> community = communityRepository.findByRecipeOrderByCreateDateTimeDesc(recipe);
 		
 		model.addAttribute("community", community);
+		model.addAttribute("likedRecipeList", likeRepository.findByAccountAndLiked(account, true));
+		model.addAttribute("userHistoryList", userHistoryRepository.findByAccountOrderByTimeStampDesc(account));
 		return "recipe/community";
 	}
 	/*

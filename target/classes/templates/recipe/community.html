@@ -8,127 +8,8 @@
         <header>
             <div th:replace="fragments.html :: navi(activeMenu)"></div>
         </header>
-
-        <div class="recipeIntro">
-            <div class="recipeIntro_container">
-                <div class="recipeIntro_inner">
-                    <div class="recipeIntro_head">
-                        <div class="recipeIntro_head_inner">
-                            <p class="category">한식</p>
-                            <h1 class="recipe_title" th:text="${recipe.title}">음식 이름</h1>
-                            <div class="writer">
-                                <a href="#" th:href="@{'/profile/' + ${recipe.writer?.nickname}}" th:text="${recipe.writer?.nickname}"></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="main_img">
-                        <figure class="main_img_cover">
-                            <div class="slider_wrap">
-                                <div class="swiper_wrap">
-                                    <div class="swiper">
-                                        <div class="swiper_slide">
-                                            <div class="food_img">
-                                                <img th:src="${recipe.foodImg}">
-                                            </div>
-                                        </div>
-                                        <div class="swiper_slide"></div>
-                                        <div class="swiper_slide"></div>
-                                    </div>
-                                    <div class="swiper_pagination">
-                                        <div class="bullet bullet-active"></div>
-                                        <div class="bullet"></div>
-                                        <div class="bullet"></div>
-                                    </div>                                    
-                                </div>
-                                <div class="swiper_btn_prev swiper_btn_disable">
-                                    <div class="arrow_left"></div>
-                                </div>
-                                <div class="swiper_btn_next">
-                                    <div class="arrow_right"></div>
-                                </div>
-                            </div>
-                        </figure>
-                    </div>
-                    <aside class="recipeIntro_sub">
-                        <div class="recipe_descrip">
-                            <span th:text="${recipe.foodIntro}">description</span>
-                        </div>
-                        <div class="recipe_subInfo">
-                            <div class="recipe_subInfo_items">
-                                <dl class="recipe_subInfo_item">
-                                    <dt>난이도</dt>
-                                    <dd th:if="${recipe.level == T(com.aloneCook.recipe.Level).EASY}">쉬움</dd>
-                                    <dd th:if="${recipe.level == T(com.aloneCook.recipe.Level).NORMAL}">보통</dd>
-                                    <dd th:if="${recipe.level == T(com.aloneCook.recipe.Level).HARD}">어려움</dd>
-                                </dl>
-                                <dl class="recipe_subInfo_item">
-                                    <dt>조회수</dt>
-                                    <dd th:text="${recipe.viewCount}"></dd>
-                                </dl>                                
-                            </div>
-                        </div>                        
-                        <div class="recipe_btns">
-                            <div class="recipe_btns_inner">
-                                <div class="recipe_btn">
-                                	<form th:if ="${!recipe.isLiker(#authentication.principal)}"
-                                	 	  th:action="@{'/recipe/' + ${recipe.path} + '/like'}" method="post">
-                                		<button class="likeButton" type="submit">
-                                    		<div class="likeButton_inner">
-                                    			<div class="icon_like">
-                                    				<i class="fa fa-heart-o" aria-hidden="true"></i>
-                                    			</div>                                    		
-                                    			<span th:text="${recipe.likeCount}"></span>
-                                    		</div>                                    	
-                                    	</button>
-                                    </form>
-                                    
-                                    <form th:if ="${recipe.isLiker(#authentication.principal)}" 
-                                    	  th:action="@{'/recipe/' + ${recipe.path} + '/dislike'}" method="post">
-                                   		<button class="likeButton" type="submit">
-                                    		<div class="likeButton_inner">
-                                    			<div class="icon_cancel">
-                                    				<i class="fa fa-heart" aria-hidden="true"></i>
-                                    			</div>                                    		
-                                    			<span th:text="${recipe.likeCount}"></span>
-                                    		</div>                                    	
-                                    </button>                                    	  
-                                    </form> 
-                                    
-                                </div>
-                                <div class="recipe_btn">
-                                    <button class="share_button recipe_button">
-                                        <div class="share_btn_detail recipe_btn_detail">
-                                            <div class="icon_kakao"></div>                                            
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="recipe_btn">
-                                    <button class="share_button recipe_button">
-                                        <div class="share_btn_detail recipe_btn_detail">
-                                            <div class="icon_facebook"></div>                                            
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="recipe_btn">
-                                    <button class="share_button recipe_button">
-                                        <div class="share_btn_detail recipe_btn_detail">
-                                            <div class="icon_twiter"></div>                                            
-                                        </div>
-                                    </button>
-                                </div>
-                                <div class="recipe_btn">
-                                    <button class="share_button recipe_button">
-                                        <div class="share_btn_detail recipe_btn_detail">
-                                            <div class="icon_link"></div>                                            
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </div>
+	<main>
+		<div th:replace="fragments.html :: recipe-view"></div>
 
         <nav class="contents_nav">
             <div class="contents_nav_container">
@@ -198,62 +79,16 @@
             </div>            
         </div>
 
-        <div class="content_footer">
-            <div class="recentlyView_recipe">
-                <div class="recentlyView_recipe_container">
-                    <div class="recentlyView_title">최근 본 레시피</div>
-                    <div class="recipe_list_slider">
-                        <div class="swiper_wrap">
-                            <div class="swiper_container">
-                                <div class="swiper_slide swiper_slide_active">
-                                    <div class="recipeList_item">
-                                        <div class="recipeList_item_img">
-                                            <a href="#"></a>
-                                        </div>
-                                        <div class="recipeList_item_info">
-                                            <dl>
-                                                <dd class="recipeList_item_writer">
-                                                    <span>김덕배</span>
-                                                </dd>
-                                                <dt>
-                                                    <strong>떡볶이</strong>
-                                                </dt>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="swiper_slide swiper_slide_next">
-                                    <div class="recipeList_item">
-                                        <div class="recipeList_item_img">
-                                            <img src="img/introduce/1.jpg">
-                                        </div>
-                                        <div class="recipeList_item_info">
-                                            <dl>
-                                                <dd class="recipeList_item_writer">
-                                                    <span>김덕배</span>
-                                                </dd>
-                                                <dt>
-                                                    <strong>오뎅탕</strong>
-                                                </dt>
-                                            </dl>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-		
+		<div th:replace="fragments.html :: recipe-footer"></div>
+		</main>
 		<!-- 푸터 영역 -->
-		<footer th:replace="fragments.html :: footer"></footer>    
+		<footer th:replace="fragments.html :: footer"></footer>
     </div>
-</body>
-
-<script th:replace="fragments.html :: date-time"></script>
+    
+ <script th:replace="fragments.html :: date-time"></script>
 <script th:replace="fragments.html :: ajax-csrf-header"></script>
+<script th:replace="fragments.html :: recipe-swiper"></script>
+
 
 <script type="application/javascript" th:inline="javascript">
     $(function() {
@@ -301,15 +136,7 @@
     	function loadJSONdata() {
     		
     	}
-
-
-    	
-    	
-    	
-        
-
-        
-       
+ 
     });
 </script>
 
@@ -336,5 +163,5 @@
             });
     })
 </script>
-
+</body>
 </html>

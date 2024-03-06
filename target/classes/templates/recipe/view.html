@@ -9,119 +9,7 @@
 		</header>
 
 		<main>
-			<div class="recipeIntro">
-				<div class="recipeIntro_container">
-					<div class="recipeIntro_inner">
-						<div class="recipeIntro_head">
-							<div class="recipeIntro_head_inner">
-								<p class="category">한식</p>
-								<h1 class="recipe_title" th:text="${recipe.title}">음식 이름</h1>
-								<div class="writer">
-									<a href="#"
-										th:href="@{'/profile/' + ${recipe.writer?.nickname}}"
-										th:text="${recipe.writer?.nickname}"></a>
-								</div>
-							</div>
-						</div>
-						<div class="main_img">						
-							<figure class="main_img_cover">
-								<div class="slider_wrap">
-									<div class="swiper-container">
-										<div class="swiper-wrapper">
-											<div class="swiper-slide food_img" th:each="image : ${recipe.images}">
-												<img th:src="'/uploads/' + ${image.fileName}">												
-											</div>											
-										</div>
-										<div class="swiper-pagination"></div>																				
-									</div>
-									<div class="swiper-button-prev"></div>
-									<div class="swiper-button-next"></div>									
-								</div>
-							</figure>
-						</div>
-						<aside class="recipeIntro_sub">
-							<div class="recipe_descrip">
-								<span th:text="${recipe.foodIntro}">description</span>
-							</div>
-							<div class="recipe_subInfo">
-								<div class="recipe_subInfo_items">
-									<dl class="recipe_subInfo_item">
-										<dt>난이도</dt>
-										<dd
-											th:if="${recipe.level == T(com.aloneCook.recipe.Level).EASY}">쉬움</dd>
-										<dd
-											th:if="${recipe.level == T(com.aloneCook.recipe.Level).NORMAL}">보통</dd>
-										<dd
-											th:if="${recipe.level == T(com.aloneCook.recipe.Level).HARD}">어려움</dd>
-									</dl>
-									<dl class="recipe_subInfo_item">
-										<dt>조회수</dt>
-										<dd th:text="${recipe.viewCount}"></dd>
-									</dl>
-								</div>
-							</div>
-							<div class="recipe_btns">
-								<div class="recipe_btns_inner">
-									<div class="recipe_btn" id="like_btn">
-
-										<button class="likeButton" id="like" type="button"
-											th:if="${!recipe.isLiker(#authentication.principal)}">
-											<div class="likeButton_inner">
-												<div class="icon_like">
-													<i class="fa fa-heart-o" aria-hidden="true"></i>
-												</div>
-												<span th:text="${recipe.likeCount}"></span>
-											</div>
-										</button>
-
-
-
-										<button class="likeButton" id="dislike" type="button"
-											th:if="${recipe.isLiker(#authentication.principal)}">
-											<div class="likeButton_inner">
-												<div class="icon_cancel">
-													<i class="fa fa-heart" aria-hidden="true"></i>
-												</div>
-												<span th:text="${recipe.likeCount}"></span>
-											</div>
-										</button>
-
-
-									</div>
-									<div class="recipe_btn">
-										<button class="share_button recipe_button">
-											<div class="share_btn_detail recipe_btn_detail">
-												<div class="icon_kakao"></div>
-											</div>
-										</button>
-									</div>
-									<div class="recipe_btn">
-										<button class="share_button recipe_button">
-											<div class="share_btn_detail recipe_btn_detail">
-												<div class="icon_facebook"></div>
-											</div>
-										</button>
-									</div>
-									<div class="recipe_btn">
-										<button class="share_button recipe_button">
-											<div class="share_btn_detail recipe_btn_detail">
-												<div class="icon_twiter"></div>
-											</div>
-										</button>
-									</div>
-									<div class="recipe_btn">
-										<button class="share_button recipe_button">
-											<div class="share_btn_detail recipe_btn_detail">
-												<div class="icon_link"></div>
-											</div>
-										</button>
-									</div>
-								</div>
-							</div>
-						</aside>
-					</div>
-				</div>
-			</div>
+			<div th:replace="fragments.html :: recipe-view"></div>
 
 			<nav class="contents_nav">
 				<div class="contents_nav_container">
@@ -177,67 +65,7 @@
 				</div>
 			</div>
 
-			<div class="content_footer">
-				<div class="recentlyView_recipe">
-					<div class="recentlyView_recipe_container">
-						<div class="recentlyView_title">관심 레시피</div>
-						<div class="recipe_list_slider">
-							<div class="recently">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide" th:each="liked : ${likedRecipeList}">
-										<a class="recipeList_item"
-											th:href="@{'/recipe/' + ${liked.recipe.path}}">
-											<div class="recipeList_item_img">
-												<img th:src="${liked.recipe.foodImg}">
-											</div>
-											<div class="recipeList_item_info">
-												<dl>
-													<dd class="recipeList_item_writer">
-														<span th:text="${liked.recipe.writer?.nickname}">김덕배</span>
-													</dd>
-													<dt>
-														<strong th:text="${liked.recipe.title}">오뎅탕</strong>
-													</dt>
-												</dl>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<div class="recentlyView_recipe">
-					<div class="recentlyView_recipe_container">
-						<div class="recentlyView_title">최근 본 레시피</div>
-						<div class="recipe_list_slider">
-							<div class="recently">
-								<div class="swiper-wrapper">
-									<div class="swiper-slide" th:each="history : ${userHistoryList}">
-										<a class="recipeList_item"
-											th:href="@{'/recipe/' + ${history.recipe.path}}">
-											<div class="recipeList_item_img">
-												<img th:src="${history.recipe.foodImg}">
-											</div>
-											<div class="recipeList_item_info">
-												<dl>
-													<dd class="recipeList_item_writer">
-														<span th:text="${history.recipe.writer?.nickname}">김덕배</span>
-													</dd>
-													<dt>
-														<strong th:text="${history.recipe.title}">오뎅탕</strong>
-													</dt>
-												</dl>
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<div th:replace="fragments.html :: recipe-footer"></div>
 		</main>
 
 		<!-- 푸터 영역 -->
@@ -245,6 +73,7 @@
 	</div>
 
 	<script th:replace="fragments.html :: ajax-csrf-header"></script>
+	<script th:replace="fragments.html :: recipe-swiper"></script>
 	<script type="application/javascript">
 		        
     $(function () {
@@ -306,70 +135,6 @@
 		});
 	</script>
 
-	<script type="application/javascript">
-		
-   		const swiper = new Swiper('.swiper-container', {
-	      // Optional parameters
-	      
-	      loop: false,	      
-	      slidesPerView: 1,	      
-	    
-	      // If we need pagination
-	      pagination: {
-	        el: '.swiper-pagination',
-	        clickable: false,
-	      },
-	    
-	      // Navigation arrows
-	      navigation: {
-	        nextEl: '.swiper-button-next',
-	        prevEl: '.swiper-button-prev',
-	      },
-	    
-	      // And if we need scrollbar
-	      scrollbar: {
-	        el: '.swiper-scrollbar',
-	      },	      	      
-	      
-	      observer: true,
-	      observeParents: true,
-	    });
-   
-   		const recently = new Swiper('.recently', {
-    	      // Optional parameters
-    	      
-    	      loop: false,
-    	      spaceBetween: 30,
-    	      slidesPerView: 3,
-    	      slidesPerGroup: 3,
-    	    
-    	      // If we need pagination
-    	      pagination: {
-    	        el: '.swiper-recently-pagination',
-    	      },
-    	    
-    	      // Navigation arrows
-    	      navigation: {
-    	        nextEl: '.swiper-recently-button-next',
-    	        prevEl: '.swiper-recently-button-prev',
-    	      },
-    	       	      
-    	      
-    	      breakpoints: {
-    	    	768: {
-    	    		slidesPerView: 4,
-    	    		slidesPerGroup: 4,
-    	    	},
-    	    	1080: {
-    	            slidesPerView: 5,
-    	            slidesPerGroup: 4,
-    	        }
-    	      },
-    	      
-    	      observer: true,
-    	      observeParents: true,
-    	    });
-	</script>
 
 </body>
 </html>

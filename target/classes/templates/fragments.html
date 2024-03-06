@@ -6,9 +6,12 @@
 	content="width=device-width, initial-scale=1, minimum-scale=1,maximum-scale=1,user-scalable=no">
 <title>나 혼자 요리!</title>
 <link rel="stylesheet" href="/node_modules/swiper/swiper-bundle.min.css" />
-<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
-<link rel="stylesheet" href="/node_modules/summernote/dist/summernote-lite.min.css" />
-<link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet"
+	href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="/node_modules/summernote/dist/summernote-lite.min.css" />
+<link rel="stylesheet"
+	href="/node_modules/font-awesome/css/font-awesome.min.css" />
 <link rel="stylesheet" href="/css/index.css" />
 <link rel="stylesheet" href="/css/base.css" />
 <link rel="stylesheet" href="/css/dropdown.css" />
@@ -27,25 +30,22 @@
 		<div class="navi_inner">
 			<div class="navigations">
 				<div class="logo">
-					<a href="/" th:href="@{/}"> <img src="/images/logo_1.png" alt="로고"></a>
+					<a href="/" th:href="@{/}"> <img src="/images/logo_1.png"
+						alt="로고"></a>
 				</div>
 				<div class="navi_menu">
-					<a th:href="@{/}" class="navi_item" th:classappend="${activeMenu == 'home'}? active">
-						홈
-					</a>
-					<a href="#" class="navi_item">
-						소개
-					</a>
-					<a th:href="@{/recipe-list}" class="navi_item" th:classappend="${activeMenu == 'recipe'}? active">
-						레시피
-					</a>
-					<a th:href="@{/bbs-list/{category}(category='NOTICE')}" class="navi_item" th:classappend="${activeMenu == 'bbs'}? active">
-						게시판
-					</a>
+					<a th:href="@{/}" class="navi_item"
+						th:classappend="${activeMenu == 'home'}? active"> 홈 </a> <a
+						href="#" class="navi_item"> 소개 </a> <a th:href="@{/recipe-list}"
+						class="navi_item"
+						th:classappend="${activeMenu == 'recipe'}? active"> 레시피 </a> <a
+						th:href="@{/bbs-list/{category}(category='NOTICE')}"
+						class="navi_item" th:classappend="${activeMenu == 'bbs'}? active">
+						게시판 </a>
 				</div>
-			</div>			
+			</div>
 			<div class="navi_login">
-				<div class="navi_right">					
+				<div class="navi_right">
 					<div class="navi_item user_buttons">
 						<a th:href="@{/login}" href="#" class="login button"
 							sec:authorize="!isAuthenticated()">로그인</a> <a th:href="@{/join}"
@@ -58,18 +58,23 @@
 							id="dropdownMenuLink" data-bs-toggle="dropdown"
 							aria-expanded="false">
 							<div class="userProfile">
-								<img th:if="${!#strings.isEmpty(account?.profileImg)}" th:src="${account.profileImg}" />
-								<img th:if="${#strings.isEmpty(account?.profileImg)}" src="/images/profile.svg" />							
-							</div>
-							<span sec:authentication="name">UserName</span>
+								<img th:if="${!#strings.isEmpty(account?.profileImg)}"
+									th:src="${account.profileImg}" /> <img
+									th:if="${#strings.isEmpty(account?.profileImg)}"
+									src="/images/profile.svg" />
+							</div> <span sec:authentication="name">UserName</span>
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							<li><a class="dropdown_item" href="#" th:href="@{'/profile/' + ${#authentication.name}}">프로필</a></li>
-							<li><a class="dropdown_item" href="#" th:href="@{'/settings/profile'}">설정</a></li>
+							<li><a class="dropdown_item" href="#"
+								th:href="@{'/profile/' + ${#authentication.name}}">프로필</a></li>
+							<li><a class="dropdown_item" href="#"
+								th:href="@{'/settings/profile'}">설정</a></li>
 							<li class="dropdown-line"></li>
-							<li><a class="dropdown_item" href="#" th:href="@{'/my-recipe'}">나의 레시피</a></li>
-							<li><a class="dropdown_item" href="#" th:href="@{'/recipe/liked'}">찜한 레시피</a></li>
-							<li class="dropdown-line"></li>							
+							<li><a class="dropdown_item" href="#"
+								th:href="@{'/my-recipe'}">나의 레시피</a></li>
+							<li><a class="dropdown_item" href="#"
+								th:href="@{'/recipe/liked'}">찜한 레시피</a></li>
+							<li class="dropdown-line"></li>
 							<li><form action="#" th:action="@{/logout}" method="post">
 									<button type="submit" class="dropdown_item">로그아웃</button>
 								</form></li>
@@ -81,15 +86,21 @@
 		<div class="m_navi_menu">
 			<div class="m_navi_menu_container">
 				<div class="m_navi_menu_inner">
-					<a th:href="@{/}" class="m_navi_menu_item" th:classappend="${activeMenu == 'home'}? active"><span>홈</span></a>
-					<a class="m_navi_menu_item"><span>소개</span></a>                                
-                    <a th:href="@{/recipe-list}" class="m_navi_menu_item" th:classappend="${activeMenu == 'recipe'}? active"><span>레시피</span></a>
-                    <a th:href="@{/bbs-list/{category}(category='NOTICE')}" class="m_navi_menu_item" th:classappend="${activeMenu == 'bbs'}? active"><span>게시판</span></a>
-                </div>                           
-            </div>
-        </div>
+					<a th:href="@{/}" class="m_navi_menu_item"
+						th:classappend="${activeMenu == 'home'}? active"><span>홈</span></a>
+					<a class="m_navi_menu_item"><span>소개</span></a> <a
+						th:href="@{/recipe-list}" class="m_navi_menu_item"
+						th:classappend="${activeMenu == 'recipe'}? active"><span>레시피</span></a>
+					<a th:href="@{/bbs-list/{category}(category='NOTICE')}"
+						class="m_navi_menu_item"
+						th:classappend="${activeMenu == 'bbs'}? active"><span>게시판</span></a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script type="application/javascript">
+		
+		
 	$(function () {
         var fixed = $("header").offset().top; 
         $(window).scroll(function () {
@@ -102,7 +113,9 @@
                 }
             });
     })	
-</script>
+
+	
+	</script>
 </nav>
 
 <footer th:fragment="footer">
@@ -110,28 +123,21 @@
 		<div class="footer_info">
 			<div class="footer_info_items">
 				<div class="footer_info_item">
-					<strong>회사명</strong>
-					<span>나혼자요리</span>
+					<strong>회사명</strong> <span>나혼자요리</span>
 				</div>
 				<div class="footer_info_item">
-					<strong>대표</strong>
-					<span>정지형</span>
+					<strong>대표</strong> <span>정지형</span>
 				</div>
 				<div class="footer_info_item">
-					<strong>주소</strong>
-					<span>인천 동구 송림동 122-1 인천재능대학교 IT관 3층</span>
+					<strong>주소</strong> <span>인천 동구 송림동 122-1 인천재능대학교 IT관 3층</span>
 				</div>
 				<div class="footer_info_item">
-					<strong>이메일</strong>
-					<span>stopbro0323@naver.com</span>
+					<strong>이메일</strong> <span>stopbro0323@naver.com</span>
 				</div>
 				<div class="footer_info_item">
-					<strong>전화번호</strong>
-					<span>010-3744-9840</span>
+					<strong>전화번호</strong> <span>010-3744-9840</span>
 				</div>
-				<div class="footerRight">
-					©ACOOK. All Rights Reserved.
-				</div>
+				<div class="footerRight">©ACOOK. All Rights Reserved.</div>
 			</div>
 			<div class="footer_sns">
 				<a href="#" class="icon_button">
@@ -145,15 +151,13 @@
 
 <!-- settings 메뉴 -->
 <ul th:fragment="settings-menu (activeMenu)" class="settings_menu_items">
-	<li class="settings_menu_item" th:classappend="${activeMenu == 'profile'}? active">
-		<a href="#" th:href="@{/settings/profile}">프로필</a>
-	</li>
-	<li class="settings_menu_item" th:classappend="${activeMenu == 'password'}? active">
-		<a href="#" th:href="@{/settings/password}">비밀번호 변경</a>
-	</li>
-	<li class="settings_menu_item">
-		<a href="#">회원탈퇴</a>
-	</li>
+	<li class="settings_menu_item"
+		th:classappend="${activeMenu == 'profile'}? active"><a href="#"
+		th:href="@{/settings/profile}">프로필</a></li>
+	<li class="settings_menu_item"
+		th:classappend="${activeMenu == 'password'}? active"><a href="#"
+		th:href="@{/settings/password}">비밀번호 변경</a></li>
+	<li class="settings_menu_item"><a href="#">회원탈퇴</a></li>
 </ul>
 
 <!-- profile info(프로필이미지,닉네임 등) -->
@@ -163,8 +167,7 @@
 			<div class="profile_img_box_wrap">
 				<div class="profile_img_box">
 					<img th:if="${!#strings.isEmpty(byNickname.profileImg)}"
-						th:src="${byNickname.profileImg}" class="profile_img" />
-						<img
+						th:src="${byNickname.profileImg}" class="profile_img" /> <img
 						th:if="${#strings.isEmpty(byNickname.profileImg)}"
 						src="/images/profile.svg" class="profile_img" width="100%"
 						height="100%" />
@@ -174,18 +177,21 @@
 			<div class="profile_name_wrap">
 				<div class="profile_name">
 					<span class="nickname" th:text="${byNickname.nickname}">UserName</span>
-					
-					<div class="follow">						 
-						<button th:if="${!isOwner && !isFollow}" th:data-name="${byNickname.nickname}" class="follow_btn">
+
+					<div class="follow">
+						<button th:if="${!isOwner && !isFollow}"
+							th:data-name="${byNickname.nickname}" class="follow_btn">
 							<span>팔로우</span>
 						</button>
-						<button th:if="${isFollow}" th:data-name="${byNickname.nickname}" class="disfollow_btn">
+						<button th:if="${isFollow}" th:data-name="${byNickname.nickname}"
+							class="disfollow_btn">
 							<span>팔로우 취소</span>
-						</button>										
-						
-						<a th:if="${isOwner && !isFollow}" th:href="@{/settings/profile}" class="profileEdit"><span>프로필 수정</span></a>
+						</button>
+
+						<a th:if="${isOwner && !isFollow}" th:href="@{/settings/profile}"
+							class="profileEdit"><span>프로필 수정</span></a>
 					</div>
-					
+
 				</div>
 
 				<div class="user_email">
@@ -198,6 +204,8 @@
 
 <!-- follow script -->
 <script type="application/javascript" th:fragment="follow">
+	
+	
 $(document).ready(function () {
 	$(".follow_btn, .disfollow_btn").click(function() {
 		var nickname = $(this).data("name");
@@ -219,233 +227,253 @@ $(document).ready(function () {
 	});
 	
 });
+
+
 </script>
 
 <!-- profile 메뉴 -->
 <div th:fragment="profile-menu (activeMenu)" class="profileMenu_inner">
-	<span class="profileMenu_item" th:classappend="${activeMenu == 'intro'}? active"><a th:href="@{'/profile/' + ${byNickname.nickname}}">소개</a></span>
-	<span class="profileMenu_item" th:classappend="${activeMenu == 'recipe'}? active"><a th:href="@{'/profile/' + ${byNickname.nickname} + '/recipe'}" th:text="|레시피 ${recipeCnt}|">레시피</a></span>
-	<span class="profileMenu_item" th:classappend="${activeMenu == 'follower'}? active"> <a th:href="@{'/profile/' + ${byNickname.nickname} + '/follower'}" th:text="|팔로워 ${followerCnt}|">팔로워 1</a></span>
-	<span class="profileMenu_item" th:classappend="${activeMenu == 'following'}? active"> <a th:href="@{'/profile/' + ${byNickname.nickname} + '/following'}" th:text="|팔로잉 ${followingCnt}|">팔로잉 3</a></span>
+	<span class="profileMenu_item"
+		th:classappend="${activeMenu == 'intro'}? active"><a
+		th:href="@{'/profile/' + ${byNickname.nickname}}">소개</a></span> <span
+		class="profileMenu_item"
+		th:classappend="${activeMenu == 'recipe'}? active"><a
+		th:href="@{'/profile/' + ${byNickname.nickname} + '/recipe'}"
+		th:text="|레시피 ${recipeCnt}|">레시피</a></span> <span class="profileMenu_item"
+		th:classappend="${activeMenu == 'follower'}? active"> <a
+		th:href="@{'/profile/' + ${byNickname.nickname} + '/follower'}"
+		th:text="|팔로워 ${followerCnt}|">팔로워 1</a></span> <span
+		class="profileMenu_item"
+		th:classappend="${activeMenu == 'following'}? active"> <a
+		th:href="@{'/profile/' + ${byNickname.nickname} + '/following'}"
+		th:text="|팔로잉 ${followingCnt}|">팔로잉 3</a></span>
 </div>
 
 <!-- message -->
-<script th:fragment="message" th:if="${message}" type="application/javascript">
+<script th:fragment="message" th:if="${message}"
+	type="application/javascript">
+	
+	
 	$(document).ready(function() {
 		var msg = "[(${message})]";
 		alert(msg);
 	});	
+
+
 </script>
 
 
 <!-- recipe-form -->
 <div th:fragment="recipe-form (mode, action)">
 	<div class="contents_header">
-            <div class="page_title">
-                <span th:if="${mode == 'new'}">레시피 등록</span>
-                <span th:if="${mode == 'edit'}">
-                	<span th:text="${recipe.title}"></span>
-                	 수정
-                </span>
-            </div>
-        </div>
+		<div class="page_title">
+			<span th:if="${mode == 'new'}">레시피 등록</span> <span
+				th:if="${mode == 'edit'}"> <span th:text="${recipe.title}"></span>
+				수정
+			</span>
+		</div>
+	</div>
 
-        <div class="register">
-            <form class="register_items needs-validation" id="recipeForm" th:action="@{${action}}" th:object="${recipeForm}" method="post" enctype="multipart/form-data" novalidate>
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">레시피 대표 이미지</dt>
-                        <dd class="register_item_infoDesc">
-                            레시피 대표 이미지에 사용 됩니다.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <div class="register_form_container">
-                        <div class="imgUpload">
-                            <div>
-                                <span>이미지 업로드</span>
-                                <p>최소 1개, 최대 5개까지 업로드 가능</p>
-                            </div>
-                            <input type="file" id="main-img-file" name="images" accept="image/*" multiple>
-                        </div>
-                      <!-- 	<input type="hidden" id="foodImgUpload" th:field="*{foodImg}" multiple> -->
-                        <div id="imgPreview">                     	
-                      	<ul th:if="${recipe != null and recipe.images.size() > 0 and recipe.images != null}">
-                        <li class="imgStep" th:each="image : ${recipe.images}">
-                        	<div class="imgStep_num">
-                        		<span></span>
-                        	</div>
-                        	<div class="imgStep_box">
-                        		<div class="imgStep_img">
-                        			<img id="imagePreview" th:src="@{/uploads/{fileName}(fileName=${image.fileName})}"
-                        				 th:data-file-name="${image.fileName}" />
-                        		</div>
-                        		
-                        		<div class="imgStep_change">
-                        			<button type="button" class="change_btn" th:attr="data-file-name=${image.fileName}">변경</button>
-                        		</div>
-                        		
-                        	</div>
-                        	<div class="imgStep_btn">
-                    			<button class="stepBtn">
-                    				<div class="stepBtn_arrow">↑</div>
-                    			</button>
-                    			 <button type="button" class="stepBtn imgCancel" th:attr="data-file-name=${image.fileName}">
-                    			 	<div class="stepBtn_cancel">X</div>
-                    			 </button>
-                    			 <button class="stepBtn">
-                    			 	<div class="stepBtn_arrow">↓</div>
-                    			 </button>
-                    		</div>
-                        </li>                        
-                        </ul>
-                        <ul id="previewItems">
-                        	
-                        </ul>
-                        </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                <div class="register_item">
-                	<dl class="register_item_info">
-                        <dt class="register_title">레시피 주소</dt>
-                        <dd class="register_item_infoDesc">
-                            레시피 주소(URL)에 사용됩니다.<br>예) aloneCook.com/recipe/<b>레시피주소</b>
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                    	<div class="inputAndGuide">
-                    		<input type="text" class="form-control" id="path" th:field="*{path}" aria-describedby="pathHelp" required min="2" max="20" placeholder="레시피 URL" />
-                    		<small id="pathHelp" class="form-text text-muted">
-                				공백없이 문자, 숫자, 대시(-)와 언더바(_)만 2자 이상 20자 이내로 입력하세요.
-                			</small>
-                			<small class="invalid-feedback">레시피 주소를 입력하세요.</small>
-                			<small class="form-text text-danger" th:if="${#fields.hasErrors('path')}" th:errors="*{path}">Path Error</small>
-                    	</div>                    	
-                    </div>                    
-                </div>
+	<div class="register">
+		<form class="register_items needs-validation" id="recipeForm"
+			th:action="@{${action}}" th:object="${recipeForm}" method="post"
+			enctype="multipart/form-data" novalidate>
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">레시피 대표 이미지</dt>
+					<dd class="register_item_infoDesc">레시피 대표 이미지에 사용 됩니다.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="register_form_container">
+						<div class="imgUpload">
+							<div>
+								<span>이미지 업로드</span>
+								<p>최소 1개, 최대 5개까지 업로드 가능</p>
+							</div>
+							<input type="file" id="main-img-file" name="images"
+								accept="image/*" multiple>
+						</div>
+						<!-- 	<input type="hidden" id="foodImgUpload" th:field="*{foodImg}" multiple> -->
+						<div id="imgPreview">
+							<ul
+								th:if="${recipe != null and recipe.images.size() > 0 and recipe.images != null}">
+								<li class="imgStep" th:each="image : ${recipe.images}">
+									<div class="imgStep_num">
+										<span></span>
+									</div>
+									<div class="imgStep_box">
+										<div class="imgStep_img">
+											<img id="imagePreview"
+												th:src="@{/uploads/{fileName}(fileName=${image.fileName})}"
+												th:data-file-name="${image.fileName}" />
+										</div>
 
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">레시피 제목</dt>
-                        <dd class="register_item_infoDesc">
-                            레시피 제목에 사용됩니다.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <div class="inputAndGuide">
-                            <input type="text" id="title" class="form-control" th:field="*{title}" required max="50" placeholder="레시피 제목">
-                            <small id="titleHelp" class="form-text text-muted">
-                				30자 이내로 입력하세요.
-                			</small>
-                			<small class="invalid-feedback">레시피 제목을 입력하세요.</small>
-                			<small class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>                            
-                        </div>                        
-                    </div>
-                </div>
+										<div class="imgStep_change">
+											<button type="button" class="change_btn"
+												th:attr="data-file-name=${image.fileName}">변경</button>
+										</div>
 
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">레시피 소개</dt>
-                        <dd class="register_item_infoDesc">
-                            어떤 음식인지 간단하게 소개해 주세요.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <div class="inputAndGuide">
-                            <input type="text" id="foodIntro" class="form-control" th:field="*{foodIntro}" placeholder="레시피 소개" required>
-                            <small id="introHelp" class="form-text text-muted">
-                				30자 이내로 입력하세요.
-                			</small>
-                			<small class="invalid-feedback">레시피 소개를 입력하세요.</small>
-                			<small class="form-text text-danger" th:if="${#fields.hasErrors('foodIntro')}" th:errors="*{foodIntro}"></small>                            
-                        </div>
-                    </div>
-                </div>
+									</div>
+									<div class="imgStep_btn">
+										<button class="stepBtn">
+											<div class="stepBtn_arrow">↑</div>
+										</button>
+										<button type="button" class="stepBtn imgCancel"
+											th:attr="data-file-name=${image.fileName}">
+											<div class="stepBtn_cancel">X</div>
+										</button>
+										<button class="stepBtn">
+											<div class="stepBtn_arrow">↓</div>
+										</button>
+									</div>
+								</li>
+							</ul>
+							<ul id="previewItems">
 
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">난이도</dt>
-                        <dd class="register_item_infoDesc">
-                            음식 완성 난이도를 선택해 주세요.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <select id="level" class="form-control" th:field="*{level}">
-                        	<option th:value="EASY">쉬움</option>
-                        	<option th:value="NORMAL">보통</option>
-                        	<option th:value="HARD">어려움</option>                                                       
-                        </select>
-                    </div>
-                </div>
+							</ul>
+						</div>
+					</div>
 
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">레시피 재료</dt>
-                        <dd class="register_item_infoDesc">
-                            레시피에 사용되는 재료를 소개해 주세요.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                    	<div class="inputAndGuide">
-                    		<textarea id="ingredients" class="editor" th:field="*{ingredients}" placeholder="재료를 입력해 주세요." required></textarea>                    		
-                			<small class="invalid-feedback">재료를 입력하세요.</small>
-                			<small class="form-text text-danger" th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}"></small>
-                    	</div>
-                    </div>
-                    
-                </div>
-                
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">조리 과정</dt>
-                        <dd class="register_item_infoDesc">
-                            조리 과정을 순서대로 소개해 주세요. 
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <div class="register_form_container">
-                        	<textarea id="steps" class="editor" th:field="*{steps}" placeholder="조리 과정을 입력해 주세요." required></textarea>                            	
-                			<small class="invalid-feedback">조리 과정을 입력하세요.</small>
-                			<small class="form-text text-danger" th:if="${#fields.hasErrors('steps')}" th:errors="*{steps}"></small>                                                    
-                        </div>
-                    </div>
-                </div>                
+				</div>
+			</div>
 
-                <div class="register_item">
-                    <dl class="register_item_info">
-                        <dt class="register_title">동영상</dt>
-                        <dd class="register_item_infoDesc">
-                            동영상으로 소개할 수 있습니다.
-                        </dd>
-                    </dl>
-                    <div class="register_form">
-                        <div class="register_form_container">
-                            <textarea class="videoEditor" placeholder="↑비디오 아이콘을 클릭해 주세요." th:field="*{videoUrl}"></textarea>
-                        </div>
-                    </div>
-                </div>
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">레시피 주소</dt>
+					<dd class="register_item_infoDesc">
+						레시피 주소(URL)에 사용됩니다.<br>예) aloneCook.com/recipe/<b>레시피주소</b>
+					</dd>
+				</dl>
+				<div class="register_form">
+					<div class="inputAndGuide">
+						<input type="text" class="form-control" id="path"
+							th:field="*{path}" aria-describedby="pathHelp" required min="2"
+							max="20" placeholder="레시피 URL" /> <small id="pathHelp"
+							class="form-text text-muted"> 공백없이 문자, 숫자, 대시(-)와 언더바(_)만
+							2자 이상 20자 이내로 입력하세요. </small> <small class="invalid-feedback">레시피
+							주소를 입력하세요.</small> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('path')}" th:errors="*{path}">Path
+							Error</small>
+					</div>
+				</div>
+			</div>
 
-                
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">레시피 제목</dt>
+					<dd class="register_item_infoDesc">레시피 제목에 사용됩니다.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="inputAndGuide">
+						<input type="text" id="title" class="form-control"
+							th:field="*{title}" required max="50" placeholder="레시피 제목">
+						<small id="titleHelp" class="form-text text-muted"> 30자
+							이내로 입력하세요. </small> <small class="invalid-feedback">레시피 제목을
+							입력하세요.</small> <small class="form-text text-danger"
+							th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></small>
+					</div>
+				</div>
+			</div>
 
-                <div class="register_btn">
-                    <button type="submit" class="draft_btn" name="draft" value="true">
-                        <span>임시 저장</span>
-                    </button>
-                    <button type="submit" class="submit_btn" name="draft" value="false">
-                    	<span>레시피 공개</span>
-                    </button>
-                    <button th:if="${mode == 'new'}" class="cancel_btn">
-                        <span>취소</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">레시피 소개</dt>
+					<dd class="register_item_infoDesc">어떤 음식인지 간단하게 소개해 주세요.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="inputAndGuide">
+						<input type="text" id="foodIntro" class="form-control"
+							th:field="*{foodIntro}" placeholder="레시피 소개" required> <small
+							id="introHelp" class="form-text text-muted"> 30자 이내로
+							입력하세요. </small> <small class="invalid-feedback">레시피 소개를 입력하세요.</small> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('foodIntro')}"
+							th:errors="*{foodIntro}"></small>
+					</div>
+				</div>
+			</div>
+
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">난이도</dt>
+					<dd class="register_item_infoDesc">음식 완성 난이도를 선택해 주세요.</dd>
+				</dl>
+				<div class="register_form">
+					<select id="level" class="form-control" th:field="*{level}">
+						<option th:value="EASY">쉬움</option>
+						<option th:value="NORMAL">보통</option>
+						<option th:value="HARD">어려움</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">레시피 재료</dt>
+					<dd class="register_item_infoDesc">레시피에 사용되는 재료를 소개해 주세요.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="inputAndGuide">
+						<textarea id="ingredients" class="editor"
+							th:field="*{ingredients}" placeholder="재료를 입력해 주세요." required></textarea>
+						<small class="invalid-feedback">재료를 입력하세요.</small> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('ingredients')}"
+							th:errors="*{ingredients}"></small>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">조리 과정</dt>
+					<dd class="register_item_infoDesc">조리 과정을 순서대로 소개해 주세요.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="register_form_container">
+						<textarea id="steps" class="editor" th:field="*{steps}"
+							placeholder="조리 과정을 입력해 주세요." required></textarea>
+						<small class="invalid-feedback">조리 과정을 입력하세요.</small> <small
+							class="form-text text-danger"
+							th:if="${#fields.hasErrors('steps')}" th:errors="*{steps}"></small>
+					</div>
+				</div>
+			</div>
+
+			<div class="register_item">
+				<dl class="register_item_info">
+					<dt class="register_title">동영상</dt>
+					<dd class="register_item_infoDesc">동영상으로 소개할 수 있습니다.</dd>
+				</dl>
+				<div class="register_form">
+					<div class="register_form_container">
+						<textarea class="videoEditor" placeholder="↑비디오 아이콘을 클릭해 주세요."
+							th:field="*{videoUrl}"></textarea>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="register_btn">
+				<button type="submit" class="draft_btn" name="draft" value="true">
+					<span>임시 저장</span>
+				</button>
+				<button type="submit" class="submit_btn" name="draft" value="false">
+					<span>레시피 공개</span>
+				</button>
+				<button th:if="${mode == 'new'}" class="cancel_btn">
+					<span>취소</span>
+				</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <script type="application/javascript" th:fragment="img-upload">
+	
+	
 
 $(document).ready(function() {	
     if ($('#imgPreview').is(':empty')) {
@@ -540,25 +568,29 @@ $(document).ready(function() {
 		});
 	});
 
+
+
 </script>
 
 <!-- recipe-write-contentsHeader -->
-<div th:fragment="recipe-write-header (recipeMenu)" class="contents_header">            
+<div th:fragment="recipe-write-header (recipeMenu)"
+	class="contents_header">
 	<div class="page_title">
 		<span>레시피 등록</span>
-    </div>
+	</div>
 	<div class="contents_menu">
 		<div class="contents_menu_inner">
 			<ul class="contents_menu_items">
-				<li class="contents_menu_item" th:classappend="${recipeMenu == 'basic'}? active">
-					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/basic'}">기본정보</a>
+				<li class="contents_menu_item"
+					th:classappend="${recipeMenu == 'basic'}? active"><a
+					th:href="@{'/recipe/' + ${recipe.path} + '/edit/basic'}">기본정보</a></li>
+				<li class="contents_menu_item"
+					th:classappend="${recipeMenu == 'ingredient'}? active"><a
+					th:href="@{'/recipe/' + ${recipe.path} + '/edit/ingredient'}">재료</a>
 				</li>
-				<li class="contents_menu_item" th:classappend="${recipeMenu == 'ingredient'}? active">
-					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/ingredient'}">재료</a>
-				</li>
-				<li class="contents_menu_item" th:classappend="${recipeMenu == 'step'}? active">
-					<a th:href="@{'/recipe/' + ${recipe.path} + '/edit/step'}">조리 과정</a>
-				</li>
+				<li class="contents_menu_item"
+					th:classappend="${recipeMenu == 'step'}? active"><a
+					th:href="@{'/recipe/' + ${recipe.path} + '/edit/step'}">조리 과정</a></li>
 			</ul>
 		</div>
 	</div>
@@ -567,31 +599,34 @@ $(document).ready(function() {
 <!-- ingredient-write-update -->
 <div th:fragment="ingredient-form (mode, action)">
 	<div class="register">
-            <form class="register_items" method="post" th:action="@{${action}}" th:object="${ingredientForm}">                
-                <div class="register_item">
-                    <div class="register_title">
-                        <p>재료</p>
-                    </div>
-                    <div class="ingredients">
-                    	<textarea class="editor" th:field="*{ingredients}"></textarea>
-                    </div>
-                    
-                </div>                
+		<form class="register_items" method="post" th:action="@{${action}}"
+			th:object="${ingredientForm}">
+			<div class="register_item">
+				<div class="register_title">
+					<p>재료</p>
+				</div>
+				<div class="ingredients">
+					<textarea class="editor" th:field="*{ingredients}"></textarea>
+				</div>
+
+			</div>
 
 
-                <div class="register_btn">
-                    <button type="submit" class="submit_btn">
-                        <span>저장</span>
-                    </button>
-                    <button class="cancel_btn">
-                        <span>취소</span>
-                    </button>
-                </div>
-            </form>
-        </div>
+			<div class="register_btn">
+				<button type="submit" class="submit_btn">
+					<span>저장</span>
+				</button>
+				<button class="cancel_btn">
+					<span>취소</span>
+				</button>
+			</div>
+		</form>
+	</div>
 </div>
 <!-- recipe-write-scroll-event -->
 <script type="application/javascript" th:fragment="recipe-write-sc">
+	
+	
 	$(window).scroll(function () {
 		let scroll = $(window).scrollTop();
 		
@@ -607,34 +642,283 @@ $(document).ready(function() {
             $(".register").removeClass("sc_register");
         }
 	});
-</script>                
 
+
+</script>
+
+
+<div th:fragment="recipe-view" class="recipeIntro">
+	<div class="recipeIntro_container">
+		<div class="recipeIntro_inner">
+			<div class="recipeIntro_head">
+				<div class="recipeIntro_head_inner">
+					<p class="category">한식</p>
+					<h1 class="recipe_title" th:text="${recipe.title}">음식 이름</h1>
+					<div class="writer">
+						<a href="#" th:href="@{'/profile/' + ${recipe.writer?.nickname}}"
+							th:text="${recipe.writer?.nickname}"></a>
+					</div>
+				</div>
+			</div>
+			<div class="main_img">
+				<figure class="main_img_cover">
+					<div class="slider_wrap">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide food_img"
+									th:each="image : ${recipe.images}">
+									<img th:src="'/uploads/' + ${image.fileName}">
+								</div>
+							</div>
+							<div class="swiper-pagination"></div>
+						</div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+					</div>
+				</figure>
+			</div>
+			<aside class="recipeIntro_sub">
+				<div class="recipe_descrip">
+					<span th:text="${recipe.foodIntro}">description</span>
+				</div>
+				<div class="recipe_subInfo">
+					<div class="recipe_subInfo_items">
+						<dl class="recipe_subInfo_item">
+							<dt>난이도</dt>
+							<dd th:if="${recipe.level == T(com.aloneCook.recipe.Level).EASY}">쉬움</dd>
+							<dd
+								th:if="${recipe.level == T(com.aloneCook.recipe.Level).NORMAL}">보통</dd>
+							<dd th:if="${recipe.level == T(com.aloneCook.recipe.Level).HARD}">어려움</dd>
+						</dl>
+						<dl class="recipe_subInfo_item">
+							<dt>조회수</dt>
+							<dd th:text="${recipe.viewCount}"></dd>
+						</dl>
+					</div>
+				</div>
+				<div class="recipe_btns">
+					<div class="recipe_btns_inner">
+						<div class="recipe_btn" id="like_btn">
+
+							<button class="likeButton" id="like" type="button"
+								th:if="${!recipe.isLiker(#authentication.principal)}">
+								<div class="likeButton_inner">
+									<div class="icon_like">
+										<i class="fa fa-heart-o" aria-hidden="true"></i>
+									</div>
+									<span th:text="${recipe.likeCount}"></span>
+								</div>
+							</button>
+
+
+
+							<button class="likeButton" id="dislike" type="button"
+								th:if="${recipe.isLiker(#authentication.principal)}">
+								<div class="likeButton_inner">
+									<div class="icon_cancel">
+										<i class="fa fa-heart" aria-hidden="true"></i>
+									</div>
+									<span th:text="${recipe.likeCount}"></span>
+								</div>
+							</button>
+
+
+						</div>
+						<div class="recipe_btn">
+							<button class="share_button recipe_button">
+								<div class="share_btn_detail recipe_btn_detail">
+									<div class="icon_kakao"></div>
+								</div>
+							</button>
+						</div>
+						<div class="recipe_btn">
+							<button class="share_button recipe_button">
+								<div class="share_btn_detail recipe_btn_detail">
+									<div class="icon_facebook"></div>
+								</div>
+							</button>
+						</div>
+						<div class="recipe_btn">
+							<button class="share_button recipe_button">
+								<div class="share_btn_detail recipe_btn_detail">
+									<div class="icon_twiter"></div>
+								</div>
+							</button>
+						</div>
+						<div class="recipe_btn">
+							<button class="share_button recipe_button">
+								<div class="share_btn_detail recipe_btn_detail">
+									<div class="icon_link"></div>
+								</div>
+							</button>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</div>
+	</div>
+</div>
 <!-- recipe-view-contentsMenu -->
 <div th:fragment="recipe-menu (recipeMenu)" class="contents_menu">
-	<a href="#" class="contents_menu_item" th:classappend="${recipeMenu == 'recipe'}? active" th:href="@{'/recipe/' + ${recipe.path}}">레시피</a>                        
-	<a href="#" class="contents_menu_item" th:classappend="${recipeMenu == 'community'}? active" th:href="@{'/recipe/' + ${recipe.path} + '/community'}">커뮤니티 <span th:text="${recipe.comments.size()}"></span> </a>
+	<a href="#" class="contents_menu_item"
+		th:classappend="${recipeMenu == 'recipe'}? active"
+		th:href="@{'/recipe/' + ${recipe.path}}">레시피</a> <a href="#"
+		class="contents_menu_item"
+		th:classappend="${recipeMenu == 'community'}? active"
+		th:href="@{'/recipe/' + ${recipe.path} + '/community'}">커뮤니티 <span
+		th:text="${recipe.comments.size()}"></span>
+	</a>
 </div>
+
+<div th:fragment="recipe-footer" class="content_footer">
+	<div class="recentlyView_recipe">
+		<div class="recentlyView_recipe_container">
+			<div class="recentlyView_title">관심 레시피</div>
+			<div class="recipe_list_slider">
+				<div class="recently">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" th:each="liked : ${likedRecipeList}">
+							<a class="recipeList_item"
+								th:href="@{'/recipe/' + ${liked.recipe.path}}">
+								<div class="recipeList_item_img">
+									<img th:src="${liked.recipe.foodImg}">
+								</div>
+								<div class="recipeList_item_info">
+									<dl>
+										<dd class="recipeList_item_writer">
+											<span th:text="${liked.recipe.writer?.nickname}">김덕배</span>
+										</dd>
+										<dt>
+											<strong th:text="${liked.recipe.title}">오뎅탕</strong>
+										</dt>
+									</dl>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="recentlyView_recipe">
+		<div class="recentlyView_recipe_container">
+			<div class="recentlyView_title">최근 본 레시피</div>
+			<div class="recipe_list_slider">
+				<div class="recently">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" th:each="history : ${userHistoryList}">
+							<a class="recipeList_item"
+								th:href="@{'/recipe/' + ${history.recipe.path}}">
+								<div class="recipeList_item_img">
+									<img
+										th:src="'/uploads/' + ${history.recipe.images[0].fileName}">
+								</div>
+								<div class="recipeList_item_info">
+									<dl>
+										<dd class="recipeList_item_writer">
+											<span th:text="${history.recipe.writer?.nickname}">김덕배</span>
+										</dd>
+										<dt>
+											<strong th:text="${history.recipe.title}">오뎅탕</strong>
+										</dt>
+									</dl>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="application/javascript" th:fragment="recipe-swiper">
+	
+	const swiper = new Swiper('.swiper-container', {
+	      // Optional parameters
+	      
+	      loop: false,	      
+	      slidesPerView: 1,	      
+	    
+	      // If we need pagination
+	      pagination: {
+	        el: '.swiper-pagination',
+	        clickable: false,
+	      },
+	    
+	      // Navigation arrows
+	      navigation: {
+	        nextEl: '.swiper-button-next',
+	        prevEl: '.swiper-button-prev',
+	      },
+	    
+	      // And if we need scrollbar
+	      scrollbar: {
+	        el: '.swiper-scrollbar',
+	      },	      	      
+	      
+	      observer: true,
+	      observeParents: true,
+	    });
+ 
+ 		const recently = new Swiper('.recently', {
+  	      // Optional parameters
+  	      
+  	      loop: false,
+  	      spaceBetween: 30,
+  	      slidesPerView: 3,
+  	      slidesPerGroup: 3,
+  	    
+  	      // If we need pagination
+  	      pagination: {
+  	        el: '.swiper-recently-pagination',
+  	      },
+  	    
+  	      // Navigation arrows
+  	      navigation: {
+  	        nextEl: '.swiper-recently-button-next',
+  	        prevEl: '.swiper-recently-button-prev',
+  	      },
+  	       	      
+  	      
+  	      breakpoints: {
+  	    	768: {
+  	    		slidesPerView: 4,
+  	    		slidesPerGroup: 4,
+  	    	},
+  	    	1080: {
+  	            slidesPerView: 5,
+  	            slidesPerGroup: 4,
+  	        }
+  	      },
+  	      
+  	      observer: true,
+  	      observeParents: true,
+  	    });
+
+</script>
 
 <!-- my-recipe menu -->
 <div th:fragment="myRecipe-menu (currentMenu)" class="contentsHeader">
-            <div class="pageTitle">
-                <span>나의 레시피</span>
-            </div>
-            <div class="contentMenu">
-                <div class="contents_menu_inner">
-                    <ul class="contents_menu_items">
-                        <li class="contents_menu_item">
-                            <a th:href="@{/my-recipe/draft}" th:classappend="${currentMenu == 'draft'}? active">작성중</a>
-                        </li>
-                        <li class="contents_menu_item">
-                            <a th:href="@{/my-recipe}" th:classappend="${currentMenu == 'published'}? active">공개중</a>
-                        </li>                        
-                    </ul>
-                </div>
-            </div>
+	<div class="pageTitle">
+		<span>나의 레시피</span>
+	</div>
+	<div class="contentMenu">
+		<div class="contents_menu_inner">
+			<ul class="contents_menu_items">
+				<li class="contents_menu_item"><a th:href="@{/my-recipe/draft}"
+					th:classappend="${currentMenu == 'draft'}? active">작성중</a></li>
+				<li class="contents_menu_item"><a th:href="@{/my-recipe}"
+					th:classappend="${currentMenu == 'published'}? active">공개중</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
 
 <script type="application/javascript" th:fragment="form-validation">
+	
+	
 //Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
@@ -656,12 +940,16 @@ $(document).ready(function() {
       }, false)
     })
 })()
+
+
 </script>
 
 <div th:fragment="editor-script">
-    <script src="/node_modules/summernote/dist/summernote-lite.js"></script>
-    <script src="/node_modules/summernote/dist/lang/summernote-ko-KR.js"></script>
-    <script type="application/javascript">
+	<script src="/node_modules/summernote/dist/summernote-lite.js"></script>
+	<script src="/node_modules/summernote/dist/lang/summernote-ko-KR.js"></script>
+	<script type="application/javascript">
+		
+		
         $(function () {
             $('.editor').summernote({
             	inheritPlaceholder: true,
@@ -709,27 +997,36 @@ $(document).ready(function() {
             	]
             });
         });
-    </script>
+    
+	
+	</script>
 </div>
 
 
 <div th:fragment="date-time">
-    <script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
-    <script type="application/javascript">
-        $(function () {
-            moment.locale('ko');
-            $(".date-time").text(function(index, dateTime) {
-                return moment(dateTime).fromNow();
-            });
-            $(".create-day").text(function(index, dateTime) {
-            	return moment(dateTime).format("YYYY.MM.DD");
-            });
-                        
-        })
-    </script>
+	<script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
+	<script type="application/javascript">
+		
+		
+	$(function () {
+        moment.locale('ko');
+        $(".date-time").text(function(index, dateTime) {
+            return moment(dateTime).fromNow();
+        });
+        $(".create-day").text(function(index, dateTime) {
+        	return moment(dateTime).format("YYYY.MM.DD");
+        });
+                    
+    })
+    
+	
+	</script>
 </div>
 
-<script type="application/javascript" th:inline="javascript" th:fragment="ajax-csrf-header">
+<script type="application/javascript" th:inline="javascript"
+	th:fragment="ajax-csrf-header">
+	
+	
     $(function() {
         var csrfToken = /*[[${_csrf.token}]]*/ null;
         var csrfHeader = /*[[${_csrf.headerName}]]*/ null;
@@ -737,6 +1034,8 @@ $(document).ready(function() {
             xhr.setRequestHeader(csrfHeader, csrfToken);
         });
     });
+
+
 </script>
 
 </html>
