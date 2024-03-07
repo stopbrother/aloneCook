@@ -18,12 +18,21 @@ public class UserHistoryService {
 	private final UserHistoryRepository userHistoryRepository; 
 	
 	public void saveUserHistory(Account account, Recipe recipe) {
+		UserHistory existingHistory = userHistoryRepository.findByAccountAndRecipe(account, recipe);
+		if (existingHistory != null) {
+			removeUserHistory(account, recipe);
+		}
 		UserHistory userHistory = new UserHistory();
 		userHistory.setAccount(account);
 		userHistory.setRecipe(recipe);
 		userHistory.setTimeStamp(LocalDateTime.now());
 		
 		userHistoryRepository.save(userHistory);
+	}
+
+	public void removeUserHistory(Account account, Recipe recipe) {
+		UserHistory userHistory = userHistoryRepository.findByAccountAndRecipe(account, recipe);
+		userHistoryRepository.delete(userHistory);
 	}
 	
 }

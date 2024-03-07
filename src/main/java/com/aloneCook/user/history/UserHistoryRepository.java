@@ -10,9 +10,9 @@ import com.aloneCook.user.Account;
 
 @Transactional(readOnly = true)
 public interface UserHistoryRepository extends JpaRepository<UserHistory, Long> {
-
+		
 	List<UserHistory> findByAccountOrderByTimeStampDesc(Account account);
 
-	void deleteByRecipe(Recipe recipe);
+	UserHistory findByAccountAndRecipe(Account account, Recipe recipe);	
 	
 }

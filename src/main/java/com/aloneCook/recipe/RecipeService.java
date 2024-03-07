@@ -193,9 +193,7 @@ public class RecipeService {
 
 	
 	public void remove(Recipe recipe) {		
-		recipeRepository.delete(recipe);
-		
-		//userHistoryRepository.deleteByRecipe(recipe);
+		recipeRepository.delete(recipe);				
 	}
 
 
