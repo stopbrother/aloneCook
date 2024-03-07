@@ -19,6 +19,8 @@ public interface LikeRepository extends JpaRepository<Likes, Long> {
 	Likes findByRecipeAndAccount(Recipe recipe, Account account);
 	
 	List<Likes> findByAccountAndLiked(Account account, boolean liked);
+
+	List<Likes> findFirst10ByAccountAndLiked(Account account, boolean liked);
 	
 	
 

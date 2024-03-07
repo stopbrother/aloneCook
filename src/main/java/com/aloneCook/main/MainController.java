@@ -35,7 +35,7 @@ public class MainController {
 		}
 		model.addAttribute("newRecipeList", recipeRepository.findFirst10ByDraftedOrderByPublishedDateTimeDesc(false));
 		model.addAttribute("favoriteList", recipeRepository.findFirst10ByDraftedOrderByLikeCountDesc(false));
-		model.addAttribute("likeRecipeList", likeRepository.findByAccountAndLiked(account, true));
+		model.addAttribute("likeRecipeList", likeRepository.findFirst10ByAccountAndLiked(account, true));
 		model.addAttribute("userHistoryList", userHistoryRepository.findByAccountOrderByTimeStampDesc(account));
 		return "index";
 	}

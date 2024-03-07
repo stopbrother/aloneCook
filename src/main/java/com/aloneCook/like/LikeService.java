@@ -23,7 +23,7 @@ public class LikeService {
 			//likes.setLikedTime(LocalDateTime.now());			
 			likes.setAccount(account);
 			likes.setLiked(true);
-			recipe.addLike(likes);
+			recipe.addLike(likes);			
 			likeRepository.save(likes);
 		}
 	}
