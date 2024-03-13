@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -56,6 +57,7 @@ public class RecipeService {
 	public Recipe createNewRecipe(Recipe recipe, Account account, List<MultipartFile> imageFiles) {
 		recipe.setWriter(account);
 		recipe.addManager(account);
+		recipe.setDrafted(false);
 		recipe.setPublishedDateTime(LocalDateTime.now());
 		
 		List<Image> images = imageService.saveImages(imageFiles, recipe);
@@ -228,49 +230,7 @@ public class RecipeService {
 	public void addComment(Recipe recipe, Community community) {
 		recipe.getComments().add(community);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
-
-	
-
-
-
-	
+		
 
 	
 }

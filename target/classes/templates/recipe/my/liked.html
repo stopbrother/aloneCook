@@ -41,7 +41,8 @@
 													<span th:text="${like.recipe.writer?.nickname}">김덕배</span>
 												</dd>
 												<dd class="card_sub_info">
-													<span>좋아요</span> <span>조회수</span>
+													<span th:text="${like.recipe.likeCount != null ? '좋아요 ' + like.recipe.likeCount : '좋아요 0'}">좋아요</span>
+													<span th:text="${like.recipe.viewCount != null ? '조회수 ' + like.recipe.viewCount : '조회수 0'}">조회수</span>
 												</dd>
 											</dl>
 										</div>

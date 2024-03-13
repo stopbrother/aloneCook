@@ -706,7 +706,7 @@ $(document).ready(function() {
 									<div class="icon_like">
 										<i class="fa fa-heart-o" aria-hidden="true"></i>
 									</div>
-									<span th:text="${recipe.likeCount}"></span>
+									<span th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
 								</div>
 							</button>
 
@@ -718,7 +718,7 @@ $(document).ready(function() {
 									<div class="icon_cancel">
 										<i class="fa fa-heart" aria-hidden="true"></i>
 									</div>
-									<span th:text="${recipe.likeCount}"></span>
+									<span th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
 								</div>
 							</button>
 

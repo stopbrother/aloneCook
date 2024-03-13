@@ -147,6 +147,6 @@ public class RecipeController {
 		attributes.addFlashAttribute("message", "삭제 되었습니다.");
 		return "redirect:/my-recipe";
 	}
-	
+
 
 }

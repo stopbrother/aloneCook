@@ -86,9 +86,9 @@ public class Recipe {
 	
 	private boolean drafted;
 	
-	private Long viewCount;
+	private Long viewCount = 0L; //초기값을 0으로 설정
 	
-	private Long likeCount = 0L; //초기값을 0으로 설정
+	private Long likeCount = 0L;
 	
 	private Long commentCount = 0L;
 	
@@ -112,12 +112,21 @@ public class Recipe {
 	
 	
 	
-	public void addLike(Likes likes) {		
+	public void likeAdd(Likes likes) {		
 		this.likes.add(likes);
-		this.likeCount++;
+		this.likeCountAdd();
 		likes.setRecipe(this);
 	}
 	
+	private void likeCountAdd() {
+		if (this.likeCount == null) {
+			this.likeCount = 0L;
+		}
+		this.likeCount++;
+	}
+
+
+
 	public void removeLike(Likes like) {
 		this.likes.remove(like);
 		this.likeCount--;
@@ -164,12 +173,12 @@ public class Recipe {
 	public boolean isManage(Account account) {
 		return this.getManager().contains(account);
 	}
-
+/*
 	public void publish() {
 		this.published = true;
 		this.createdDateTime = LocalDateTime.now();
 	}
-
+*/
 
 
 	public void addComment(Community community) {
