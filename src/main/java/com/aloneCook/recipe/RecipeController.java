@@ -148,5 +148,10 @@ public class RecipeController {
 		return "redirect:/my-recipe";
 	}
 
+	@GetMapping("/recipe/data")
+	public String testData(@CurrentUser Account account) {
+		recipeService.testRecipes(account);
+		return "redirect:/";		
+	}
 
 }

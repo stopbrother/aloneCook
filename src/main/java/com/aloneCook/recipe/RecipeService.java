@@ -230,6 +230,44 @@ public class RecipeService {
 	public void addComment(Recipe recipe, Community community) {
 		recipe.getComments().add(community);
 	}
+	
+	public void testRecipes(Account account) {
+		for (int i = 0; i < 30; i++) {
+			String randomvalue = RandomString.make(5);
+			Recipe recipe = Recipe.builder()
+					.title("테스트 레시피 " + randomvalue)
+					.path(randomvalue)
+					.foodIntro("테스트")
+					.ingredients("test")
+					.steps("teststep")
+					.manager(new HashSet<>())
+					.images(new ArrayList<>())
+					.likeCount(0L)
+					.commentCount(0L)
+					.level(Level.EASY)
+					.videoUrl("")
+					.viewCount(0L)
+					.build();
+			
+			//실제 이미지파일 이름
+			String imageName = "02a93a52-b689-453a-bc03-6b83d237b4f7-StopBrother.png";
+			
+			//이미지 파일 생성 및 이미지 객체 생성
+			Image image = new Image();
+			image.setFileName(imageName);
+			image.setRecipe(recipe);
+			
+			recipe.getImages().add(image); //레시피에 이미지 추가
+			this.createTestRecipe(recipe, account); //레시피 저장 및 추가작업 수행
+		}
+	}
+	private Recipe createTestRecipe(Recipe recipe, Account account) {
+		recipe.setWriter(account);
+		recipe.addManager(account);
+		recipe.setDrafted(false);
+		recipe.setPublishedDateTime(LocalDateTime.now());
+		return recipeRepository.save(recipe);
+	}
 		
 
 	
