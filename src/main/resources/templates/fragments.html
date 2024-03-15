@@ -781,7 +781,7 @@ $(document).ready(function() {
 							<a class="recipeList_item"
 								th:href="@{'/recipe/' + ${liked.recipe.path}}">
 								<div class="recipeList_item_img">
-									<img th:src="${liked.recipe.foodImg}">
+									<img th:src="'/uploads/' + ${liked.recipe.images[0].fileName}">
 								</div>
 								<div class="recipeList_item_info">
 									<dl>
@@ -796,6 +796,8 @@ $(document).ready(function() {
 							</a>
 						</div>
 					</div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
 				</div>
 			</div>
 		</div>
@@ -827,6 +829,8 @@ $(document).ready(function() {
 							</a>
 						</div>
 					</div>
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
 				</div>
 			</div>
 		</div>
@@ -872,13 +876,13 @@ $(document).ready(function() {
   	    
   	      // If we need pagination
   	      pagination: {
-  	        el: '.swiper-recently-pagination',
+  	        el: '.swiper-pagination',
   	      },
   	    
   	      // Navigation arrows
   	      navigation: {
-  	        nextEl: '.swiper-recently-button-next',
-  	        prevEl: '.swiper-recently-button-prev',
+  	        nextEl: '.swiper-button-next',
+  	        prevEl: '.swiper-button-prev',
   	      },
   	       	      
   	      

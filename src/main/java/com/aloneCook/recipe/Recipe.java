@@ -45,7 +45,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @EqualsAndHashCode(of = "id")
-@Builder @NoArgsConstructor @AllArgsConstructor
+
 public class Recipe {
 
 	@Id @GeneratedValue
