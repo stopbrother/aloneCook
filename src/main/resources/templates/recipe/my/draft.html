@@ -24,8 +24,8 @@
 								<div class="MyRecipe_item_container">
 									<div class="MyRecipe_item_inner">
 										<a class="MyRecipe_item_img_wrap"
-											th:href="@{'/recipe/' + ${recipe.path}}"> <img
-											class="MyRecipe_item_img" th:src="${recipe.foodImg}" />
+											th:href="@{'/recipe/' + ${recipe.path}}">
+											<img class="MyRecipe_item_img" th:src="'/uploads/' + ${recipe.images[0].fileName}" />
 										</a>
 										<div class="MyRecipe_item_content">
 											<div class="MyRecipe_item_content_container">

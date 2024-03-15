@@ -74,39 +74,7 @@
 
 	<script th:replace="fragments.html :: ajax-csrf-header"></script>
 	<script th:replace="fragments.html :: recipe-swiper"></script>
-	<script type="application/javascript">
-		        
-    $(function () {
-    	var recipePath = "[(${recipe.path})]";
-    	
-		$(document).on("click", "#like", function(){
-			$.ajax({
-                method: "POST",
-                url: "/recipe/" + recipePath + "/like"                
-    		}).done(function () {
-    			console.log("좋아요");
-    			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
-    		}).fail(function (textStatus) {
-    			console.log(textStatus);
-    		});
-		});    	    	
-
-    	$(document).on("click", "#dislike", function(){
-    		$.ajax({
-    			method: "DELETE",
-    			url: "/recipe/" + recipePath + "/dislike"
-    		}).done(function () {
-    			console.log("좋아요 취소");
-    			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
-    		})
-    	});
-    	
-    	
-    	
-    });
-           
-    
-	</script>
+	<script th:replace="fragments.html :: recipe-like"></script>
 	<script>
 		$(function() {
 			var navfixed = $(".contents_nav").offset().top;

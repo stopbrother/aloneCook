@@ -101,6 +101,7 @@
 	<script type="application/javascript">
 		
 		
+		
 	$(function () {
         var fixed = $("header").offset().top; 
         $(window).scroll(function () {
@@ -114,6 +115,7 @@
             });
     })	
 
+	
 	
 	</script>
 </nav>
@@ -206,6 +208,7 @@
 <script type="application/javascript" th:fragment="follow">
 	
 	
+	
 $(document).ready(function () {
 	$(".follow_btn, .disfollow_btn").click(function() {
 		var nickname = $(this).data("name");
@@ -227,6 +230,7 @@ $(document).ready(function () {
 	});
 	
 });
+
 
 
 </script>
@@ -254,10 +258,12 @@ $(document).ready(function () {
 	type="application/javascript">
 	
 	
+	
 	$(document).ready(function() {
 		var msg = "[(${message})]";
 		alert(msg);
 	});	
+
 
 
 </script>
@@ -474,6 +480,7 @@ $(document).ready(function () {
 <script type="application/javascript" th:fragment="img-upload">
 	
 	
+	
 
 $(document).ready(function() {	
     if ($('#imgPreview').is(':empty')) {
@@ -570,6 +577,7 @@ $(document).ready(function() {
 
 
 
+
 </script>
 
 <!-- recipe-write-contentsHeader -->
@@ -627,6 +635,7 @@ $(document).ready(function() {
 <script type="application/javascript" th:fragment="recipe-write-sc">
 	
 	
+	
 	$(window).scroll(function () {
 		let scroll = $(window).scrollTop();
 		
@@ -642,6 +651,7 @@ $(document).ready(function() {
             $(".register").removeClass("sc_register");
         }
 	});
+
 
 
 </script>
@@ -706,7 +716,8 @@ $(document).ready(function() {
 									<div class="icon_like">
 										<i class="fa fa-heart-o" aria-hidden="true"></i>
 									</div>
-									<span th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
+									<span
+										th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
 								</div>
 							</button>
 
@@ -718,7 +729,8 @@ $(document).ready(function() {
 									<div class="icon_cancel">
 										<i class="fa fa-heart" aria-hidden="true"></i>
 									</div>
-									<span th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
+									<span
+										th:text="${recipe.likeCount != null ? recipe.likeCount : '0'}"></span>
 								</div>
 							</button>
 
@@ -837,7 +849,40 @@ $(document).ready(function() {
 	</div>
 </div>
 
+<!-- recipe-like-ajax -->
+<script type="application/javascript" th:fragment="recipe-like">
+	
+$(function () {
+	var recipePath = "[(${recipe.path})]";
+	
+	$(document).on("click", "#like", function(){
+		$.ajax({
+            method: "POST",
+            url: "/recipe/" + recipePath + "/like"                
+		}).done(function () {
+			console.log("좋아요");
+			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
+		}).fail(function (textStatus) {
+			console.log(textStatus);
+		});
+	});    	    	
+
+	$(document).on("click", "#dislike", function(){
+		$.ajax({
+			method: "DELETE",
+			url: "/recipe/" + recipePath + "/dislike"
+		}).done(function () {
+			console.log("좋아요 취소");
+			$("#like_btn").load("/recipe/" + recipePath + " #like_btn");
+		})
+	});
+});
+
+</script>
+
+<!-- recipe-view-swiper  -->
 <script type="application/javascript" th:fragment="recipe-swiper">
+	
 	
 	const swiper = new Swiper('.swiper-container', {
 	      // Optional parameters
@@ -901,6 +946,7 @@ $(document).ready(function() {
   	      observeParents: true,
   	    });
 
+
 </script>
 
 <!-- my-recipe menu -->
@@ -920,7 +966,9 @@ $(document).ready(function() {
 	</div>
 </div>
 
+
 <script type="application/javascript" th:fragment="form-validation">
+	
 	
 	
 //Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -946,12 +994,14 @@ $(document).ready(function() {
 })()
 
 
+
 </script>
 
 <div th:fragment="editor-script">
 	<script src="/node_modules/summernote/dist/summernote-lite.js"></script>
 	<script src="/node_modules/summernote/dist/lang/summernote-ko-KR.js"></script>
 	<script type="application/javascript">
+		
 		
 		
         $(function () {
@@ -1003,6 +1053,7 @@ $(document).ready(function() {
         });
     
 	
+	
 	</script>
 </div>
 
@@ -1010,6 +1061,7 @@ $(document).ready(function() {
 <div th:fragment="date-time">
 	<script src="/node_modules/moment/min/moment-with-locales.min.js"></script>
 	<script type="application/javascript">
+		
 		
 		
 	$(function () {
@@ -1024,11 +1076,13 @@ $(document).ready(function() {
     })
     
 	
+	
 	</script>
 </div>
 
 <script type="application/javascript" th:inline="javascript"
 	th:fragment="ajax-csrf-header">
+	
 	
 	
     $(function() {
@@ -1038,6 +1092,7 @@ $(document).ready(function() {
             xhr.setRequestHeader(csrfHeader, csrfToken);
         });
     });
+
 
 
 </script>

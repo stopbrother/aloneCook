@@ -88,56 +88,51 @@
  <script th:replace="fragments.html :: date-time"></script>
 <script th:replace="fragments.html :: ajax-csrf-header"></script>
 <script th:replace="fragments.html :: recipe-swiper"></script>
+<script th:replace="fragments.html :: recipe-like"></script>
 
-
-<script type="application/javascript" th:inline="javascript">
-    $(function() {
-    	
-    	$("#commentSave").click(function() {
-    		const comment = $("#comment").val();
-    		var recipePath = "[(${recipe.path})]";
-    		
-    		$.ajax({
-    			
-    			contentType: "application/json; charset=utf-8",
-                method: "POST",
-                url: "/recipe/" + recipePath + "/community/comment/add",
-                data: JSON.stringify({'comment': comment})
-    		}).done(function () {
-    			console.log("등록 완료");
-    			location.reload();
-    		//	$(".contents").load("/recipe/" + recipePath + "/community .contents");
-    		}).fail(function (textStatus) {
-    			
-    			console.log(textStatus);
-    		});
-    		
-    	});
-    	 
-    	
-    	  
-    	$(".comment_delete").click(function() {
-    		const eventCheck = confirm("해당 댓글을 삭제하시겠습니까?");
-    		var recipePath = "[(${recipe.path})]";
-    		var id = $("#communityId").data('num');
-    		
-    		if (eventCheck == true) {
-    			$.ajax({
-    				contentType: "application/json; charset=utf-8",
-    				method: "DELETE",
-    				url: "/recipe/" + recipePath + "/community/comment/" + id    				
-    			}).done(function () {
-    				console.log("댓글 삭제완료");
-    				location.reload();
-    			});
-    		}
-    	}); 
-    	
-    	function loadJSONdata() {
-    		
-    	}
- 
-    });
+<script type="application/javascript">
+$(function() {
+	
+	$("#commentSave").click(function() {
+		const comment = $("#comment").val();
+		var recipePath = "[(${recipe.path})]";
+		
+		$.ajax({
+			
+			contentType: "application/json; charset=utf-8",
+            method: "POST",
+            url: "/recipe/" + recipePath + "/community/comment/add",
+            data: JSON.stringify({'comment': comment})
+		}).done(function () {
+			console.log("등록 완료");
+			location.reload();
+		//	$(".contents").load("/recipe/" + recipePath + "/community .contents");
+		}).fail(function (textStatus) {
+			
+			console.log(textStatus);
+		});
+		
+	});
+	 
+	
+	  
+	$(".comment_delete").click(function() {
+		const eventCheck = confirm("해당 댓글을 삭제하시겠습니까?");
+		var recipePath = "[(${recipe.path})]";
+		var id = $("#communityId").data('num');
+		
+		if (eventCheck == true) {
+			$.ajax({
+				contentType: "application/json; charset=utf-8",
+				method: "DELETE",
+				url: "/recipe/" + recipePath + "/community/comment/" + id    				
+			}).done(function () {
+				console.log("댓글 삭제완료");
+				location.reload();
+			});
+		}
+	});
+});
 </script>
 
 <script>
@@ -161,7 +156,8 @@
                     $(".subMenu_items").removeClass("sc_subMenu_items");
                 }
             });
-    })
+    });
 </script>
+
 </body>
 </html>
