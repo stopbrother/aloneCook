@@ -42,8 +42,8 @@
 										<button type="button" class="profile_img_btn"
 											id="current-profile-img">
 											<img th:if="${!#strings.isEmpty(account?.profileImg)}"
-												src="#" th:src="${account.profileImg}" id="profileimg" /> <img
-												th:if="${#strings.isEmpty(account?.profileImg)}"
+												src="#" th:src="${account.profileImg}" id="profileimg" />
+											<img th:if="${#strings.isEmpty(account?.profileImg)}"
 												src="/images/profile.svg" id="profileimg" width="100%"
 												height="100%" />
 										</button>

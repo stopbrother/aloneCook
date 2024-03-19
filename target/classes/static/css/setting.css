@@ -118,6 +118,9 @@
     justify-content: flex-start;
     display: flex;
 }
+.settings_item .no-button {
+	align-items: center;
+}
 .profile_img_box {
     display: flex;
     height: 64px;
@@ -187,7 +190,12 @@
 }
 .settings_item_input {
     width: auto;
-
+}
+.passwordInput {
+	margin-top: 9px;
+}
+.interval {
+	margin-top: 30px;
 }
 .settings_item_input input {
 
@@ -254,8 +262,10 @@
     	min-height: 460px;    	    	    	
     }
     .content {
-    	width: 540px;
-    	
+    	width: 540px;    	
+    }
+    .passwordInput {
+    	width: 320px;
     }
 }
 
