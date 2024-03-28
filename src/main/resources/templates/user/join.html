@@ -19,7 +19,7 @@
 						<div class="form_content">
 							<div class="input_title">닉네임</div>							
 							<input type="text" class="form-control" placeholder="닉네임" th:field="*{nickname}"
-							required minlength="3" maxlength="20">							
+							required min="3" maxlength="20">							
 							<small id="nicknameHelp" class="form-text">닉네임은 2자 이상, 20자 이내로 입력해주세요.</small>
 							<small class="invalid-feedback">닉네임을 입력하세요.</small>
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">error</small>
@@ -34,10 +34,18 @@
 						<div class="form_content">
 							<div class="input_title">비밀번호</div>							
 							<input type="password" class="form-control" placeholder="비밀번호" th:field="*{password}"
-							aria-describedby="passwordHelp" required minlength="8" maxlength="50">							
+							aria-describedby="passwordHelp" required min="8" maxlength="50">							
 							<small id="passwordHelp" class="form-text">비밀번호는 8자 이상, 50자 이내로 입력하세요.</small>
 							<small class="invalid-feedback">비밀번호를 입력하세요.</small>
 							<small class="form-text text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">error</small>
+						</div>
+						<div class="form_content">
+							<div class="input_title">비밀번호 확인</div>							
+							<input type="password" class="form-control" placeholder="비밀번호 확인" th:field="*{passwordCheck}"
+							aria-describedby="passwordCheckHelp" required min="8" maxlength="50">							
+							<small id="passwordCheckHelp" class="form-text">비밀번호는 8자 이상, 50자 이내로 입력하세요.</small>
+							<small class="invalid-feedback">비밀번호를 입력하세요.</small>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">error</small>
 						</div>
 
 						<button type="submit" class="join_btn"

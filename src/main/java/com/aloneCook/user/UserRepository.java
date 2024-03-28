@@ -20,6 +20,8 @@ public interface UserRepository extends JpaRepository<Account, Long> {
 
 	Account findAccountWithFollowingsBynickname(String nickname);
 
+
+
 	
 
 	

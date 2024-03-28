@@ -35,6 +35,7 @@ public class SettingsController {
 	private final UserService userService;
 	private final NicknameValid nicknameValid;
 	private final ModelMapper modelMapper;
+	private final PasswordFormValid passwordFormValid;
 	
 	@GetMapping(PROFILE)
 	public String settingsForm(@CurrentUser Account account, Model model) {
@@ -42,7 +43,7 @@ public class SettingsController {
 		model.addAttribute(modelMapper.map(account, Profile.class));
 		return SETTINGS + PROFILE;
 	}
-	@PostMapping(ROOT + SETTINGS + PROFILE)
+	@PostMapping(PROFILE)
 	public String updateProfile(@CurrentUser Account account, @Valid Profile profile,
 								Errors errors, Model model, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
@@ -68,21 +69,29 @@ public class SettingsController {
 		model.addAttribute(new PasswordForm());
 		return SETTINGS + PASSWORD;
 	}
-	@PostMapping(ROOT + SETTINGS + PASSWORD)
-	public String updatePassword(@CurrentUser Account account, @Valid PasswordForm passwordForm,Errors errors,
+	@PostMapping(PASSWORD)
+	public String updatePassword(@CurrentUser Account account, @Valid PasswordForm passwordForm, Errors errors,
 								Model model, RedirectAttributes attributes) {
 		
 		if (errors.hasErrors()) {
 			model.addAttribute(account);
 			return SETTINGS + PASSWORD;
 		}
+		
+		String currentPassword = passwordForm.getCurrentPassword();
+		if (!userService.isCurrentPasswordValid(account, currentPassword)) {
+			model.addAttribute(account);
+			errors.rejectValue("currentPassword", "wrong.value", "현재 비밀번호가 일치하지 않습니다.");
+			return SETTINGS + PASSWORD;
+		}
+	
 		userService.updatePassword(account, passwordForm.getNewPassword());
 		attributes.addFlashAttribute("message", "패스워드를 변경했습니다.");
 		return "redirect:/" + SETTINGS + PASSWORD;  
 	}
 	
 	@InitBinder("passwordForm")
-	public void initBiner(WebDataBinder webDataBinder) {
+	public void passwordForminitBiner(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(new PasswordFormValid());
 	}
 	

@@ -1,11 +1,13 @@
 package com.aloneCook.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -91,6 +93,14 @@ public class UserService implements UserDetailsService {
 		}
 		return account;
 	}
+
+	public boolean isCurrentPasswordValid(Account account, String currentPassword) {
+		Account user = userRepository.findByEmail(account.getEmail());
+	
+		return passwordEncoder.matches(currentPassword, user.getPassword());
+	}
+
+
 	
 
 	
