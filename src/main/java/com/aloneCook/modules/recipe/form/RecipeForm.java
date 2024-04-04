@@ -1,4 +1,4 @@
-package com.aloneCook.recipe.form;
+package com.aloneCook.modules.recipe.form;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,8 +14,7 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aloneCook.recipe.Level;
-
+import com.aloneCook.modules.recipe.Level;
 
 import lombok.Data;
 

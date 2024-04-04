@@ -1,4 +1,4 @@
-package com.aloneCook.user.history;
+package com.aloneCook.modules.account.history;
 
 import java.time.LocalDateTime;
 
@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

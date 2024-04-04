@@ -1,4 +1,4 @@
-package com.aloneCook.community;
+package com.aloneCook.modules.community;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.bbs.Bbs;
-import com.aloneCook.recipe.Recipe;
+import com.aloneCook.modules.bbs.Bbs;
+import com.aloneCook.modules.recipe.Recipe;
 
 @Transactional(readOnly = true)
 public interface CommunityRepository extends JpaRepository<Community, Long> {

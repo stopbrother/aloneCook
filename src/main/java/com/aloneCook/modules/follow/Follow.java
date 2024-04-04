@@ -1,4 +1,4 @@
-package com.aloneCook.follow;
+package com.aloneCook.modules.follow;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.aloneCook.user.Account;
-import com.aloneCook.user.UserAccount;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserAccount;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

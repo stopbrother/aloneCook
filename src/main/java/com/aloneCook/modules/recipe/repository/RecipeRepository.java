@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe.repository;
 
 import java.util.List;
 
@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.EntityGraph.EntityGraphType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 @Transactional(readOnly = true)
 public interface RecipeRepository extends JpaRepository<Recipe, Long>, RecipeRepositoryExtension {

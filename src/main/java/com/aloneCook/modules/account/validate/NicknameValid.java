@@ -1,12 +1,12 @@
-package com.aloneCook.user.validate;
+package com.aloneCook.modules.account.validate;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.aloneCook.user.Account;
-import com.aloneCook.user.UserRepository;
-import com.aloneCook.user.form.Profile;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserRepository;
+import com.aloneCook.modules.account.form.Profile;
 
 import lombok.RequiredArgsConstructor;
 

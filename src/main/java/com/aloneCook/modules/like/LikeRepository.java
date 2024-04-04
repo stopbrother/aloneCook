@@ -1,4 +1,4 @@
-package com.aloneCook.like;
+package com.aloneCook.modules.like;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 
 

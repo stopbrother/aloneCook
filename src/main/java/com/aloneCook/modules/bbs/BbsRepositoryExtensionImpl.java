@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 import javax.persistence.EnumType;
 

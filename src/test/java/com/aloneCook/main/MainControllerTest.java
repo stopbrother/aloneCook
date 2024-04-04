@@ -16,9 +16,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.aloneCook.user.UserRepository;
-import com.aloneCook.user.UserService;
-import com.aloneCook.user.form.JoinForm;
+import com.aloneCook.modules.account.UserRepository;
+import com.aloneCook.modules.account.UserService;
+import com.aloneCook.modules.account.form.JoinForm;
 
 @SpringBootTest
 @AutoConfigureMockMvc

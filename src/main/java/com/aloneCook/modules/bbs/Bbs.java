@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.aloneCook.user.UserAccount;
-import com.aloneCook.community.Community;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserAccount;
+import com.aloneCook.modules.community.Community;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

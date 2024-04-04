@@ -1,4 +1,4 @@
-package com.aloneCook.config;
+package com.aloneCook.infra.config;
 
 import java.time.LocalDateTime;
 

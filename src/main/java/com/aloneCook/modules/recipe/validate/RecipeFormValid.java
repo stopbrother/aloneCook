@@ -1,11 +1,11 @@
-package com.aloneCook.recipe.validate;
+package com.aloneCook.modules.recipe.validate;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import com.aloneCook.recipe.RecipeRepository;
-import com.aloneCook.recipe.form.RecipeForm;
+import com.aloneCook.modules.recipe.form.RecipeForm;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 

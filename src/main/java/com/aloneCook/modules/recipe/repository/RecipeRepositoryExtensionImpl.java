@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe.repository;
 
 import java.util.List;
 
@@ -7,6 +7,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 
+import com.aloneCook.modules.recipe.QRecipe;
+import com.aloneCook.modules.recipe.Recipe;
 import com.querydsl.core.QueryResults;
 import com.querydsl.jpa.JPQLQuery;
 

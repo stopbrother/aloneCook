@@ -1,12 +1,12 @@
-package com.aloneCook.like;
+package com.aloneCook.modules.like;
 
 import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.RequiredArgsConstructor;
 

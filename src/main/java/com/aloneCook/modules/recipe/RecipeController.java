@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -29,22 +29,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aloneCook.like.Likes;
-import com.aloneCook.community.CommentForm;
-import com.aloneCook.community.Community;
-import com.aloneCook.community.CommunityRepository;
-import com.aloneCook.community.CommunityService;
-import com.aloneCook.image.Image;
-import com.aloneCook.image.ImageRepository;
-import com.aloneCook.image.ImageService;
-import com.aloneCook.like.LikeRepository;
-import com.aloneCook.like.LikeService;
-import com.aloneCook.recipe.form.RecipeForm;
-import com.aloneCook.recipe.validate.RecipeFormValid;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.history.UserHistoryRepository;
-import com.aloneCook.user.history.UserHistoryService;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.account.history.UserHistoryRepository;
+import com.aloneCook.modules.account.history.UserHistoryService;
+import com.aloneCook.modules.community.CommentForm;
+import com.aloneCook.modules.community.Community;
+import com.aloneCook.modules.community.CommunityRepository;
+import com.aloneCook.modules.community.CommunityService;
+import com.aloneCook.modules.image.Image;
+import com.aloneCook.modules.image.ImageRepository;
+import com.aloneCook.modules.image.ImageService;
+import com.aloneCook.modules.like.LikeRepository;
+import com.aloneCook.modules.like.LikeService;
+import com.aloneCook.modules.like.Likes;
+import com.aloneCook.modules.recipe.form.RecipeForm;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
+import com.aloneCook.modules.recipe.validate.RecipeFormValid;
 
 import lombok.RequiredArgsConstructor;
 

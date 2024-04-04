@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

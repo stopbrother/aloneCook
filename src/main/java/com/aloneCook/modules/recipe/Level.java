@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe;
 
 public enum Level {
 

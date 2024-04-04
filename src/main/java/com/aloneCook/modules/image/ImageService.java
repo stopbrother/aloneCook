@@ -1,4 +1,4 @@
-package com.aloneCook.image;
+package com.aloneCook.modules.image;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aloneCook.recipe.Recipe;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.RequiredArgsConstructor;
 

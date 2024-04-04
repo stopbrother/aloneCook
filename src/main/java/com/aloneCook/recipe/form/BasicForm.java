@@ -5,7 +5,7 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.aloneCook.recipe.Level;
+import com.aloneCook.modules.recipe.Level;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

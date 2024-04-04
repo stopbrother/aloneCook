@@ -1,4 +1,4 @@
-package com.aloneCook.image;
+package com.aloneCook.modules.image;
 
 import org.springframework.core.io.Resource;
 import org.springframework.http.CacheControl;

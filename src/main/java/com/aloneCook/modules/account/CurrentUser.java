@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

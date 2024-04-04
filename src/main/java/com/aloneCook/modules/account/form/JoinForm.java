@@ -1,4 +1,4 @@
-package com.aloneCook.user.form;
+package com.aloneCook.modules.account.form;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

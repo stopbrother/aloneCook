@@ -1,4 +1,4 @@
-package com.aloneCook.main;
+package com.aloneCook.modules.main;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.aloneCook.like.LikeRepository;
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.recipe.RecipeRepository;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.history.UserHistory;
-import com.aloneCook.user.history.UserHistoryRepository;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.account.history.UserHistory;
+import com.aloneCook.modules.account.history.UserHistoryRepository;
+import com.aloneCook.modules.like.LikeRepository;
+import com.aloneCook.modules.recipe.Recipe;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 

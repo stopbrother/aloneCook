@@ -1,4 +1,4 @@
-package com.aloneCook.image;
+package com.aloneCook.modules.image;
 
 
 

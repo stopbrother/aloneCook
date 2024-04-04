@@ -1,4 +1,4 @@
-package com.aloneCook.like;
+package com.aloneCook.modules.like;
 
 import java.time.LocalDateTime;
 
@@ -9,8 +9,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

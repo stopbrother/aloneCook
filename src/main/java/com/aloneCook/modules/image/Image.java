@@ -1,4 +1,4 @@
-package com.aloneCook.image;
+package com.aloneCook.modules.image;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.aloneCook.recipe.Recipe;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

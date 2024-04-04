@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;

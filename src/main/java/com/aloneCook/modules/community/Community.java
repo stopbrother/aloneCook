@@ -1,4 +1,4 @@
-package com.aloneCook.community;
+package com.aloneCook.modules.community;
 
 import java.time.LocalDateTime;
 
@@ -7,9 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import com.aloneCook.bbs.Bbs;
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.bbs.Bbs;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

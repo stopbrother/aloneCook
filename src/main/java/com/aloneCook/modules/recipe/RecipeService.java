@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,21 +21,23 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aloneCook.like.Likes;
-import com.aloneCook.recipe.event.RecipeUpdateEvent;import com.aloneCook.recipe.event.RecipeWatchedEvent;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserAccount;
+import com.aloneCook.modules.account.history.UserHistoryRepository;
+import com.aloneCook.modules.community.Community;
+import com.aloneCook.modules.community.CommunityRepository;
+import com.aloneCook.modules.image.Image;
+import com.aloneCook.modules.image.ImageRepository;
+import com.aloneCook.modules.image.ImageService;
+import com.aloneCook.modules.like.LikeRepository;
+import com.aloneCook.modules.like.Likes;
+import com.aloneCook.modules.recipe.event.RecipeUpdateEvent;
+import com.aloneCook.modules.recipe.event.RecipeWatchedEvent;
+import com.aloneCook.modules.recipe.form.RecipeForm;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 import com.aloneCook.recipe.form.BasicForm;
 import com.aloneCook.recipe.form.IngredientForm;
-import com.aloneCook.recipe.form.RecipeForm;
 import com.aloneCook.recipe.form.StepForm;
-import com.aloneCook.community.Community;
-import com.aloneCook.community.CommunityRepository;
-import com.aloneCook.image.Image;
-import com.aloneCook.image.ImageRepository;
-import com.aloneCook.image.ImageService;
-import com.aloneCook.like.LikeRepository;
-import com.aloneCook.user.Account;
-import com.aloneCook.user.UserAccount;
-import com.aloneCook.user.history.UserHistoryRepository;
 
 import lombok.RequiredArgsConstructor;
 import net.bytebuddy.utility.RandomString;

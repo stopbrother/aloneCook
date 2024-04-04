@@ -1,4 +1,4 @@
-package com.aloneCook.community;
+package com.aloneCook.modules.community;
 
 import java.time.LocalDateTime;
 
@@ -7,8 +7,8 @@ import javax.validation.Valid;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.RequiredArgsConstructor;
 

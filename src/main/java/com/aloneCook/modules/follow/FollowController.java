@@ -1,4 +1,4 @@
-package com.aloneCook.follow;
+package com.aloneCook.modules.follow;
 
 import java.util.Collections;
 
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aloneCook.user.Account;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.UserRepository;
-import com.aloneCook.user.UserService;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.account.UserRepository;
+import com.aloneCook.modules.account.UserService;
 
 import lombok.RequiredArgsConstructor;
 

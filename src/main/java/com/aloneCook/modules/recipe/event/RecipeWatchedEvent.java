@@ -1,6 +1,6 @@
-package com.aloneCook.recipe.event;
+package com.aloneCook.modules.recipe.event;
 
-import com.aloneCook.recipe.Recipe;
+import com.aloneCook.modules.recipe.Recipe;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

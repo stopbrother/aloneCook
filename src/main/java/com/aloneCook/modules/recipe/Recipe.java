@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -29,11 +29,11 @@ import javax.persistence.OrderBy;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.aloneCook.community.Community;
-import com.aloneCook.image.Image;
-import com.aloneCook.like.Likes;
-import com.aloneCook.user.UserAccount;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserAccount;
+import com.aloneCook.modules.community.Community;
+import com.aloneCook.modules.image.Image;
+import com.aloneCook.modules.like.Likes;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

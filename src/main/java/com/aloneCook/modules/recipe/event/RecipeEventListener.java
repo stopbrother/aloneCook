@@ -1,14 +1,14 @@
-package com.aloneCook.recipe.event;
+package com.aloneCook.modules.recipe.event;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.recipe.RecipeRepository;
-import com.aloneCook.user.Account;
-import com.aloneCook.user.UserRepository;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.UserRepository;
+import com.aloneCook.modules.recipe.Recipe;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 

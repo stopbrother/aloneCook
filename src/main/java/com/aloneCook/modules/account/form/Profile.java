@@ -1,11 +1,11 @@
-package com.aloneCook.user.form;
+package com.aloneCook.modules.account.form;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

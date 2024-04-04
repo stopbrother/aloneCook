@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 public enum Category {
 

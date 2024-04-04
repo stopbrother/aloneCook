@@ -1,4 +1,4 @@
-package com.aloneCook.like;
+package com.aloneCook.modules.like;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.recipe.RecipeRepository;
-import com.aloneCook.recipe.RecipeService;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.recipe.Recipe;
+import com.aloneCook.modules.recipe.RecipeService;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 

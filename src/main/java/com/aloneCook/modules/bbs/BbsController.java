@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 import java.util.List;
 
@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.community.CommentForm;
-import com.aloneCook.community.Community;
-import com.aloneCook.community.CommunityRepository;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.community.CommentForm;
+import com.aloneCook.modules.community.Community;
+import com.aloneCook.modules.community.CommunityRepository;
 
 import lombok.RequiredArgsConstructor;
 

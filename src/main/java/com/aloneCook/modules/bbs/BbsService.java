@@ -1,4 +1,4 @@
-package com.aloneCook.bbs;
+package com.aloneCook.modules.bbs;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +10,9 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.community.Community;
-import com.aloneCook.community.CommunityRepository;
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.community.Community;
+import com.aloneCook.modules.community.CommunityRepository;
 
 import lombok.RequiredArgsConstructor;
 

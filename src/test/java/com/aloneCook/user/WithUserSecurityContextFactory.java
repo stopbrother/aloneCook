@@ -7,7 +7,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.test.context.support.WithSecurityContextFactory;
 
-import com.aloneCook.user.form.JoinForm;
+import com.aloneCook.modules.account.UserService;
+import com.aloneCook.modules.account.form.JoinForm;
 
 import lombok.RequiredArgsConstructor;
 

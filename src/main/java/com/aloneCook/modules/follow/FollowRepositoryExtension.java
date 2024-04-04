@@ -1,11 +1,11 @@
-package com.aloneCook.follow;
+package com.aloneCook.modules.follow;
 
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aloneCook.user.Account;
+import com.aloneCook.modules.account.Account;
 
 @Transactional(readOnly = true)
 public interface FollowRepositoryExtension {

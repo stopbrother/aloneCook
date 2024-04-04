@@ -1,4 +1,4 @@
-package com.aloneCook.community;
+package com.aloneCook.modules.community;
 
 import java.util.List;
 
@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aloneCook.like.LikeRepository;
-import com.aloneCook.recipe.Recipe;
-import com.aloneCook.recipe.RecipeService;
-import com.aloneCook.user.Account;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.history.UserHistoryRepository;
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.account.history.UserHistoryRepository;
+import com.aloneCook.modules.like.LikeRepository;
+import com.aloneCook.modules.recipe.Recipe;
+import com.aloneCook.modules.recipe.RecipeService;
 
 import lombok.RequiredArgsConstructor;
 

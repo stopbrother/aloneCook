@@ -1,4 +1,4 @@
-package com.aloneCook.community;
+package com.aloneCook.modules.community;
 
 import lombok.Data;
 

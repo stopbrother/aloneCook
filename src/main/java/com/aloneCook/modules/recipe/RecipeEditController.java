@@ -1,4 +1,4 @@
-package com.aloneCook.recipe;
+package com.aloneCook.modules.recipe;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aloneCook.modules.account.Account;
+import com.aloneCook.modules.account.CurrentUser;
+import com.aloneCook.modules.recipe.form.RecipeForm;
 import com.aloneCook.recipe.form.BasicForm;
 import com.aloneCook.recipe.form.IngredientForm;
-import com.aloneCook.recipe.form.RecipeForm;
 import com.aloneCook.recipe.form.StepForm;
-import com.aloneCook.user.CurrentUser;
-import com.aloneCook.user.Account;
 
 import lombok.RequiredArgsConstructor;
 
