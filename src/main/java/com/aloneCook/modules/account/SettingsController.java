@@ -1,4 +1,7 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
+
+import static com.aloneCook.modules.account.SettingsController.ROOT;
+import static com.aloneCook.modules.account.SettingsController.SETTINGS;
 
 import javax.validation.Valid;
 
@@ -13,14 +16,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aloneCook.user.form.PasswordForm;
-import com.aloneCook.user.form.Profile;
-import com.aloneCook.user.validate.NicknameValid;
-import com.aloneCook.user.validate.PasswordFormValid;
+import com.aloneCook.modules.account.form.PasswordForm;
+import com.aloneCook.modules.account.form.Profile;
+import com.aloneCook.modules.account.validate.NicknameValid;
+import com.aloneCook.modules.account.validate.PasswordFormValid;
 
 import lombok.RequiredArgsConstructor;
-
-import static com.aloneCook.user.SettingsController.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,7 +36,7 @@ public class SettingsController {
 	private final UserService userService;
 	private final NicknameValid nicknameValid;
 	private final ModelMapper modelMapper;
-	private final PasswordFormValid passwordFormValid;
+	
 	
 	@GetMapping(PROFILE)
 	public String settingsForm(@CurrentUser Account account, Model model) {

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<link rel="stylesheet" href="/css/login.css" />
+
+<body>
+	<div id="wrap">
+		<section class="head">
+			<a href="#" th:href="@{/}">
+				<img src="images/login/logo_logo.png" />
+			</a>
+		</section>
+		<div class="login">
+			<div class="login_container">
+				<h2 class="login_title">비밀번호 재설정 안내</h2>
+				<div class="login_inner">
+					<div>
+						<span th:text="${message}">user@eamil.com</span>
+					</div>
+					<div class="password_find">
+						이메일을 받지 못하셨나요? <a th:href="@{/resend-email}">이메일 다시 보내기</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

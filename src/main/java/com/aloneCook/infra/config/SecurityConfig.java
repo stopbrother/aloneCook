@@ -1,4 +1,4 @@
-package com.aloneCook.config;
+package com.aloneCook.infra.config;
 
 import javax.sql.DataSource;
 
@@ -27,8 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.mvcMatchers("/", "/login", "/join", "/check-email", "/check-email-token", "/email-login",
-						"/check-email-login", "/login-link", "/search/recipe", "/recipe-list").permitAll() //mvcMatchers로 해당 링크는 모두 허용
+				.mvcMatchers("/", "/login", "/join", "/find-password", "/search/recipe", "/recipe-list",
+						"/reset-password").permitAll() //mvcMatchers로 해당 링크는 모두 허용
 				.mvcMatchers(HttpMethod.GET, "/profile/*").permitAll() //profile링크는 GET만 허용
 				.anyRequest().authenticated(); //그외는 인증후
 

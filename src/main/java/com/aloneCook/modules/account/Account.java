@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import com.aloneCook.follow.Follow;
+import com.aloneCook.modules.follow.Follow;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -49,6 +49,8 @@ public class Account {
 	
 	@Lob @Basic(fetch = FetchType.EAGER)
 	private String profileImg;
+	
+	private String emailToken;
 
 	/*
 	@OneToMany(mappedBy = "fromUser")

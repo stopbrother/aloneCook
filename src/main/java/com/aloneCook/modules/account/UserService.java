@@ -1,7 +1,8 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -16,12 +17,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import com.aloneCook.follow.Follow;
-import com.aloneCook.follow.FollowRepository;
-import com.aloneCook.user.form.JoinForm;
-import com.aloneCook.user.form.Profile;
+import com.aloneCook.infra.config.AppProperties;
+import com.aloneCook.infra.email.EmailMessage;
+import com.aloneCook.infra.email.EmailService;
+import com.aloneCook.modules.account.form.JoinForm;
+import com.aloneCook.modules.account.form.Profile;
+import com.aloneCook.modules.follow.Follow;
+import com.aloneCook.modules.follow.FollowRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +39,9 @@ public class UserService implements UserDetailsService {
 	private final ModelMapper modelMapper;
 	private final UserRepository userRepository;
 	private final FollowRepository followRepository;
+	private final AppProperties appProperties;
+	private final TemplateEngine templateEngine;
+	private final EmailService emailService;
 
 	
 	public Account saveNewUser(@Valid JoinForm joinForm) {
@@ -85,6 +93,12 @@ public class UserService implements UserDetailsService {
 		account.setPassword(passwordEncoder.encode(newPassword));
 		userRepository.save(account);
 	}
+	public void resetPassword(Account account, String password) {
+		
+		account.setPassword(passwordEncoder.encode(password));
+		account.setEmailToken(null); //토큰만료
+		userRepository.save(account);
+	}
 
 	public Account getAccount(String nickname) {
 		Account account = userRepository.findByNickname(nickname);
@@ -99,6 +113,35 @@ public class UserService implements UserDetailsService {
 	
 		return passwordEncoder.matches(currentPassword, user.getPassword());
 	}
+
+	public void resetSendEmail(Account account) {
+		String token = UUID.randomUUID().toString();
+		account.setEmailToken(token);
+		userRepository.save(account);
+
+		Context context = new Context();
+		context.setVariable("link", "/reset-password?token=" + token
+				+ "$email=" + account.getEmail());
+		context.setVariable("nickname", account.getNickname());
+		context.setVariable("linkName", "비밀번호 재설정");
+		context.setVariable("message", "비밀번호 초기화");
+		context.setVariable("host", appProperties.getHost());
+		
+		String message = templateEngine.process("mail/simple-link", context);
+		
+		EmailMessage emailMessage = EmailMessage.builder()
+				.to(account.getEmail())
+				.title("나혼자요리 비밀번호 초기화")
+				.message(message)
+				.build();
+		emailService.sendEmail(emailMessage);
+	}
+
+	public boolean isValidToken(String token, Account account) {
+		
+		return account != null && token.equals(account.getEmailToken());
+	}
+
 
 
 	

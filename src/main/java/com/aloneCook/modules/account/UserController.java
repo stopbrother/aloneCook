@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import java.util.List;
 
@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aloneCook.follow.Follow;
-import com.aloneCook.follow.FollowRepository;
-import com.aloneCook.follow.FollowService;
-import com.aloneCook.like.LikeRepository;
-import com.aloneCook.recipe.RecipeRepository;
-import com.aloneCook.user.form.JoinForm;
-import com.aloneCook.user.validate.JoinFormValid;
+import com.aloneCook.modules.account.form.JoinForm;
+import com.aloneCook.modules.account.validate.JoinFormValid;
+import com.aloneCook.modules.follow.Follow;
+import com.aloneCook.modules.follow.FollowRepository;
+import com.aloneCook.modules.follow.FollowService;
+import com.aloneCook.modules.like.LikeRepository;
+import com.aloneCook.modules.recipe.repository.RecipeRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -63,23 +63,35 @@ public class UserController {
 		webDataBinder.addValidators(joinFormValid);
 	}
 	
-	/* 비밀번호 찾기
-	@GetMapping("/lost-password")
-	public String lostForm() {
-		return "user/lost-password";
+	
+	@GetMapping("/find-password")
+	public String findPasswordForm() {
+		return "find-password";
 	}
-	@PostMapping("/lost-password")
-	public String sendEmailLink(String email, Model model, RedirectAttributes attributes) {
-		UserDTO userDTO = userRepository.findByEmail(email);
-		if (userDTO == null) {
+
+	@PostMapping("/find-password")
+	public String sendEmailLink(String email, Model model) {
+		Account account = userRepository.findByEmail(email);
+		if (account == null) {
 			model.addAttribute("error", "가입되어 있지 않은 이메일입니다.");
-			return "user/lost-password";
+			return "find-password";
 		}
-		userService.lostSendLink(userDTO);
-		attributes.addFlashAttribute("message", "비밀번호 변경 메일을 발송했습니다. 메일을 확인해주세요.");
-		return "redirect:/lost-password";
+		userService.resetSendEmail(account);
+		model.addAttribute("message", email + "로 비밀번호 변경 메일을 전송했습니다. 메일을 확인해주세요.");
+		return "resend-email";
 	}
-	*/
+	
+	@GetMapping("/reset-password")
+	public String resetPassword(String token, String email, String password, Model model) {
+		Account account = userRepository.findByEmail(email);
+		if (!userService.isValidToken(token, account)) {
+			model.addAttribute("error", "유효한 토큰이 아닙니다.");
+			return "reset-password";
+		}
+		userService.resetPassword(account, password);
+		return "reset-password";
+	}
+	
 	
 	
 	@GetMapping("/profile/{nickname}")

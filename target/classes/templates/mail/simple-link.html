@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>나혼자요리</title>
+</head>
+<style>
+	.linkname {
+		background-color: #0d6efd;
+		padding: 14px;
+		border-radius: 1px;
+	}
+</style>
+<body>
+	<div>
+		<p>안녕하세요. <span th:text="${nickname}"></span>님</p>
+		
+		<h2 th:text="${message}">메시지</h2>
+		
+		<div>
+			<a class="linkname" th:href="${host + link}" th:text="${linkName}">Link</a>
+			<p>비밀번호를 변경하시려면 버튼을 클릭하거나 링크를 사용하세요.</p>
+			<small th:text="${host + link}"></small>
+		</div> 
+	</div>
+	
+	
+</body>
+</html>
