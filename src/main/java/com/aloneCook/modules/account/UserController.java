@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aloneCook.modules.account.form.JoinForm;
+import com.aloneCook.modules.account.form.ResetPasswordForm;
 import com.aloneCook.modules.account.validate.JoinFormValid;
 import com.aloneCook.modules.follow.Follow;
 import com.aloneCook.modules.follow.FollowRepository;
@@ -82,16 +84,30 @@ public class UserController {
 	}
 	
 	@GetMapping("/reset-password")
-	public String resetPassword(String token, String email, String password, Model model) {
+	public String resetPasswordForm(String token, String email, Model model) {
 		Account account = userRepository.findByEmail(email);
 		if (!userService.isValidToken(token, account)) {
 			model.addAttribute("error", "유효한 토큰이 아닙니다.");
 			return "reset-password";
 		}
-		userService.resetPassword(account, password);
+		model.addAttribute("token", token);
+		model.addAttribute("email", email);
+		model.addAttribute(new ResetPasswordForm());
 		return "reset-password";
 	}
 	
+	@PostMapping("/reset-password")
+	public String resetPassword(String email, String token, @Valid ResetPasswordForm passwordForm,
+			Errors errors, Model model) {
+		Account account = userRepository.findByEmail(email);
+		
+		if (!passwordForm.getResetPassword().equals(passwordForm.getResetPasswordCheck())) {
+			errors.rejectValue("resetPasswordCheck", "wrong.value", "입력한 새비밀번호와 일치하지 않습니다.");
+			return "reset-password";
+		}
+		userService.resetPassword(account, passwordForm.getResetPassword());
+		return "redirect:/login?resetSuccess";
+	}
 	
 	
 	@GetMapping("/profile/{nickname}")

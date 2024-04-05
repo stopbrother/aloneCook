@@ -93,12 +93,12 @@ public class UserService implements UserDetailsService {
 		account.setPassword(passwordEncoder.encode(newPassword));
 		userRepository.save(account);
 	}
-	public void resetPassword(Account account, String password) {
-		
-		account.setPassword(passwordEncoder.encode(password));
+	public void resetPassword(Account account, String resetPassword) {
+		account.setPassword(passwordEncoder.encode(resetPassword));
 		account.setEmailToken(null); //토큰만료
 		userRepository.save(account);
 	}
+
 
 	public Account getAccount(String nickname) {
 		Account account = userRepository.findByNickname(nickname);
@@ -120,8 +120,8 @@ public class UserService implements UserDetailsService {
 		userRepository.save(account);
 
 		Context context = new Context();
-		context.setVariable("link", "/reset-password?token=" + token
-				+ "$email=" + account.getEmail());
+		context.setVariable("link", "/reset-password?token=" + account.getEmailToken() 
+				+ "&email=" + account.getEmail());
 		context.setVariable("nickname", account.getNickname());
 		context.setVariable("linkName", "비밀번호 재설정");
 		context.setVariable("message", "비밀번호 초기화");
@@ -141,6 +141,8 @@ public class UserService implements UserDetailsService {
 		
 		return account != null && token.equals(account.getEmailToken());
 	}
+
+
 
 
 
