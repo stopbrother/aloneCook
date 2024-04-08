@@ -228,10 +228,14 @@
     margin: 0;
     border: 0;
     font-weight: normal;
-    box-sizing: border-box;
-    padding-right: 16px;
+    box-sizing: border-box;    
     color: #fff;
     background-color: #0095f6;
+}
+.delete {
+	color: #dc3545;
+	border: 1px solid #dc3545;
+	background-color: transparent;
 }
 
 .password {

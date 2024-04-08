@@ -51,6 +51,10 @@ public class Account {
 	private String profileImg;
 	
 	private String emailToken;
+	
+	private boolean active; //활성여부
+	
+	private LocalDateTime deletedAt; //회원탈퇴일
 
 	/*
 	@OneToMany(mappedBy = "fromUser")

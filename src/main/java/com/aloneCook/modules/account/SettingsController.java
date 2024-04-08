@@ -96,4 +96,16 @@ public class SettingsController {
 		webDataBinder.addValidators(new PasswordFormValid());
 	}
 	
+	@GetMapping("/deleteAt")
+	public String deleteIdForm(@CurrentUser Account account, Model model) {
+		model.addAttribute(account);
+		return SETTINGS + "/deleteAt";
+	}
+	
+	@PostMapping("/deleteAt")
+	public String deleteId(@CurrentUser Account account, RedirectAttributes attributes) {
+		userService.deleteAt(account);
+		attributes.addFlashAttribute("message", "회원탈퇴가 성공적으로 처리되었습니다.");
+		return "redirect:/";
+	}
 }

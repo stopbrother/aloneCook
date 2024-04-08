@@ -1,5 +1,6 @@
 package com.aloneCook.modules.account;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -140,6 +141,11 @@ public class UserService implements UserDetailsService {
 	public boolean isValidToken(String token, Account account) {
 		
 		return account != null && token.equals(account.getEmailToken());
+	}
+
+	public void deleteAt(Account account) {
+		account.setActive(false);
+		account.setDeletedAt(LocalDateTime.now());
 	}
 
 

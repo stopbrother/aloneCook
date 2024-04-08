@@ -159,7 +159,9 @@
 	<li class="settings_menu_item"
 		th:classappend="${activeMenu == 'password'}? active"><a href="#"
 		th:href="@{/settings/password}">비밀번호 변경</a></li>
-	<li class="settings_menu_item"><a href="#">회원탈퇴</a></li>
+	<li class="settings_menu_item" th:classappend="${activeMenu == 'deleteAt'}? active">
+		<a href="#" th:href="@{/settings/deleteAt}">회원탈퇴</a>
+	</li>
 </ul>
 
 <!-- profile info(프로필이미지,닉네임 등) -->

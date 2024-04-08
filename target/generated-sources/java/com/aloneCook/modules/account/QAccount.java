@@ -19,6 +19,10 @@ public class QAccount extends EntityPathBase<Account> {
 
     public static final QAccount account = new QAccount("account");
 
+    public final BooleanPath active = createBoolean("active");
+
+    public final DateTimePath<java.time.LocalDateTime> deletedAt = createDateTime("deletedAt", java.time.LocalDateTime.class);
+
     public final StringPath email = createString("email");
 
     public final StringPath emailToken = createString("emailToken");

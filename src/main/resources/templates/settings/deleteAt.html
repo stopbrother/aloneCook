@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/setting.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+        <!-- 컨텐츠 영역 -->
+        <main class="contentsWrap">
+        <div class="settings contents">
+            <div class="settings_header contentsHeader">
+                <div class="pageTitle">
+                    <span>설정</span>
+                </div>
+                <div class="settings_menu contentMenu">
+                    <div class="settings_menu_inner">
+                        <ul th:replace="fragments.html :: settings-menu(activeMenu='deleteAt')"></ul>
+                    </div>
+                </div>
+            </div>
+			
+			<div class="alert alert-success" th:if="${message}" role="alert">
+				<span th:text="${message}"></span>
+			</div>
+
+            <div class="content_wrap contentWrap">
+                <div class="content">
+                    <div class="settings_item">
+                        <div class="settings_item_title">
+                            <p>탈퇴전 유의사항</p>
+                        </div>
+                        <div class="settings_item_content">
+                        	<p>유의사항</p>
+                        </div>
+                    </div>
+
+					<form class="content needs-validation" action="#" th:action="@{/settings/deleteAt}" method="post" novalidate>
+                    <div class="settings_submit">
+                        <button type="submit" class="submit_btn delete">
+                            <span>회원탈퇴</span>
+                        </button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </main>
+
+        <!-- 푸터 영역 -->
+        <footer th:replace="fragments.html :: footer"></footer>
+
+    </div>
+    
+    <script th:replace="fragments.html :: form-validation"></script>
+     <!-- 
+    <script type="application/javascript">
+    (function () {
+        'use strict';
+
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('form-warning')
+                }, false)
+            })
+        }, false)
+    }())
+</script>
+-->
+</body>
+</html>
