@@ -50,6 +50,7 @@ public class UserService implements UserDetailsService {
 				.nickname(joinForm.getNickname())
 				.email(joinForm.getEmail())
 				.password(passwordEncoder.encode(joinForm.getPassword()))
+				.active(true)
 				.build();
 		
 		 return userRepository.save(account);
@@ -144,8 +145,7 @@ public class UserService implements UserDetailsService {
 	}
 
 	public void deleteAt(Account account) {
-		account.setActive(false);
-		account.setDeletedAt(LocalDateTime.now());
+		account.close();
 	}
 
 

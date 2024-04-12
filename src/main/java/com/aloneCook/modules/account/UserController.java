@@ -55,8 +55,6 @@ public class UserController {
 		Account account = userService.saveNewUser(joinForm);
 		userService.login(account);
 		
-		
-		
 		return "redirect:/";
 	}
 	

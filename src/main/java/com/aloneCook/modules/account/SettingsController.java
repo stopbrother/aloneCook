@@ -106,6 +106,6 @@ public class SettingsController {
 	public String deleteId(@CurrentUser Account account, RedirectAttributes attributes) {
 		userService.deleteAt(account);
 		attributes.addFlashAttribute("message", "회원탈퇴가 성공적으로 처리되었습니다.");
-		return "redirect:/";
+		return "redirect:/logout";
 	}
 }

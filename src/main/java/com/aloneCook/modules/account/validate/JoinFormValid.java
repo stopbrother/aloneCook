@@ -30,5 +30,9 @@ public class JoinFormValid implements Validator {
 		if (userRepository.existsByNickname(joinForm.getNickname())) {
 			errors.rejectValue("nickname", "overlap.nickname", new Object[] {joinForm.getNickname()}, "이미 사용중인 닉네임입니다.");
 		}
+		
+		if (!joinForm.getPassword().equals(joinForm.getPasswordCheck())) {
+			errors.rejectValue("passwordCheck", "wrong.value" ,"비밀번호가 일치하지 않습니다.");
+		}
 	}
 }

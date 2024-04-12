@@ -19,9 +19,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aloneCook.infra.email.EmailService;
 import com.aloneCook.modules.account.Account;
 import com.aloneCook.modules.account.UserRepository;
 
@@ -30,8 +33,13 @@ import com.aloneCook.modules.account.UserRepository;
 @AutoConfigureMockMvc
 public class UserControllerTest {
 
-	@Autowired MockMvc mockMvc;
-	@Autowired UserRepository userRepository;
+	@Autowired
+	private MockMvc mockMvc;
+	@Autowired
+	private UserRepository userRepository;
+	
+	@MockBean
+	EmailService emailService;
 	
 	@DisplayName("회원가입 view")
 	@Test
@@ -64,14 +72,28 @@ public class UserControllerTest {
 				.param("nickname", "testname")
 				.param("email", "testname@naver.com")
 				.param("password", "12345678")
+				.param("passwordCheck", "12345678")
 				.with(csrf()))
 					.andExpect(status().is3xxRedirection())
 					.andExpect(view().name("redirect:/"))
-					.andExpect(authenticated().withUsername("testname"));
-					
+					.andExpect(authenticated().withUsername("testname"));							
 		
 		Account user = userRepository.findByEmail("testname@naver.com");
 		assertNotNull(user);
 		assertNotEquals(user.getPassword(), "12345678");
+	}
+	
+	@DisplayName("회원가입 - 비밀번호 불일치")
+	@Test
+	void joinSubmit_password_fail() throws Exception {
+		mockMvc.perform(post("/join")
+				.param("nickname", "test")
+				.param("email", "test@naver.com")
+				.param("password", "12345678")
+				.param("passwordCheck", "87654321")
+				.with(csrf()))
+		.andExpect(status().isOk())
+		.andExpect(view().name("user/join"))
+		.andExpect(unauthenticated());
 	}
 }

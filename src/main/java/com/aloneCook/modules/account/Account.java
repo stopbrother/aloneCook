@@ -56,6 +56,15 @@ public class Account {
 	
 	private LocalDateTime deletedAt; //회원탈퇴일
 
+	public void close() {
+		if (this.active) {
+			this.active = false;
+			this.deletedAt = LocalDateTime.now();
+		} else {
+			throw new RuntimeException("회원탈퇴를 할수 없습니다.");
+		}
+	}
+
 	/*
 	@OneToMany(mappedBy = "fromUser")
 	private List<Follow> followers;

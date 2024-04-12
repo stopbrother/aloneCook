@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import lombok.RequiredArgsConstructor;
 
@@ -35,7 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin() // 스프링 시큐리티가 가지고 있는 loginform이 있음, loginPage를 설정해 커스텀하게 표현할 수 있다.
 				.loginPage("/login").permitAll(); // 로그인 안해도 접근, 해도 접근할 수 있도록 permitAll !
 
-		http.logout().logoutSuccessUrl("/");
+		http.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/");
 		
 		http.rememberMe()
 			.userDetailsService(userDetailService)
