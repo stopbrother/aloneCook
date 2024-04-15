@@ -146,6 +146,7 @@ public class UserService implements UserDetailsService {
 
 	public void deleteAt(Account account) {
 		account.close();
+		userRepository.save(account);
 	}
 
 

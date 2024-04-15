@@ -3,6 +3,7 @@ package com.aloneCook.modules.account;
 import static com.aloneCook.modules.account.SettingsController.ROOT;
 import static com.aloneCook.modules.account.SettingsController.SETTINGS;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -103,8 +104,10 @@ public class SettingsController {
 	}
 	
 	@PostMapping("/deleteAt")
-	public String deleteId(@CurrentUser Account account, RedirectAttributes attributes) {
+	public String deleteId(@CurrentUser Account account, RedirectAttributes attributes,
+			HttpServletRequest request) {
 		userService.deleteAt(account);
+		request.getSession().invalidate(); //세션 무효화
 		attributes.addFlashAttribute("message", "회원탈퇴가 성공적으로 처리되었습니다.");
 		return "redirect:/logout";
 	}
