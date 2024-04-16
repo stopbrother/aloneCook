@@ -40,13 +40,11 @@
                         </div>
                     </div>
 
-					<form class="content needs-validation" action="#" th:action="@{/settings/deleteAt}" method="post" novalidate>
+					
                     <div class="settings_submit">
-                        <button type="submit" class="submit_btn delete">
-                            <span>회원탈퇴</span>
-                        </button>
+                        <a class="delete" th:href="@{/settings/deleteAtForm}">회원탈퇴</a>
                     </div>
-                    </form>
+                    
                 </div>
             </div>
         </div>

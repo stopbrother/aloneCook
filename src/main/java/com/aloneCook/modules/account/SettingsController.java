@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aloneCook.modules.account.form.DeleteForm;
 import com.aloneCook.modules.account.form.PasswordForm;
 import com.aloneCook.modules.account.form.Profile;
 import com.aloneCook.modules.account.validate.NicknameValid;
@@ -103,9 +104,24 @@ public class SettingsController {
 		return SETTINGS + "/deleteAt";
 	}
 	
+	@GetMapping("/deleteAtForm")
+	public String deleteAtForm(@CurrentUser Account account, Model model) {
+		model.addAttribute(account);
+		model.addAttribute(new DeleteForm());
+		return SETTINGS + "/deleteAtForm";
+	}
+	
 	@PostMapping("/deleteAt")
-	public String deleteId(@CurrentUser Account account, RedirectAttributes attributes,
-			HttpServletRequest request) {
+	public String deleteId(@CurrentUser Account account, @Valid DeleteForm deleteForm, Errors errors,
+			Model model, RedirectAttributes attributes, HttpServletRequest request) {
+		
+		String currentPassword = deleteForm.getPassword();
+		if (!userService.isCurrentPasswordValid(account, currentPassword)) {
+			model.addAttribute(account);
+			errors.rejectValue("password", "wrong.value", "비밀번호가 일치하지 않습니다.");
+			return SETTINGS + "/deleteAtForm";
+		}
+		
 		userService.deleteAt(account);
 		request.getSession().invalidate(); //세션 무효화
 		attributes.addFlashAttribute("message", "회원탈퇴가 성공적으로 처리되었습니다.");
