@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -75,6 +76,9 @@ public class UserService implements UserDetailsService {
 		Account account = userRepository.findByEmail(email);
 		if (account == null) {
 			throw new UsernameNotFoundException(email);
+		}
+		if (!account.isActive()) {
+			throw new DisabledException("탈퇴한 회원입니다.");
 		}
 		return new UserAccount(account);
 	}
