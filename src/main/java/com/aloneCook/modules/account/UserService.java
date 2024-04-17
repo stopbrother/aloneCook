@@ -52,6 +52,7 @@ public class UserService implements UserDetailsService {
 				.email(joinForm.getEmail())
 				.password(passwordEncoder.encode(joinForm.getPassword()))
 				.active(true)
+				.joinedAt(LocalDateTime.now())
 				.build();
 		
 		 return userRepository.save(account);
