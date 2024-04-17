@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+
+<link rel="stylesheet" href="/css/profile.css" />
+
+<body>
+	<div id="wrap">
+		<!--gnb 영역 -->
+		<header>
+			<div th:replace="fragments.html :: navi(activeMenu)"></div>
+		</header>
+
+
+		<!-- 컨텐츠 영역 -->
+		<div class="contentsWrap">
+			<div class="deleteAt">
+				<span>탈퇴한 회원의 프로필입니다.</span>
+				<a th:href="@{/}" class="btn btn-primary my-2">홈으로</a>
+			</div>
+		</div>
+		
+		<!-- 푸터 영역 -->
+		<footer th:replace="fragments.html :: footer"></footer>
+
+	</div>
+
+</body>
+</html>

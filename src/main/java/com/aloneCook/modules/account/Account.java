@@ -56,7 +56,7 @@ public class Account {
 	
 	private LocalDateTime deletedAt; //회원탈퇴일
 
-	public void close() {
+	public void activeOff() {
 		if (this.active) {
 			this.active = false;
 			this.deletedAt = LocalDateTime.now();

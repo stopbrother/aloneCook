@@ -110,9 +110,14 @@ public class UserController {
 	
 	@GetMapping("/profile/{nickname}")
 	public String profileView(@PathVariable String nickname, Model model, @CurrentUser Account account) {
+		Account byNickname = userService.getAccount(nickname);
+		
+		if (!byNickname.isActive()) {
+			return "user/deleteAt";
+		}
+		
 		if (account != null) {
-			model.addAttribute(account);
-			Account byNickname = userService.getAccount(nickname);			
+			model.addAttribute(account);						
 			boolean isFollow = followRepository.existsByToUserAndFromUser(byNickname, account);
 			
 			model.addAttribute("byNickname", byNickname);	
@@ -129,8 +134,13 @@ public class UserController {
 
 	@GetMapping("/profile/{nickname}/recipe")
 	public String recipeCreated(@PathVariable String nickname, Model model, @CurrentUser Account account) {
-		if (account != null) {			
-			Account byNickname = userService.getAccount(nickname);
+		Account byNickname = userService.getAccount(nickname);
+		
+		if (!byNickname.isActive()) {
+			return "user/deleteAt";
+		}
+		
+		if (account != null) {						
 			boolean follow = followRepository.existsByToUserAndFromUser(byNickname, account);
 			
 			model.addAttribute(account);
@@ -147,8 +157,13 @@ public class UserController {
 	
 	@GetMapping("/profile/{nickname}/follower")
 	public String followerView(@PathVariable String nickname, Model model, @CurrentUser Account account) {
+		Account byNickname = userService.getAccount(nickname);
+		
+		if (!byNickname.isActive()) {
+			return "user/deleteAt";
+		}
+		
 		if (account != null) {			
-			Account byNickname = userService.getAccount(nickname);
 			boolean follow = followRepository.existsByToUserAndFromUser(byNickname, account);
 			List<String> myList = followService.getFollowed(account);
 			
@@ -170,8 +185,13 @@ public class UserController {
 	
 	@GetMapping("/profile/{nickname}/following")
 	public String followingView(@PathVariable String nickname, Model model, @CurrentUser Account account) {
-		if (account != null) {			
-			Account byNickname = userService.getAccount(nickname);
+		Account byNickname = userService.getAccount(nickname);
+		
+		if (!byNickname.isActive()) {
+			return "user/deleteAt";
+		}
+		
+		if (account != null) {						
 			boolean follow = followRepository.existsByToUserAndFromUser(byNickname, account);
 			List<String> myList = followService.getFollowed(account);
 			
