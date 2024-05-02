@@ -73,12 +73,15 @@ public class UserService implements UserDetailsService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException { //DB정보와 일치하는지
-		Account account = userRepository.findByEmail(email);
-		if (account == null) {
-			throw new UsernameNotFoundException(email);
+	public UserDetails loadUserByUsername(String emailOrNickname) throws UsernameNotFoundException { //DB정보와 일치하는지
+		Account account = userRepository.findByEmail(emailOrNickname);
+		if (account == null) { //이메일로 찾아보고 닉네임으로 찾아보고
+			account = userRepository.findByNickname(emailOrNickname);
 		}
-		if (!account.isActive()) {
+		if (account == null) { //그래도 null이면 예외던지기
+			throw new UsernameNotFoundException(emailOrNickname);
+		}
+		if (!account.isActive()) { //탈퇴한(비활성화)유저라면 예외던지기
 			throw new DisabledException("탈퇴한 회원입니다.");
 		}
 		return new UserAccount(account);

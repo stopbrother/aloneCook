@@ -1,4 +1,4 @@
-package com.aloneCook.main;
+package com.aloneCook.modules.main;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;

@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -22,7 +22,7 @@ public class WithUserSecurityContextFactory implements WithSecurityContextFactor
 		String nickname = withUser.value();
 		
 		JoinForm joinForm = new JoinForm();
-		joinForm.setEmail("test1@naver.com");
+		joinForm.setEmail(nickname + "@email.com");
 		joinForm.setNickname(nickname);
 		joinForm.setPassword("12345678");
 		userService.saveNewUser(joinForm);

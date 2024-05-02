@@ -1,4 +1,4 @@
-package com.aloneCook.user;
+package com.aloneCook.modules.account;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -29,15 +29,14 @@ import com.aloneCook.modules.account.Account;
 import com.aloneCook.modules.account.UserRepository;
 
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@SpringBootTest //통합테스트
+@AutoConfigureMockMvc //컨트롤러 단위테스트
 public class UserControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
 	private UserRepository userRepository;
-	
 	@MockBean
 	EmailService emailService;
 	
