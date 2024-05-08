@@ -3,6 +3,7 @@ package com.aloneCook.modules.account;
 import static com.aloneCook.modules.account.SettingsController.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -107,4 +108,44 @@ class SettingsControllerTest {
 	}
 	
 	*/
+	
+	@WithUser("test")
+	@DisplayName("패스워드 수정 폼")
+	@Test
+	void updatePassword_Form() throws Exception {
+		mockMvc.perform(get(ROOT + SETTINGS + PASSWORD))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("account"))
+				.andExpect(model().attributeExists("passwordForm"));
+	}
+	
+	@WithUser("test")
+	@DisplayName("패스워드 수정 - 정상")
+	@Test
+	void updatePassword_success() throws Exception {
+		mockMvc.perform(post(ROOT + SETTINGS + PASSWORD)
+				.param("currentPassword", "12345678")
+				.param("newPassword", "87654321")
+				.param("newPasswordCheck", "87654321")
+				.with(csrf()))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl(ROOT + SETTINGS + PASSWORD))
+		.andExpect(flash().attributeExists("message"));
+	}
+	
+	@WithUser("test")
+	@DisplayName("패스워드 수정 - 에러 - 새비밀번호 불일치")
+	@Test
+	void updatePassword_fail() throws Exception {
+		mockMvc.perform(post(ROOT + SETTINGS + PASSWORD)
+				.param("currentPassword", "12345678")
+				.param("newPassword", "87654321")
+				.param("newPasswordCheck", "00700123")
+				.with(csrf()))
+		.andExpect(status().isOk())
+		.andExpect(view().name(SETTINGS + PASSWORD))
+		.andExpect(model().hasErrors())
+		.andExpect(model().attributeExists("passwordForm"))
+		.andExpect(model().attributeExists("account"));
+	}
 }
