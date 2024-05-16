@@ -148,4 +148,54 @@ class SettingsControllerTest {
 		.andExpect(model().attributeExists("passwordForm"))
 		.andExpect(model().attributeExists("account"));
 	}
+	
+	@WithUser("test")
+	@DisplayName("패스워드 수정 - 에러 - 현재비밀번호 불일치")
+	@Test
+	void updatePassword_failCurrentPassword() throws Exception {
+		mockMvc.perform(post(ROOT + SETTINGS + PASSWORD)
+				.param("currentPassword", "00000000")
+				.param("newPassword", "87654321")
+				.param("newPasswordCheck", "87654321")
+				.with(csrf()))
+		.andExpect(status().isOk())
+		.andExpect(view().name(SETTINGS + PASSWORD))
+		.andExpect(model().attributeExists("passwordForm"))
+		.andExpect(model().attributeExists("account"));		
+	}
+	
+	@WithUser("test")
+	@DisplayName("회원탈퇴 폼")
+	@Test
+	void deleteAccount_view() throws Exception {
+		mockMvc.perform(get(ROOT + SETTINGS + "/deleteAtForm"))
+				.andExpect(status().isOk())
+				.andExpect(model().attributeExists("deleteForm"))
+				.andExpect(model().attributeExists("account"));
+	}
+	
+	@WithUser("test")
+	@DisplayName("회원탈퇴 - 성공")
+	@Test
+	void deleteAccount_success() throws Exception {
+		mockMvc.perform(post(ROOT + SETTINGS + "/deleteAt")
+				.param("password", "12345678")
+				.with(csrf()))
+		.andExpect(status().is3xxRedirection())
+		.andExpect(redirectedUrl("/logout"))
+		.andExpect(flash().attributeExists("message"));
+	}
+	
+	@WithUser("test")
+	@DisplayName("회원탍뢰 - 실패 - 현재비밀번호 불일치")
+	@Test
+	void deleteAccount_fail() throws Exception {
+		mockMvc.perform(post(ROOT + SETTINGS + "/deleteAt")
+				.param("password", "87654321")
+				.with(csrf()))
+		.andExpect(status().isOk())
+		.andExpect(view().name(SETTINGS + "/deleteAtForm"))
+		.andExpect(model().attributeExists("deleteForm"))
+		.andExpect(model().attributeExists("account"));		
+	}
 }
