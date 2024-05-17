@@ -90,10 +90,16 @@ public class RecipeController {
 		return "recipe/write";
 	}
 	@PostMapping("/recipe-write")
-	public String newRecipeSubmit(@CurrentUser Account account, @Valid RecipeForm recipeForm,
+	public String newRecipeSubmit(@CurrentUser Account account, @Valid RecipeForm recipeForm, Errors errors,
 								@RequestParam(value = "draft", required = false) boolean drafted,
 								@RequestParam("images") List<MultipartFile> images,
-								Model model, RedirectAttributes attributes) {		
+								Model model, RedirectAttributes attributes) {
+		
+		if (errors.hasErrors()) {
+			model.addAttribute(account);
+			return "recipe/write";
+		}
+		
 		if (drafted) {			
 			recipeService.draftRecipe(modelMapper.map(recipeForm, Recipe.class), account, images);			
 			attributes.addFlashAttribute("message", "레시피가 저장 되었습니다.");
